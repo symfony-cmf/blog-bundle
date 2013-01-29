@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="span12">
+        {% if tag %}
+            <div class="text-info">
+                Showing posts with tag "{{ tag }}"
+            </div>
+        {% endif %}
+        {% if blog %}
+            <div class="text-info">
+                Showing posts from blog "{{ blog.title }}"
+            </div>
+        {% endif %}
+    </div>
+</div>
+<div class="row">
+    <div class="span12">
+        {% for post in posts %}
+            {% include "DCMSBlogBundle:Post:_post.html.twig" %}
+        {% endfor %}
+    </div>
+</div>
+
+
