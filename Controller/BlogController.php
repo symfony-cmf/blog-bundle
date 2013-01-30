@@ -11,9 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
-class BlogController extends BaseController
+class BlogController
 {
-    public function renderAction(Request $request)
+    public function indexAction(Request $request)
     {
         $blog = $this->get('request')->get('_endpoint');
         $posts = $this->getPostRepo()->search(array(

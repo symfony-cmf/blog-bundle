@@ -3,15 +3,13 @@
 namespace Symfony\Cmf\Bundle\BlogBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
-use Symfony\Cmf\Bundle\CoreBundle\Document\Endpoint;
 
 /**
  * @PHPCR\Document(
- *   referenceable=true,
  *   repositoryClass="Symfony\Cmf\Bundle\BlogBundle\Repository\PostRepository"
  * )
  */
-class Post extends Endpoint
+class Post
 {
     /**
      * @PHPCR\Id
@@ -26,7 +24,7 @@ class Post extends Endpoint
     /**
      * @PHPCR\Parent()
      */
-    protected $parent;
+    protected $blog;
 
     /**
      * @PHPCR\String()
@@ -42,14 +40,6 @@ class Post extends Endpoint
      * @PHPCR\Date()
      */
     protected $date;
-
-    /**
-     * @PHPCR\ReferenceOne(
-     *   targetDocument="Symfony\Cmf\Bundle\BlogBundle\Document\Blog",
-     *   strategy="hard"
-     * )
-     */
-    public $blog;
 
     /**
      * @PHPCR\Boolean
@@ -79,16 +69,6 @@ class Post extends Endpoint
     public function setName($name)
     {
         $this->name = $name;
-    }
-    
-    public function getParent() 
-    {
-        return $this->parent;
-    }
-
-    public function setParent($parent)
-    {
-        $this->parent = $parent;
     }
     
     public function getTitle()
@@ -128,34 +108,19 @@ class Post extends Endpoint
         $this->date = $date;
     }
 
-    public function getParent()
-    {
-        return $this->parent;
-    }
-    
-    public function setParent($parent)
-    {
-        $this->parent = $parent;
-    }
-
-    public function getUuid()
-    {
-        return $this->uuid;
-    }
-    
-    public function setUuid($uuid)
-    {
-        $this->uuid = $uuid;
-    }
-
     public function getBlog()
     {
         return $this->blog;
     }
     
-    public function setBlog($blog)
+    public function setBlog(Blog $blog)
     {
         $this->blog = $blog;
+
+        // The user can create a post from Admin, so
+        // we let them choose and automatically make
+        // this Post a child of selected blog.
+        $this->parent = $blog;
     }
 
     public function getStatus()
