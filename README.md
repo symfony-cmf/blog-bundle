@@ -6,12 +6,12 @@ Features
 
 - Sonata backoffice admin
 - Frontoffice controllers:
-  - Blog archive w/pagination (knp-paginator??)
-  - Post view
+  - Blog archive w/pagination (knp-paginator??) and postView
 - Tags
-- Blocks:
+  - Support for native PHPCR or ORM, or other strategies.
+- Blocks
   - TagCloudBlock
-- Very simple structure for now. Blog>Post* structure
+- Very simple structure for now. Blog>Post*
 - RSS/ATOM feed
 
 Next?
