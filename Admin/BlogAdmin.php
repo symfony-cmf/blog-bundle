@@ -10,33 +10,23 @@ use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
 use Symfony\Cmf\Bundle\BlogBundle\Form\PostType;
 
 /**
- * Post Controller
+ * Blog Admin
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
-class PostAdmin extends Admin
+class BlogAdmin extends Admin
 {
+    protected $blogRoot;
+
     protected function configureFormFields(FormMapper $mapper)
     {
-        // @todo: Move this to a didicated form class and service?
-        //        (easier handling of dependencies)
-        $mapper->add('title');
-        $mapper->add('date', 'datetime', array(
-            'widget' => 'single_text',
-        ));
-        $mapper->add('status', 'choice', array(
-            'choices' => array(
-                'draft' => 'Draft',
-                'published' => 'Published',
-            ),
-        ));
-        $mapper->add('body', 'dcms_markdown_textarea', array(
-            'preview' => false,
-        ));
-        $mapper->add('blog', 'phpcr_document', array(
-            'class' => 'DCMS\Bundle\BlogBundle\Document\BlogEndpoint',
-        ));
-        $mapper->add('csvTags');
+        $mapper->add('parent', 'doctrine_phpcr_type_tree_model', array(
+            'root_node' => $this->blogRoot, 
+            'choice_list' => array(), 
+            'select_root_node' => true)
+        );
+
+        $mapper->add('name', 'text');
     }
 
     protected function configureDatagridFilters(DatagridMapper $dm)
@@ -50,6 +40,11 @@ class PostAdmin extends Admin
         $dm->add('status');
         $dm->add('blog');
         $dm->add('updatedAt');
+    }
+
+    public function setBlogRoot($blogRoot)
+    {
+        $this->blogRoot = $blogRoot;
     }
 
     public function validate(ErrorElement $ee, $obj)
