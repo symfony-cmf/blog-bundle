@@ -26,7 +26,7 @@ class Blog implements RouteAwareInterface
     protected $name;
 
     /**
-     * @PHPCR\Parent()
+     * @PHPCR\ParentDocument()
      */
     protected $parent;
 
