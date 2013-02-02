@@ -20,23 +20,22 @@ class BlogAdmin extends Admin
 
     protected function configureFormFields(FormMapper $mapper)
     {
+        $mapper->add('name', 'text');
         $mapper->add('parent', 'doctrine_phpcr_type_tree_model', array(
             'root_node' => $this->blogRoot, 
             'choice_list' => array(), 
             'select_root_node' => true)
         );
-
-        $mapper->add('name', 'text');
     }
 
     protected function configureDatagridFilters(DatagridMapper $dm)
     {
-        $dm->add('title', 'doctrine_phpcr_string');
+        $dm->add('name', 'doctrine_phpcr_string');
     }
 
     protected function configureListFields(ListMapper $dm)
     {
-        $dm->addIdentifier('title');
+        $dm->addIdentifier('name');
         $dm->add('status');
         $dm->add('blog');
         $dm->add('updatedAt');
@@ -49,8 +48,6 @@ class BlogAdmin extends Admin
 
     public function validate(ErrorElement $ee, $obj)
     {
-        $ee->with('title')->assertNotBlank()->end();
+        $ee->with('name')->assertNotBlank()->end();
     }
 }
-
-?>

@@ -21,7 +21,7 @@ class Blog implements RouteAwareInterface
     protected $id;
 
     /**
-     * @PHPCR\Name()
+     * @PHPCR\NodeName()
      */
     protected $name;
 
@@ -98,5 +98,10 @@ class Blog implements RouteAwareInterface
             //     '_controller' => '@SymfonyCmfBlogBundle:Blog:tag',
             // )),
         );
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }
