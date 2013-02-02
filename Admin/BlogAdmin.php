@@ -16,6 +16,7 @@ use Symfony\Cmf\Bundle\BlogBundle\Form\PostType;
  */
 class BlogAdmin extends Admin
 {
+    protected $translationDomain = 'SymfonyCmfBlogBundle';
     protected $blogRoot;
 
     protected function configureFormFields(FormMapper $mapper)
@@ -36,9 +37,6 @@ class BlogAdmin extends Admin
     protected function configureListFields(ListMapper $dm)
     {
         $dm->addIdentifier('name');
-        $dm->add('status');
-        $dm->add('blog');
-        $dm->add('updatedAt');
     }
 
     public function setBlogRoot($blogRoot)

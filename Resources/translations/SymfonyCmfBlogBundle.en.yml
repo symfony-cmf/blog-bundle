@@ -1,0 +1,14 @@
+breadcrumb:
+    link_blog_list: Blogs
+    link_blog_create: Create
+    link_blog_edit: Edit
+    link_blog_delete: Delete
+
+list:
+    label_id: Id
+    label_name: Name
+
+form:
+    group_general: General
+    label_parent: Parent
+    label_name: Name
