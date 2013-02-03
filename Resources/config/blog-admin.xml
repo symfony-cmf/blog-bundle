@@ -6,9 +6,11 @@
 
     <parameters>
         <parameter key="symfony_cmf_blog.blog_admin_class">Symfony\Cmf\Bundle\BlogBundle\Admin\BlogAdmin</parameter>
+        <parameter key="symfony_cmf_blog.post_admin_class">Symfony\Cmf\Bundle\BlogBundle\Admin\PostAdmin</parameter>
     </parameters>
 
     <services>
+
         <service id="symfony_cmf_blog.admin" class="%symfony_cmf_blog.blog_admin_class%">
             <tag 
                 name="sonata.admin" 
@@ -27,6 +29,23 @@
 
             <call method="setBlogRoot">
                 <argument>%symfony_cmf_blog.blog_basepath%</argument>
+            </call>
+        </service>
+
+        <service id="symfony_cmf_post.admin" class="%symfony_cmf_blog.post_admin_class%">
+            <tag 
+                name="sonata.admin" 
+                manager_type="doctrine_phpcr" 
+                group="dashboard.group_blog" 
+                label_catalogue="SymfonyCmfBlogBundle" 
+                label="dashboard.label_post" 
+                label_translator_strategy="sonata.admin.label.strategy.underscore" />
+            <argument/>
+            <argument>Symfony\Cmf\Bundle\BlogBundle\Document\Post</argument>
+            <argument>SonataAdminBundle:CRUD</argument>
+
+            <call method="setRouteBuilder">
+                <argument type="service" id="sonata.admin.route.path_info_slashes" />
             </call>
         </service>
     </services>

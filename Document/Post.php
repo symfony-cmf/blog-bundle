@@ -3,11 +3,10 @@
 namespace Symfony\Cmf\Bundle\BlogBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
+use Symfony\Cmf\Bundle\BlogBundle\Util\PostUtils;
 
 /**
- * @PHPCR\Document(
- *   repositoryClass="Symfony\Cmf\Bundle\BlogBundle\Repository\PostRepository"
- * )
+ * @PHPCR\Document()
  */
 class Post
 {
@@ -22,7 +21,7 @@ class Post
     protected $name;
 
     /**
-     * @PHPCR\Parent()
+     * @PHPCR\ParentDocument()
      */
     protected $blog;
 
@@ -42,7 +41,7 @@ class Post
     protected $date;
 
     /**
-     * @PHPCR\Boolean
+     * @PHPCR\String()
      */
     protected $status;
 
@@ -79,6 +78,7 @@ class Post
     public function setTitle($title)
     {
         $this->title = $title;
+        $this->name = PostUtils::slugify($title);
     }
 
     public function getBody()
@@ -89,13 +89,6 @@ class Post
     public function setBody($body)
     {
         $this->body = $body;
-    }
-
-    public function getBodyPreview($length = 255)
-    {
-        $suffix = strlen($this->body) > $length ? ' ...' : '';
-
-        return substr($this->body, 0, 255).$suffix;
     }
 
     public function getDate()
@@ -133,24 +126,6 @@ class Post
         $this->status = $status;
     }
 
-    public function getCsvTags()
-    {
-        $csvTags = '';
-        if ($this->tags) {
-            $csvTags = implode(',', (array) $this->tags);
-        }
-        return $csvTags;
-    }
-    
-    public function setCsvTags($tags)
-    {
-        $tags = explode(',', $tags);
-        foreach ($tags as &$tag) {
-            $tag = trim($tag);
-        }
-        $this->tags = $tags;
-    }
-
     public function getTags()
     {
         return $this->tags;
@@ -158,11 +133,12 @@ class Post
     
     public function setTags($tags)
     {
-        $uniq = array();
-        foreach ($tags as $tag) {
-            $uniq[$tag] = $tag;
-        }
-        $this->tags = array_values($uniq);
+        $this->tags = $tags;
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 }
 

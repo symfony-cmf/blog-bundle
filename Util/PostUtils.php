@@ -1,6 +1,6 @@
 <?php
 
-namespace DCMS\Bundle\CoreBundle\Util;
+namespace Symfony\Cmf\Bundle\BlogBundle\Util;
 
 /**
  * Miscilaneous reuseable code
@@ -10,7 +10,7 @@ namespace DCMS\Bundle\CoreBundle\Util;
 class PostUtils
 {
     /**
-     * Dan: I wonder if this should be pushed back
+     * @todo: I wonder if this should be pushed back
      *      to some cmf/commons library.
      */
     public static function slugify($string)
