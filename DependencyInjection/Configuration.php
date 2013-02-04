@@ -29,7 +29,7 @@ class Configuration implements ConfigurationInterface
                 //     ->values(array(true, false, 'auto'))
                 //     ->defaultValue('auto')
                 // ->end()
-                ->scalarNode('blog_basepath')->defaultValue('/cms/blog')->end()
+                ->scalarNode('blog_basepath')->defaultValue('/cms/content')->end()
             ->end()
         ;
 

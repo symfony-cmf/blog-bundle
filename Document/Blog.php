@@ -81,9 +81,8 @@ class Blog implements RouteAwareInterface
     /**
      * Return the routes associated with this blog.
      *
-     * NOTE: This smells wrong -- wouldn't it be better to define
-     *       this outside of the ODM Doc? Ideally loading the routes
-     *       from a file.
+     * @todo: This is wrong, it should return the routeContent
+     *        routes that reffer to this blog post.
      */
     public function getRoutes()
     {
