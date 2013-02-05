@@ -1,20 +1,22 @@
-<div class="panel">
-    <div class="row">
-        <div class="span-6" style="font-size: 28px">
+<div class="post">
+    <div class="row-fluid">
+        <div class="span9" style="font-size: 28px">
             {# @todo: Post routes #}
             <a href="#">{{ post.title }}</a>
         </div>
-        <div class="span-6" style="text-align: right">
+        <div class="span3" style="text-align: right">
             <i>{{ post.date.format('d-m-Y H:i:s') }}</i>
         </div>
     </div>
-    <div class="row">
-        <div class="span-6" style="margin: 10px 0px 10px 0px">
+    <div class="row-fluid">
+        <div class="span12" style="margin: 10px 0px 10px 0px">
             {{ post.bodyPreview }}
         </div>
     </div>
-    <div class="row">
-        <div class="span-6" style="text-align: right">
+    <div class="row-fluid">
+        <div class="span6">
+        </div>
+        <div class="span6" style="text-align: right">
             {# @todo: Translation #}
             Tagged: {% for tag in post.tags %}
             {# @todo: Tag routes #}
