@@ -6,7 +6,9 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 use Symfony\Cmf\Bundle\BlogBundle\Util\PostUtils;
 
 /**
- * @PHPCR\Document()
+ * @PHPCR\Document(
+ *   repositoryClass="Symfony\Cmf\Bundle\BlogBundle\Repository\PostRepository"
+ * )
  */
 class Post
 {
@@ -134,6 +136,13 @@ class Post
     public function setTags($tags)
     {
         $this->tags = $tags;
+    }
+
+    public function getBodyPreview($length = 255)
+    {
+        $suffix = strlen($this->body) > $length ? ' ...' : '';
+
+        return substr($this->body, 0, 255).$suffix;
     }
 
     public function __toString()

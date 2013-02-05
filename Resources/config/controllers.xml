@@ -1,0 +1,20 @@
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="symfony_cmf_blog.controller">Symfony\Cmf\Bundle\BlogBundle\Controller\BlogController</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="symfony_cmf_blog.blog_controller" class="Symfony\Cmf\Bundle\BlogBundle\Controller\BlogController">
+            <argument type="service" id="templating" />
+            <argument type="service" id="fos_rest.view_handler" on-invalid="ignore"/>
+            <argument type="service" id="doctrine_phpcr.odm.default_document_manager"/>
+        </service>
+
+    </services>
+
+</container>
+

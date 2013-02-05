@@ -1,3 +1,9 @@
+Work in progress
+================
+
+This document will eventually describe the process of implenting
+the BlogBundle.
+
 Routing
 -------
 

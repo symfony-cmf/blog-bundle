@@ -35,6 +35,12 @@ class Blog implements RouteAwareInterface
      */
     protected $posts;
 
+    /**
+     * @PHPCR\Referrers(filter="routeContent")
+     */
+    protected $routes;
+
+
     public function getId() 
     {
         return $this->id;
@@ -78,25 +84,13 @@ class Blog implements RouteAwareInterface
         $this->posts[] = $post;
     }
 
+
     /**
-     * Return the routes associated with this blog.
-     *
-     * @todo: This is wrong, it should return the routeContent
-     *        routes that reffer to this blog post.
+     * @return \Symfony\Component\Routing\Route[] Route instances that point to this content
      */
     public function getRoutes()
     {
-        return array(
-            new Route('/', array(
-                '_controller' => '@SymfonyCmfBlogBundle:Blog:index',
-            )),
-            new Route('/posts/{slug}', array(
-                '_controller' => '@SymfonyCmfBlogBundle:Post:view',
-            )),
-            // new Route('/tag/{tag}', array(
-            //     '_controller' => '@SymfonyCmfBlogBundle:Blog:tag',
-            // )),
-        );
+        return $this->routes;
     }
 
     public function __toString()

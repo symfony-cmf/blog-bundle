@@ -1,0 +1,27 @@
+{% extends "SymfonyCmfBlogBundle::default_layout.html.twig" %}
+{% block content %}
+<div class="row">
+    <div class="span12">
+        {% if tag %}
+            <div class="text-info">
+                {# @todo: Translation #}
+                Showing posts with tag "{{ tag }}"
+            </div>
+        {% endif %}
+        {% if blog %}
+            <div class="text-info">
+                Showing posts from blog "{{ blog.name }}"
+            </div>
+        {% endif %}
+    </div>
+</div>
+<div class="row">
+    <div class="span-12">
+        {% block posts %}
+            {% for post in posts %}
+                {% include "SymfonyCmfBlogBundle:Blog:list_post.html.twig" %}
+            {% endfor %}
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
