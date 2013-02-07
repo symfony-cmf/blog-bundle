@@ -2,7 +2,7 @@
 
 namespace Symfony\Cmf\Bundle\BlogBundle\Routing;
 
-use Symfony\Cmf\Bundle\BlogBundle\Routing\PostRoute;
+use Symfony\Cmf\Bundle\BlogBundle\Document\PostRoute;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use Symfony\Cmf\Bundle\BlogBundle\Document\Blog;
 use Symfony\Cmf\Bundle\RoutingExtraBundle\Document\Route;
@@ -19,17 +19,21 @@ class BlogRouteManager
 
     protected $dm;
 
-    protected $defaultPostRouteName;
+    protected $postPrefix;
     protected $postController;
 
-    public function __construct(
-        DocumentManager $dm,
-        $postController = 'symfony_cmf_blog.blog_controller:viewPost',
-        $defaultPostRouteName = 'posts'
-    ) {
+    /**
+     * Constructor
+     *
+     * @param DocumentManager $dm
+     * @param string $postController - of the form: <service_id>:<methodName>
+     * @param string $postPrefix - Prefix to use before post slugs, e.g. "posts"
+     */
+    public function __construct(DocumentManager $dm, $postController, $postPrefix) 
+    {
         $this->dm =$dm;
         $this->postController = $postController;
-        $this->defaultPostRouteName = $defaultPostRouteName;
+        $this->postPrefix = $postPrefix;
     }
 
     /**
@@ -92,10 +96,10 @@ class BlogRouteManager
 
         if (null === $postRoute) {
             $postRoute = new PostRoute;
-            $postRoute->setParent($postRoute);
+            $postRoute->setParent($route);
         }
 
-        $postRoute->setName($this->defaultPostRouteName);
+        $postRoute->setName($this->postPrefix);
         $postRoute->setDefault('_controller', $this->postController);
         $postRoute->setVariablePattern(self::POST_ROUTE_VAR_PATTERN);
 

@@ -27,6 +27,10 @@
                 <argument type="service" id="sonata.admin.route.path_info_slashes" />
             </call>
 
+            <call method="setBlogRouteManager">
+                <argument type="service" id="symfony_cmf_blog.blog_route_manager" />
+            </call>
+
             <call method="setBlogRoot">
                 <argument>%symfony_cmf_blog.blog_basepath%</argument>
             </call>

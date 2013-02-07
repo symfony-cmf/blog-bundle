@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
 use Symfony\Cmf\Bundle\BlogBundle\Form\PostType;
+use Symfony\Cmf\Bundle\BlogBundle\Routing\BlogRouteManager;
 
 /**
  * Blog Admin
@@ -18,6 +19,7 @@ class BlogAdmin extends Admin
 {
     protected $translationDomain = 'SymfonyCmfBlogBundle';
     protected $blogRoot;
+    protected $brm;
 
     protected function configureFormFields(FormMapper $mapper)
     {
@@ -44,8 +46,18 @@ class BlogAdmin extends Admin
         $this->blogRoot = $blogRoot;
     }
 
+    public function setBlogRouteManager(BlogRouteManager $brm)
+    {
+        $this->brm = $brm;
+    }
+
     public function validate(ErrorElement $ee, $obj)
     {
         $ee->with('name')->assertNotBlank()->end();
+    }
+
+    public function preUpdate($object)
+    {
+        $this->brm->syncSubRoutes($object);
     }
 }
