@@ -1,8 +1,9 @@
 <?php
 
-namespace Symfony\Cmf\Bundle\BlogBundle\Routing;
+namespace Symfony\Cmf\Bundle\BlogBundle\Document;
 
 use Symfony\Cmf\Bundle\RoutingExtraBundle\Document\Route;
+use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 
 /**
  * Route class for internal use by the blog bundle.

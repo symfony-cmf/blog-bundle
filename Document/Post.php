@@ -6,49 +6,57 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 use Symfony\Cmf\Bundle\BlogBundle\Util\PostUtils;
 
 /**
- * @PHPCR\Document(
- *   repositoryClass="Symfony\Cmf\Bundle\BlogBundle\Repository\PostRepository"
- * )
+ * Object representing a blog post.
+ *
+ * @author Daniel Leech <daniel@dantleech.com>
  */
 class Post
 {
     /**
-     * @PHPCR\Id
+     * ID / Path to to this object
+     * @var string
      */
     protected $id;
 
     /**
-     * @PHPCR\NodeName()
+     * Node name / slug
+     * @var string
      */
     protected $name;
 
     /**
-     * @PHPCR\ParentDocument()
+     * Blog - this is the parent document.
+     * @var Blog
      */
     protected $blog;
 
     /**
-     * @PHPCR\String()
+     * Post title (name is generated from this)
+     * @var string
      */
     protected $title;
 
     /**
-     * @PHPCR\String()
+     * Post body text
+     * @var string
      */
     protected $body;
 
     /**
-     * @PHPCR\Date()
+     * Date of publication
+     * @var DateTime
      */
     protected $date;
 
     /**
-     * @PHPCR\String()
+     * Post status [draft|published]
+     * @var string
      */
     protected $status;
 
     /**
-     * @PHPCR\String(multivalue=true)
+     * List of tags associated with this post
+     * @var array
      */
     protected $tags = array();
 

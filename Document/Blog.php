@@ -10,33 +10,31 @@ use Symfony\Component\Routing\Route;
  * Blog Document
  *
  * @author Daniel Leech <daniel@dantleech.com>
- *
- * @PHPCR\Document(referenceable=true)
  */
 class Blog implements RouteAwareInterface
 {
     /**
-     * @PHPCR\Id()
+     * Identifier
      */
     protected $id;
 
     /**
-     * @PHPCR\NodeName()
+     * Node Name / Blog Title
      */
     protected $name;
 
     /**
-     * @PHPCR\ParentDocument()
+     * Parent Document
      */
     protected $parent;
 
     /**
-     * @PHPCR\Children()
+     * Posts (mapped as children)
      */
     protected $posts;
 
     /**
-     * @PHPCR\Referrers(filter="routeContent")
+     * Routes (mapped as Referrers(filter=routeContent))
      */
     protected $routes;
 
