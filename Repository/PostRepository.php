@@ -43,4 +43,15 @@ class PostRepository extends DocumentRepository
         $res = $q->execute();
         return $res;
     }
+
+    public function fetchOneBySlug($slug)
+    {
+        $qb = $this->createQueryBuilder();
+        $qb->where($qb->expr()->eq('slug', $slug));
+        $qb->setMaxResults(1);
+        $q = $qb->getQuery();
+        $post = $q->getSingleResult();
+
+        return $post;
+    }
 }

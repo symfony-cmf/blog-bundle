@@ -97,7 +97,7 @@ class BlogRouteManager
     private function syncRoute(Route $route)
     {
         $postRoute = null;
-        $routeChildren = $route->getChildren() ? : array();
+        $routeChildren = $route->getRouteChildren() ? : array();
 
         foreach ($routeChildren as $child) {
             if ($child instanceof PostRoute) {

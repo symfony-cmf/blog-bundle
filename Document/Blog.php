@@ -91,6 +91,27 @@ class Blog implements RouteAwareInterface
         return $this->routes;
     }
 
+    public function getPostsRoutes()
+    {
+        $postsRoutes = array();
+
+        foreach ($this->routes as $route) {
+            foreach ($route->getRouteChildren() as $routeChild)
+                if ($routeChild instanceof PostRoute) {
+                    $postsRoutes[] = $routeChild;
+            }
+        }
+
+        if (empty($postsRoutes)) {
+            throw new \Exception(
+                'Could not find posts route, this special route should be a child '.
+                'of the blogs route.'
+            );
+        }
+
+        return $postsRoutes;
+    }
+
     public function __toString()
     {
         return $this->name;

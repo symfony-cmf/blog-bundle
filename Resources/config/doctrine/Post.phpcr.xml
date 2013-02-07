@@ -14,6 +14,7 @@
             <generator strategy="parent"/>
         </id>
 
+        <field fieldName="slug" type="string"/>
         <field fieldName="title" type="string"/>
         <field fieldName="body" type="string"/>
         <field fieldName="date" type="date"/>

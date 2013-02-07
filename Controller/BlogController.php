@@ -67,6 +67,18 @@ class BlogController
         return $blog;
     }
 
+    public function viewPost(Request $request)
+    {
+        $slug = $request->get('slug');
+        $post = $this->getPostRepo()->fetchOneBySlug($slug);
+
+        $contentTemplate = 'SymfonyCmfBlogBundle:Blog:view_post.html.twig';
+
+        return $this->renderResponse($contentTemplate, array(
+            'post' => $post
+        ));
+    }
+
     // @todo: Not sure how contentDocument and maybe contentTemplate get injected here.
     public function listAction(Request $request, $contentDocument)
     {

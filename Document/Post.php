@@ -4,13 +4,14 @@ namespace Symfony\Cmf\Bundle\BlogBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 use Symfony\Cmf\Bundle\BlogBundle\Util\PostUtils;
+use Symfony\Cmf\Component\Routing\RouteAwareInterface;
 
 /**
  * Object representing a blog post.
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
-class Post
+class Post implements RouteAwareInterface
 {
     /**
      * ID / Path to to this object
@@ -19,10 +20,15 @@ class Post
     protected $id;
 
     /**
-     * Node name / slug
+     * Node name (same as slug)
      * @var string
      */
     protected $name;
+
+    /**
+     * READ ONLY: Post slug (cannot query directly on name field)
+     */
+    protected $slug;
 
     /**
      * Blog - this is the parent document.
@@ -89,6 +95,12 @@ class Post
     {
         $this->title = $title;
         $this->name = PostUtils::slugify($title);
+        $this->slug = $this->name;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
     }
 
     public function getBody()
@@ -151,6 +163,11 @@ class Post
         $suffix = strlen($this->body) > $length ? ' ...' : '';
 
         return substr($this->body, 0, 255).$suffix;
+    }
+
+    public function getRoutes()
+    {
+        return $this->blog->getPostsRoutes();
     }
 
     public function __toString()

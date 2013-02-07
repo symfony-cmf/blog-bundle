@@ -1,0 +1,14 @@
+{% extends "SymfonyCmfBlogBundle::default_layout.html.twig" %}
+{% block content %}
+<div class="row">
+    <div class="span12">
+        <h1>{{ post.title }}</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="span-12">
+        {{ post.body|nl2br|raw }}
+    </div>
+</div>
+{% endblock %}
+
