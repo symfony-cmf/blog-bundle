@@ -14,6 +14,7 @@ class BlogRouteManagerTest extends \PHPUnit_Framework_TestCase
 
         $this->brm = new BlogRouteManager(
             $this->dm,
+            '/cms/routes',
             'test_controller',
             'test'
         );
@@ -26,9 +27,19 @@ class BlogRouteManagerTest extends \PHPUnit_Framework_TestCase
         $this->blog->expects($this->once())
             ->method('getRoutes')
             ->will($this->returnValue(array()));
+        $this->blog->expects($this->once())
+            ->method('getName')
+            ->will($this->returnValue('This is a test blog'));
+        $this->dm->expects($this->once())
+            ->method('find')
+            ->with(null, '/cms/routes');
+        $this->dm->expects($this->exactly(2))
+            ->method('persist');
 
-        $res = $this->brm->syncSubRoutes($this->blog);
-        $this->assertNull($res);
+        $res = $this->brm->syncRoutes($this->blog);
+        $this->assertCount(2, $res);
+        $route = $res[0];
+        $this->assertEquals('this-is-a-test-blog', $route->getName());
     }
 
     public function testSyncWithOneRoute()
@@ -41,10 +52,11 @@ class BlogRouteManagerTest extends \PHPUnit_Framework_TestCase
         $this->dm->expects($this->once())
             ->method('persist');
 
-        $res = $this->brm->syncSubRoutes($this->blog);
-        $this->assertCount(1, $res);
-        $this->assertEquals('test_controller', $res[0]->getDefault('_controller'));
-        $this->assertEquals('test', $res[0]->getName());
+        $res = $this->brm->syncRoutes($this->blog);
+        $this->assertCount(2, $res);
+        $route = $res[1];
+        $this->assertEquals('test_controller', $route->getDefault('_controller'));
+        $this->assertEquals('test', $route->getName());
     }
 
     public function testRemove()
@@ -58,6 +70,6 @@ class BlogRouteManagerTest extends \PHPUnit_Framework_TestCase
             ->method('remove')
             ->with($this->route1);
 
-        $this->brm->removeSubRoutes($this->blog);
+        $this->brm->removeRoutes($this->blog);
     }
 }

@@ -58,6 +58,11 @@ class BlogAdmin extends Admin
 
     public function preUpdate($object)
     {
-        $this->brm->syncSubRoutes($object);
+        $this->brm->syncRoutes($object);
+    }
+
+    public function prePersist($object)
+    {
+        $this->brm->syncRoutes($object);
     }
 }

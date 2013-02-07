@@ -25,8 +25,17 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $treeBuilder->root('symfony_cmf_blog')
             ->children()
-                ->scalarNode('default_template')->defaultValue('SymfonyCmfBlogBundle::symfony_cmf_blog_layout.html.twig')->end()
-                ->scalarNode('blog_basepath')->defaultValue('/cms/content')->end()
+            ->scalarNode('blog_basepath')
+                ->defaultValue('/cms/content')
+            ->end()
+            ->scalarNode('routing_post_controller')
+                ->defaultValue('symfony_cmf_blog.blog_controller:viewPost')
+            ->end()
+            ->scalarNode('routing_post_prefix')
+                ->defaultValue('posts')
+            ->end()
+            ->scalarNode('routing_basepath')
+                ->isRequired()
             ->end()
         ;
 

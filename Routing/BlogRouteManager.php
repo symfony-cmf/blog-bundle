@@ -6,6 +6,7 @@ use Symfony\Cmf\Bundle\BlogBundle\Document\PostRoute;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use Symfony\Cmf\Bundle\BlogBundle\Document\Blog;
 use Symfony\Cmf\Bundle\RoutingExtraBundle\Document\Route;
+use Symfony\Cmf\Bundle\BlogBundle\Util\PostUtils;
 
 /**
  * Class which handles the maintainance of the routes associated
@@ -19,6 +20,7 @@ class BlogRouteManager
 
     protected $dm;
 
+    protected $baseRoutePath;
     protected $postPrefix;
     protected $postController;
 
@@ -29,9 +31,10 @@ class BlogRouteManager
      * @param string $postController - of the form: <service_id>:<methodName>
      * @param string $postPrefix - Prefix to use before post slugs, e.g. "posts"
      */
-    public function __construct(DocumentManager $dm, $postController, $postPrefix) 
+    public function __construct(DocumentManager $dm, $baseRoutePath, $postController, $postPrefix) 
     {
         $this->dm =$dm;
+        $this->baseRoutePath = $baseRoutePath;
         $this->postController = $postController;
         $this->postPrefix = $postPrefix;
     }
@@ -48,20 +51,29 @@ class BlogRouteManager
      *
      * @param Blog $blog
      * 
-     * @return array|null - Child routes, for testing purposes or NULL if
+     * @return array|null - Blog routes, for testing purposes or NULL if
      *                      blog has no route.
      */
-    public function syncSubRoutes(Blog $blog)
+    public function syncRoutes(Blog $blog)
     {
+        $ret = array();
         $routes = $blog->getRoutes();
 
         if (empty($routes)) {
-            return null;
+            // create new
+            $parentRoute = $this->dm->find(null, $this->baseRoutePath);
+
+            $route = new Route();
+            $route->setParent($parentRoute);
+            $route->setName(PostUtils::slugify($blog->getName()));
+            $route->setRouteContent($blog);
+            $this->dm->persist($route);
+
+            $routes = array($route);
         }
 
-        $ret = array();
-
         foreach ($routes as $route) {
+            $ret[] = $route;
             $ret[] = $this->syncRoute($route);
         }
 
@@ -73,7 +85,7 @@ class BlogRouteManager
      *
      * @param Blog $blog
      */
-    public function removeSubRoutes(Blog $blog)
+    public function removeRoutes(Blog $blog)
     {
         $routes = $blog->getRoutes() ? : array();
         

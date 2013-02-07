@@ -22,7 +22,19 @@ class SymfonyCmfBlogExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter($this->getAlias() . '.blog_basepath', $config['blog_basepath']);
+        $keys = array(
+            'routing_post_controller',
+            'blog_basepath',
+            'routing_post_prefix',
+            'routing_basepath',
+        );
+
+        foreach ($keys as $key) {
+            $container->setParameter(
+                $this->getAlias().'.'.$key, 
+                $config[$key]
+            );
+        }
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('blog-admin.xml');
