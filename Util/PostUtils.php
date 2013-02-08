@@ -11,7 +11,7 @@ class PostUtils
 {
     /**
      * @todo: I wonder if this should be pushed back
-     *      to some cmf/commons library.
+     *        to some cmf/commons library.
      */
     public static function slugify($string)
     {
