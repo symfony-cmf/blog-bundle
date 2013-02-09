@@ -71,11 +71,15 @@ class BlogController
     {
         $slug = $request->get('slug');
         $post = $this->getPostRepo()->fetchOneBySlug($slug);
+        $prevPost = $this->getPostRepo()->fetchPrevPost($post);
+        $nextPost = $this->getPostRepo()->fetchNextPost($post);
 
         $contentTemplate = 'SymfonyCmfBlogBundle:Blog:view_post.html.twig';
 
         return $this->renderResponse($contentTemplate, array(
-            'post' => $post
+            'post' => $post,
+            'nextPost' => $nextPost,
+            'prevPost' => $prevPost,
         ));
     }
 

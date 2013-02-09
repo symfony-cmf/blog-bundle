@@ -2,6 +2,7 @@
 
 namespace Symfony\Cmf\Bundle\BlogBundle\Repository;
 use Doctrine\ODM\PHPCR\DocumentRepository;
+use Symfony\Cmf\Bundle\BlogBundle\Document\Post;
 
 class PostRepository extends DocumentRepository
 { 
@@ -51,6 +52,39 @@ class PostRepository extends DocumentRepository
         $qb->setMaxResults(1);
         $q = $qb->getQuery();
         $post = $q->getSingleResult();
+
+        return $post;
+    }
+
+    public function fetchNextPost(Post $post)
+    {
+        $post = $this->fetchSiblingPost($post);
+        return $post;
+    }
+
+    public function fetchPrevPost(Post $post)
+    {
+        $post = $this->fetchSiblingPost($post, true);
+        return $post;
+    }
+
+    public function fetchSiblingPost(Post $post, $prev = false)
+    {
+        $qb = $this->createQueryBuilder();
+        $qb->setMaxResults(1);
+
+        // hmm, if two adjacent posts were created in the same second this
+        // will not work.
+        if (false === $prev) {
+            $qb->where($qb->expr()->lt('date', $post->getDate()));
+            $qb->orderBy('date', 'desc');
+        } else {
+            $qb->where($qb->expr()->gt('date', $post->getDate()));
+            $qb->orderBy('date', 'asc');
+        }
+
+        $q = $qb->getQuery();
+        $post = $q->getOneOrNullResult();
 
         return $post;
     }

@@ -17,11 +17,8 @@
         <div class="span6">
         </div>
         <div class="span6" style="text-align: right">
-            {# @todo: Translation #}
-            Tagged: {% for tag in post.tags %}
-            {# @todo: Tag routes #}
-            <a href="#">{{ tag }}</a></span>
-            {% endfor %}
+            {% trans from "SymfonyCmfSimpleCmsBundle" %}Tagging{% endtrans %}: 
+            {% include "SymfonyCmfBlogBundle:Blog:tags_inline.html.twig" %}
         </div>
     </div>
 </div>

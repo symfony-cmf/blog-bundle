@@ -1,12 +1,33 @@
 {% extends "SymfonyCmfBlogBundle::default_layout.html.twig" %}
 {% block content %}
-<div class="row">
+<div class="row-fluid">
+    <div class="span6">
+        {% if prevPost %}
+            <a href="{{ path(prevPost, {'slug': prevPost.slug}) }}">&lt;&lt; {{ prevPost.title }}</a>
+        {% endif %}
+    </div>
+    <div class="span6" style="text-align: right">
+        {% if nextPost %}
+            <a href="{{ path(nextPost, {'slug': nextPost.slug}) }}">{{ nextPost.title }} &gt;&gt;</a>
+        {% endif %}
+    </div>
+</div>
+<div class="row-fluid">
     <div class="span12">
         <h1>{{ post.title }}</h1>
     </div>
 </div>
-<div class="row">
-    <div class="span-12">
+<div class="row-fluid">
+    <div class="span6">
+        <p><i>Posted on: {{ post.date.format('Y-m-d H:i:s') }}</i></p>
+    </div>
+    <div class="span6" style="text-align: right">
+        <i>{% trans from "SymfonyCmfSimpleCmsBundle" %}Tagged{% endtrans %}:</i> 
+        <i>{% include "SymfonyCmfBlogBundle:Blog:tags_inline.html.twig" %}</i>
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span12">
         {{ post.body|nl2br|raw }}
     </div>
 </div>

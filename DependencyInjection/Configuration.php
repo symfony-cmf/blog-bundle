@@ -26,7 +26,7 @@ class Configuration implements ConfigurationInterface
         $treeBuilder->root('symfony_cmf_blog')
             ->children()
             ->scalarNode('blog_basepath')
-                ->defaultValue('/cms/content')
+                ->isRequired()
             ->end()
             ->scalarNode('routing_post_controller')
                 ->defaultValue('symfony_cmf_blog.blog_controller:viewPost')
