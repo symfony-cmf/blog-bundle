@@ -93,23 +93,34 @@ class Blog implements RouteAwareInterface
 
     public function getPostsRoutes()
     {
-        $postsRoutes = array();
+        return $this->getSubRoutes('Symfony\Cmf\Bundle\BlogBundle\Document\PostRoute');
+    }
+
+    public function getTagRoutes()
+    {
+        return $this->getSubRoutes('Symfony\Cmf\Bundle\BlogBundle\Document\TagRoute');
+    }
+
+    public function getSubRoutes($routeClass)
+    {
+        $subRoutes = array();
 
         foreach ($this->routes as $route) {
             foreach ($route->getRouteChildren() as $routeChild)
-                if ($routeChild instanceof PostRoute) {
-                    $postsRoutes[] = $routeChild;
+                if ($routeChild instanceof $routeClass) {
+                    $subRoutes[] = $routeChild;
             }
         }
 
-        if (empty($postsRoutes)) {
-            throw new \Exception(
-                'Could not find posts route, this special route should be a child '.
-                'of the blogs route.'
-            );
+        if (empty($subRoutes)) {
+            throw new \Exception(sprintf(
+                'Could not find route of class "%s", this special route should be a child '.
+                'of the blogs route.',
+                $routeClass
+            ));
         }
 
-        return $postsRoutes;
+        return $subRoutes;
     }
 
     public function __toString()

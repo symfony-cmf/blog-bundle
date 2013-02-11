@@ -15,8 +15,10 @@ class BlogRouteManagerTest extends \PHPUnit_Framework_TestCase
         $this->brm = new BlogRouteManager(
             $this->dm,
             '/cms/routes',
-            'test_controller',
-            'test'
+            'post_controller',
+            'test',
+            'tag_controller',
+            'tag'
         );
         $this->blog = $this->getMock('Symfony\Cmf\Bundle\BlogBundle\Document\Blog');
         $this->route1 = $this->getMock('Symfony\Cmf\Bundle\RoutingExtraBundle\Document\Route');
@@ -33,11 +35,11 @@ class BlogRouteManagerTest extends \PHPUnit_Framework_TestCase
         $this->dm->expects($this->once())
             ->method('find')
             ->with(null, '/cms/routes');
-        $this->dm->expects($this->exactly(2))
+        $this->dm->expects($this->exactly(3))
             ->method('persist');
 
         $res = $this->brm->syncRoutes($this->blog);
-        $this->assertCount(2, $res);
+        $this->assertCount(3, $res);
         $route = $res[0];
         $this->assertEquals('this-is-a-test-blog', $route->getName());
     }
@@ -49,14 +51,33 @@ class BlogRouteManagerTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(array(
                 $this->route1
             )));
-        $this->dm->expects($this->once())
+        $this->route1->expects($this->any())
+            ->method('getDefault')
+            ->will($this->returnCallback(function ($key) {
+                switch ($key) {
+                    case 'blog_id':
+                        return '/blog';
+                    case '_locale':
+                        return 'en';
+                }
+            }));
+        $this->blog->expects($this->exactly(1))
+            ->method('getId')
+            ->will($this->returnValue('/blog'));
+        $this->dm->expects($this->exactly(3))
             ->method('persist');
 
         $res = $this->brm->syncRoutes($this->blog);
-        $this->assertCount(2, $res);
+        $this->assertCount(3, $res);
+
         $route = $res[1];
-        $this->assertEquals('test_controller', $route->getDefault('_controller'));
+        $this->assertEquals('post_controller', $route->getDefault('_controller'));
         $this->assertEquals('test', $route->getName());
+
+        $route = $res[2];
+        $this->assertEquals('tag_controller', $route->getDefault('_controller'));
+        $this->assertEquals('tag', $route->getName());
+        $this->assertEquals('/blog', $route->getDefault('blog_id'));
     }
 
     public function testRemove()

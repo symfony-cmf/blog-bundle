@@ -9,6 +9,8 @@
             <argument>%symfony_cmf_blog.routing_basepath%</argument>
             <argument>%symfony_cmf_blog.routing_post_controller%</argument>
             <argument>%symfony_cmf_blog.routing_post_prefix%</argument>
+            <argument>%symfony_cmf_blog.routing_tag_controller%</argument>
+            <argument>%symfony_cmf_blog.routing_tag_prefix%</argument>
         </service>
 
     </services>

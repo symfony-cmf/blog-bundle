@@ -17,12 +17,15 @@ use Symfony\Cmf\Bundle\BlogBundle\Util\PostUtils;
 class BlogRouteManager
 {
     const POST_ROUTE_VAR_PATTERN = '/{slug}';
+    const TAG_ROUTE_VAR_PATTERN = '/{tag}';
 
     protected $dm;
 
     protected $baseRoutePath;
     protected $postPrefix;
     protected $postController;
+    protected $tagPrefix;
+    protected $tagController;
 
     /**
      * Constructor
@@ -31,12 +34,21 @@ class BlogRouteManager
      * @param string $postController - of the form: <service_id>:<methodName>
      * @param string $postPrefix - Prefix to use before post slugs, e.g. "posts"
      */
-    public function __construct(DocumentManager $dm, $baseRoutePath, $postController, $postPrefix) 
+    public function __construct(
+        DocumentManager $dm, 
+        $baseRoutePath, 
+        $postController, 
+        $postPrefix,
+        $tagController,
+        $tagPrefix
+    ) 
     {
         $this->dm =$dm;
         $this->baseRoutePath = $baseRoutePath;
         $this->postController = $postController;
         $this->postPrefix = $postPrefix;
+        $this->tagController = $tagController;
+        $this->tagPrefix = $tagPrefix;
     }
 
     /**
@@ -65,16 +77,18 @@ class BlogRouteManager
 
             $route = new Route();
             $route->setParent($parentRoute);
-            $route->setName(PostUtils::slugify($blog->getName()));
-            $route->setRouteContent($blog);
-            $this->dm->persist($route);
 
             $routes = array($route);
         }
 
         foreach ($routes as $route) {
+            $route->setName(PostUtils::slugify($blog->getName()));
+            $route->setRouteContent($blog);
+            $route->setDefault('blog_id', $blog->getId());
+            $this->dm->persist($route);
+
             $ret[] = $route;
-            $ret[] = $this->syncRoute($route);
+            $ret = array_merge($ret, $this->syncRoute($route));
         }
 
         return $ret;
@@ -96,27 +110,48 @@ class BlogRouteManager
 
     private function syncRoute(Route $route)
     {
-        $postRoute = null;
-        $routeChildren = $route->getRouteChildren() ? : array();
+        $ret = array();
+        $blogId = $route->getDefault('blog_id');
 
-        foreach ($routeChildren as $child) {
-            if ($child instanceof PostRoute) {
-                $postRoute = $child;
-                break;
+        $routeConfigs = array(
+            'Symfony\Cmf\Bundle\BlogBundle\Document\PostRoute' => array(
+                'prefix' => $this->postPrefix,
+                'controller' => $this->postController,
+                'variable_pattern' => self::POST_ROUTE_VAR_PATTERN,
+            ),
+            'Symfony\Cmf\Bundle\BlogBundle\Document\TagRoute' => array(
+                'prefix' => $this->tagPrefix,
+                'controller' => $this->tagController,
+                'variable_pattern' => self::TAG_ROUTE_VAR_PATTERN,
+            ),
+        );
+
+        foreach ($routeConfigs as $routeClass => $routeConfig) {
+            $subRoute = null;
+            $routeChildren = $route->getRouteChildren() ? : array();
+
+            foreach ($routeChildren as $child) {
+                if ($child instanceof $routeClass) {
+                    $subRoute = $child;
+                    break;
+                }
             }
+
+            if (null === $subRoute) {
+                $subRoute = new $routeClass;
+                $subRoute->setParent($route);
+            }
+
+            $subRoute->setName($routeConfig['prefix']);
+            $subRoute->setDefault('_controller', $routeConfig['controller']);
+            $subRoute->setVariablePattern($routeConfig['variable_pattern']);
+            $subRoute->setDefault('blog_id', $blogId);
+            $subRoute->setDefault('_locale', $route->getDefault('_locale'));
+
+            $this->dm->persist($subRoute);
+            $ret[] = $subRoute;
         }
 
-        if (null === $postRoute) {
-            $postRoute = new PostRoute;
-            $postRoute->setParent($route);
-        }
-
-        $postRoute->setName($this->postPrefix);
-        $postRoute->setDefault('_controller', $this->postController);
-        $postRoute->setVariablePattern(self::POST_ROUTE_VAR_PATTERN);
-
-        $this->dm->persist($postRoute);
-
-        return $postRoute;
+        return $ret;
     }
 }
