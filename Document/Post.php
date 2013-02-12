@@ -4,6 +4,7 @@ namespace Symfony\Cmf\Bundle\BlogBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 use Symfony\Cmf\Bundle\BlogBundle\Util\PostUtils;
+use Symfony\Cmf\Bundle\BlogBundle\Tagging\Tag;
 use Symfony\Cmf\Component\Routing\RouteAwareInterface;
 
 /**
@@ -150,12 +151,26 @@ class Post implements RouteAwareInterface
 
     public function getTags()
     {
-        return $this->tags;
+        $ret = array();
+        foreach ($this->tags as $tag) {
+            $tag = new Tag($this->blog, $tag);
+            $ret[] = $tag;
+        }
+
+        return $ret;
     }
     
     public function setTags($tags)
     {
-        $this->tags = $tags;
+        $this->tags = array();
+
+        foreach ($tags as $tag) {
+            $this->tags[] = (string) $tag;
+        }
+    }
+
+    public function getTagObjects()
+    {
     }
 
     public function getBodyPreview($length = 255)

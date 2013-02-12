@@ -67,7 +67,7 @@ class BlogController
         return $blog;
     }
 
-    public function viewPost(Request $request)
+    public function viewPostAction(Request $request)
     {
         $slug = $request->get('slug');
         $post = $this->getPostRepo()->fetchOneBySlug($slug);
@@ -84,14 +84,16 @@ class BlogController
     }
 
     // @todo: Not sure how contentDocument and maybe contentTemplate get injected here.
-    public function listAction(Request $request, $contentDocument)
+    public function listAction(Request $request, $blog_id)
     {
         $tag = $request->get('tag', null);
+
+        $blog = $this->dm->find(null, $blog_id);
 
         // @todo: Pagination
         $posts = $this->getPostRepo()->search(array(
             'tag' => $tag,
-            'blog_id' => $contentDocument->getId(),
+            'blog_id' => $blog_id,
         ));
 
         $contentTemplate = 'SymfonyCmfBlogBundle:Blog:list.{_format}.twig';
@@ -106,7 +108,7 @@ class BlogController
         );
 
         return $this->renderResponse($contentTemplate, array(
-            'blog' => $contentDocument,
+            'blog' => $blog,
             'posts' => $posts,
             'tag' => $tag
         ));
