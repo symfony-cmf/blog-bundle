@@ -46,5 +46,5 @@ interface StrategyInterface
      *
      * @param Post $post - Blog post
      */
-    public function updateTags(Post $post);
+    // public function updateTags(Post $post);
 }

@@ -88,4 +88,31 @@ class PostRepository extends DocumentRepository
 
         return $post;
     }
+
+    /**
+     * Return ALL tags for posts that are descendants
+     * of the given path.
+     *
+     * This is to facilitate tag count aggregation in PHP
+     * as PHPCR doesn't do aggregation.
+     *
+     * @param string $path - return only tags from posts 
+     *                       descending from this path
+     */
+    public function getTagsForPath($path)
+    {
+        $qb = $this->postRep->createQueryBuilder();
+        $qb->select('tags');
+        $qb->descendant($path); // select only children of given blog
+        $q = $qb->getQuery();
+        $res = $q->getPhpcrNodeResult();
+        $rows = $res->getRows();
+        $tags = array();
+
+        foreach ($rows as $row) {
+            $tags = array_merge($tags, $row->getValue('tags'));
+        }
+
+        return $tags;
+    }
 }

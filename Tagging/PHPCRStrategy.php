@@ -2,6 +2,8 @@
 
 namespace Symfony\Cmf\Bundle\BlogBundle\Tagging;
 
+use Symfony\Cmf\Bundle\BlogBundle\Repository\PostRepository;
+
 /**
  * Tagging strategy that uses the native
  * multivalue string property of the blog post
@@ -9,24 +11,26 @@ namespace Symfony\Cmf\Bundle\BlogBundle\Tagging;
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
-class PHPCRStringStrategy implements StrategyInterface
+class PHPCRStrategy implements StrategyInterface
 {
+    protected $postRepo;
+
+    public function __construct(PostRepository $postRepo)
+    {
+        $this->postRepo = $postRepo;
+    }
+
     /**
      * {@inheritDoc}
      */
     public function getWeightedTags($blogId)
     {
-        $qb = $this->postRep->createQueryBuilder();
-        $qb->select('tags');
-        $qb->descendant($blogId); // select only children of given blog
-        $q = $qb->getQuery();
-        $res = $q->getPhpcrNodeResult();
-        $rows = $res->getRows();
-        $weightedTags = array();
+        $tags = $this->postRepo->getTagsForPath($blogId);
 
         $max = 0;
-        foreach ($rows as $row) {
-            $tag = $row->getValue('tags');
+        $weightedTags = array();
+
+        foreach ($tags as $tag) {
             if (!isset($weightedTags[$tag])) {
                 $weightedTags[$tag] = array(
                     'count' => 0,
@@ -41,9 +45,9 @@ class PHPCRStringStrategy implements StrategyInterface
         }
 
         foreach ($weightedTags as $name => &$tag) {
-            $tag['weight'] = $tag['count'] / $max;
+            $tag['weight'] = round($tag['count'] / $max, 2);
         }
 
-        return $wTags;
+        return $weightedTags;
     }
 }
