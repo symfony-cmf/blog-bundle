@@ -169,10 +169,6 @@ class Post implements RouteAwareInterface
         }
     }
 
-    public function getTagObjects()
-    {
-    }
-
     public function getBodyPreview($length = 255)
     {
         $suffix = strlen($this->body) > $length ? ' ...' : '';

@@ -1,0 +1,7 @@
+<ul class="tag_cloud">
+{% for name, data in weightedTags %}
+    <li style="font-size: {{ 2 * data.weight }}em">
+    <a href="{{ path(data.object, {'tag': name }) }}">{{ name }}</a>
+    </li>
+{% endfor %}
+</ul>

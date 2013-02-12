@@ -7,9 +7,8 @@ use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\BlockBundle\Block\BaseBlockService;
-use Doctrine\ODM\PHPCR\DocumentManager;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Symfony\Cmf\Bundle\BlogBundle\Repository\TagRepository;
+use Symfony\Cmf\Bundle\BlogBundle\Tagging\StrategyInterface;
 
 /**
  * Tag Cloud block service
@@ -18,18 +17,18 @@ use Symfony\Cmf\Bundle\BlogBundle\Repository\TagRepository;
  */
 class TagCloudBlockService extends BaseBlockService
 {
-    protected $repo;
+    protected $strategy;
 
-    public function __construct($name, EngineInterface $templating, TagRepository $repo)
+    public function __construct($name, EngineInterface $templating, StrategyInterface $strategy)
     {
-        $this->repo = $repo;
+        $this->strategy = $strategy;
         parent::__construct($name, $templating);
     }
 
     public function getDefaultSettings()
     {
         return array(
-            'path' => 'symfony_cmf_blog_post_index'
+            'descendants_of' => '/'
         );
     }
 
@@ -43,10 +42,12 @@ class TagCloudBlockService extends BaseBlockService
 
     public function execute(BlockInterface $block, Response $response = null)
     {
-        $wTags = $this->repo->getWeightedTags();
-        return $this->renderResponse('SymfonyCmfBlogBundle:Block:tagCloud.html.twig', array(
+        $settings = array_merge($this->getDefaultSettings(), $block->getSettings());
+        $weightedTags = $this->strategy->getWeightedTags($settings['descendants_of']);
+
+        return $this->renderResponse('SymfonyCmfBlogBundle:Block:tag_cloud.html.twig', array(
             'block' => $block,
-            'wTags' => $wTags
+            'weightedTags' => $weightedTags
         ));
     }
 }

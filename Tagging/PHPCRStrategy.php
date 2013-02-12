@@ -3,6 +3,7 @@
 namespace Symfony\Cmf\Bundle\BlogBundle\Tagging;
 
 use Symfony\Cmf\Bundle\BlogBundle\Repository\PostRepository;
+use Symfony\Cmf\Bundle\BlogBundle\Repository\BlogRepository;
 
 /**
  * Tagging strategy that uses the native
@@ -14,10 +15,12 @@ use Symfony\Cmf\Bundle\BlogBundle\Repository\PostRepository;
 class PHPCRStrategy implements StrategyInterface
 {
     protected $postRepo;
+    protected $blogRepo;
 
-    public function __construct(PostRepository $postRepo)
+    public function __construct(BlogRepository $blogRepo,  PostRepository $postRepo)
     {
         $this->postRepo = $postRepo;
+        $this->blogRepo = $blogRepo;
     }
 
     /**
@@ -25,7 +28,16 @@ class PHPCRStrategy implements StrategyInterface
      */
     public function getWeightedTags($blogId)
     {
-        $tags = $this->postRepo->getTagsForPath($blogId);
+        $blog = $this->blogRepo->find($blogId);
+
+        if (!$blog) {
+            throw new \Exception(sprintf(
+                'Cannot find blog at "%s"',
+                $blogId
+            ));
+        }
+
+        $tags = $this->postRepo->getTagsForBlog($blog);
 
         $max = 0;
         $weightedTags = array();
@@ -35,6 +47,7 @@ class PHPCRStrategy implements StrategyInterface
                 $weightedTags[$tag] = array(
                     'count' => 0,
                 );
+                $weightedTags[$tag]['object'] = new Tag($blog, $tag);
             }
 
             $weightedTags[$tag]['count']++;

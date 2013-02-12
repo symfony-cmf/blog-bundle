@@ -1,0 +1,26 @@
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="symfony_cmf_blog.post_repository"
+                factory-service="doctrine_phpcr.odm.default_document_manager"
+                factory-method="getRepository"
+                class="Symfony\Cmf\Bundle\BlogBundle\Repository\PostRepository" >
+            <argument>Symfony\Cmf\Bundle\BlogBundle\Document\Post</argument>
+        </service>
+
+        <service id="symfony_cmf_blog.blog_repository"
+                factory-service="doctrine_phpcr.odm.default_document_manager"
+                factory-method="getRepository"
+                class="Symfony\Cmf\Bundle\BlogBundle\Repository\BlogRepository" >
+            <argument>Symfony\Cmf\Bundle\BlogBundle\Document\Blog</argument>
+        </service>
+
+    </services>
+
+</container>
+
+
+
