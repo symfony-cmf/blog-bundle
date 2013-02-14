@@ -24,7 +24,7 @@ class BlogAdmin extends Admin
     protected function configureFormFields(FormMapper $mapper)
     {
         $mapper->add('name', 'text');
-        $mapper->add('parent', 'doctrine_phpcr_type_tree_model', array(
+        $mapper->add('parent', 'doctrine_phpcr_odm_tree', array(
             'root_node' => $this->blogRoot, 
             'choice_list' => array(), 
             'select_root_node' => true)
