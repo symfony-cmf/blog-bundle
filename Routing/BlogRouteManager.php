@@ -2,15 +2,13 @@
 
 namespace Symfony\Cmf\Bundle\BlogBundle\Routing;
 
-use Symfony\Cmf\Bundle\BlogBundle\Document\PostRoute;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use Symfony\Cmf\Bundle\BlogBundle\Document\Blog;
 use Symfony\Cmf\Bundle\RoutingExtraBundle\Document\Route;
 use Symfony\Cmf\Bundle\BlogBundle\Util\PostUtils;
 
 /**
- * Class which handles the maintainance of the routes associated
- * with a Blog object.
+ * Class which handles the maintenance of the routes associated with a Blog object.
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */

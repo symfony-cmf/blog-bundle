@@ -82,7 +82,6 @@ class Blog implements RouteAwareInterface
         $this->posts[] = $post;
     }
 
-
     /**
      * @return \Symfony\Component\Routing\Route[] Route instances that point to this content
      */
