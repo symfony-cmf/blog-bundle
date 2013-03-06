@@ -34,7 +34,7 @@ class Blog implements RouteAwareInterface
     protected $posts;
 
     /**
-     * Routes (mapped as Referrers(filter=routeContent))
+     * Routes (mapped from Route::routeContent)
      */
     protected $routes;
 
