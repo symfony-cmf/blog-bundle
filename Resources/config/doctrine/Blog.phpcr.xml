@@ -11,7 +11,7 @@
             <generator strategy="parent"/>
         </id>
         <children fieldName="posts"/>
-        <referrers fieldName="routes" filter="routeContent"/>
+        <referrers fieldName="routes" referring-document="Symfony\Cmf\Bundle\RoutingExtraBundle\Document\Route" referenced-by="routeContent"/>
     </document>
 
 </doctrine-mapping>
