@@ -34,8 +34,11 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('routing_post_prefix')
                 ->defaultValue('posts')
             ->end()
-            ->scalarNode('routing_basepath')
-                ->isRequired()
+            ->scalarNode('routing_tag_controller')
+                ->defaultValue('symfony_cmf_blog.blog_controller:listAction')
+            ->end()
+            ->scalarNode('routing_tag_prefix')
+                ->defaultValue('tag')
             ->end()
         ;
 
