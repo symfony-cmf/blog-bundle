@@ -28,7 +28,6 @@ class SymfonyCmfBlogExtension extends Extension
             'routing_tag_controller',
             'routing_tag_prefix',
             'blog_basepath',
-            'routing_basepath',
         );
 
         foreach ($keys as $key) {
@@ -41,6 +40,5 @@ class SymfonyCmfBlogExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('blog-admin.xml');
         $loader->load('controllers.xml');
-        $loader->load('routing.xml');
     }
 }

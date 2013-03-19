@@ -40,9 +40,6 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('routing_tag_prefix')
                 ->defaultValue('tag')
             ->end()
-            ->scalarNode('routing_basepath')
-                ->isRequired()
-            ->end()
         ;
 
         return $treeBuilder;
