@@ -67,6 +67,11 @@ class Post implements RouteAwareInterface
      */
     protected $tags = array();
 
+    /**
+     * List of referring routes
+     */
+    protected $routes;
+
     public function __construct()
     {
         $this->date = new \DateTime();
@@ -164,8 +169,10 @@ class Post implements RouteAwareInterface
     {
         $this->tags = array();
 
-        foreach ($tags as $tag) {
-            $this->tags[] = (string) $tag;
+        if (is_array($tags)) {
+            foreach ($tags as $tag) {
+                $this->tags[] = (string) $tag;
+            }
         }
     }
 
@@ -182,12 +189,12 @@ class Post implements RouteAwareInterface
 
     public function getRoutes()
     {
-        return $this->blog->getPostsRoutes();
+        return $this->routes;
     }
 
     public function __toString()
     {
-        return $this->title;
+        return $this->title ? : '';
     }
 }
 

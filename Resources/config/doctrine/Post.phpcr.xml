@@ -4,6 +4,7 @@
     <document 
         name="Symfony\Cmf\Bundle\BlogBundle\Document\Post"
         repository-class="Symfony\Cmf\Bundle\BlogBundle\Repository\PostRepository"
+        referenceable="true"
         >
 
         <parentdocument name="blog"/>
@@ -20,6 +21,7 @@
         <field fieldName="date" type="date"/>
         <field fieldName="status" type="string"/>
         <field fieldName="tags" type="string" multivalue="true"/>
+        <referrers fieldName="routes" referring-document="Symfony\Cmf\Bundle\RoutingExtraBundle\Document\Route" referenced-by="routeContent"/>
     </document>
 
 </doctrine-mapping>

@@ -2,7 +2,7 @@
     <div class="row-fluid">
         <div class="span9" style="font-size: 28px">
             {# @todo: Post routes #}
-            <a href="{{ path(post, {'slug': post.name}) }}">{{ post.title }}</a>
+            <a href="{{ path(post) }}">{{ post.title }}</a>
         </div>
         <div class="span3" style="text-align: right">
             <i>{{ post.date.format('d-m-Y H:i:s') }}</i>
