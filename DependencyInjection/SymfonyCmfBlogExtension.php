@@ -23,10 +23,6 @@ class SymfonyCmfBlogExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $keys = array(
-            'routing_post_controller',
-            'routing_post_prefix',
-            'routing_tag_controller',
-            'routing_tag_prefix',
             'blog_basepath',
         );
 
