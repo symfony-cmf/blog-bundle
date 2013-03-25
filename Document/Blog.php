@@ -39,36 +39,36 @@ class Blog implements RouteAwareInterface
     protected $routes;
 
 
-    public function getId() 
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getName() 
+    public function getName()
     {
         return $this->name;
     }
-    
+
     public function setName($name)
     {
         $this->name = $name;
     }
 
-    public function getParent() 
+    public function getParent()
     {
         return $this->parent;
     }
-    
+
     public function setParent($parent)
     {
         $this->parent = $parent;
     }
 
-    public function getPosts() 
+    public function getPosts()
     {
         return $this->posts;
     }
-    
+
     public function setPosts($posts)
     {
         $this->posts = array();
@@ -124,6 +124,6 @@ class Blog implements RouteAwareInterface
 
     public function __toString()
     {
-        return $this->name;
+        return (string) $this->name;
     }
 }

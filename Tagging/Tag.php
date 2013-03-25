@@ -24,7 +24,7 @@ class Tag implements RouteAwareInterface
 
     public function __toString()
     {
-        return $this->name;
+        return (string)$this->name;
     }
 }
 
