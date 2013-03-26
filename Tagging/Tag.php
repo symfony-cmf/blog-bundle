@@ -5,6 +5,12 @@ namespace Symfony\Cmf\Bundle\BlogBundle\Tagging;
 use Symfony\Cmf\Component\Routing\RouteAwareInterface;
 use Symfony\Cmf\Bundle\BlogBundle\Document\Blog;
 
+/**
+ * Class representation of a tag that implements
+ * routing aware.
+ *
+ * @author Daniel Leech <daniel@dantleech.com>
+ */
 class Tag implements RouteAwareInterface
 {
     protected $name;
@@ -16,7 +22,6 @@ class Tag implements RouteAwareInterface
         $this->blog = $blog;
     }
 
-
     public function getRoutes()
     {
         return $this->blog->getTagRoutes();
@@ -27,4 +32,3 @@ class Tag implements RouteAwareInterface
         return (string)$this->name;
     }
 }
-

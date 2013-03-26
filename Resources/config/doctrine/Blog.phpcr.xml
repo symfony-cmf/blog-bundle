@@ -4,6 +4,7 @@
       <document 
           name="Symfony\Cmf\Bundle\BlogBundle\Document\Blog" 
           referenceable="true"
+          repository-class="Symfony\Cmf\Bundle\BlogBundle\Repository\BlogRepository"
           >
         <parentdocument name="parent"/>
         <nodename name="name"/>

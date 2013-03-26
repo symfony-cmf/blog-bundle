@@ -42,5 +42,8 @@ class SymfonyCmfBlogExtension extends Extension
         $loader->load('blog-admin.xml');
         $loader->load('controllers.xml');
         $loader->load('routing.xml');
+        $loader->load('repository.xml');
+        $loader->load('tagging.xml');
+        $loader->load('block.xml');
     }
 }

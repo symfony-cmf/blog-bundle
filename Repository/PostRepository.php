@@ -3,6 +3,7 @@
 namespace Symfony\Cmf\Bundle\BlogBundle\Repository;
 use Doctrine\ODM\PHPCR\DocumentRepository;
 use Symfony\Cmf\Bundle\BlogBundle\Document\Post;
+use Symfony\Cmf\Bundle\BlogBundle\Document\Blog;
 
 class PostRepository extends DocumentRepository
 { 
@@ -87,5 +88,40 @@ class PostRepository extends DocumentRepository
         $post = $q->getOneOrNullResult();
 
         return $post;
+    }
+
+    /**
+     * Return ALL tags for posts that are descendants
+     * of the given path.
+     *
+     * This is to facilitate tag count aggregation in PHP
+     * as PHPCR doesn't do aggregation.
+     *
+     * @param string $path - return only tags from posts 
+     *                       descending from this path
+     */
+    public function getTagsForBlog(Blog $blog)
+    {
+        $qb = $this->createQueryBuilder();
+        $qb->select('tags');
+        $qb->where($qb->expr()->descendant($blog->getId())); // select only children of given blog
+        $q = $qb->getQuery();
+        $res = $q->getPhpcrNodeResult();
+        $rows = $res->getRows();
+        $ret = array();
+
+        foreach ($rows as $row) {
+            $node = $row->getNode();
+
+            $tags = $row->getNode()->getProperty('tags')->getValue();
+
+            if (empty($tags)) {
+                continue;
+            }
+
+            $ret = array_merge($ret, $tags);
+        }
+
+        return $ret;
     }
 }
