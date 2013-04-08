@@ -25,6 +25,10 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $treeBuilder->root('symfony_cmf_blog')
             ->children()
+            ->enumNode('use_sonata_admin')
+                ->values(array(true, false, 'auto'))
+                ->defaultValue('auto')
+            ->end()
             ->scalarNode('blog_basepath')
                 ->isRequired()
             ->end()
