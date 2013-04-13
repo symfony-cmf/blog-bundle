@@ -30,9 +30,9 @@ class SymfonyCmfBlogExtension extends Extension
             $this->loadSonataAdmin($config, $loader, $container);
         }
 
-        foreach ($config['classes'] as $type => $classFqn) {
+        foreach ($config['class'] as $type => $classFqn) {
             $container->setParameter(
-                sprintf('symfony_cmf_blog.%s_class', $type),
+                $param = sprintf('symfony_cmf_blog.%s_class', $type),
                 $classFqn
             );
         }
