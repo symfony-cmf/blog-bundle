@@ -29,6 +29,13 @@ class SymfonyCmfBlogExtension extends Extension
         if ($config['use_sonata_admin']) {
             $this->loadSonataAdmin($config, $loader, $container);
         }
+
+        foreach ($config['classes'] as $type => $classFqn) {
+            $container->setParameter(
+                sprintf('symfony_cmf_blog.%s_class', $type),
+                $classFqn
+            );
+        }
     }
 
     public function loadSonataAdmin($config, XmlFileLoader $loader, ContainerBuilder $container)
