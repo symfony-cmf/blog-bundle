@@ -9,16 +9,11 @@ class PostRepository extends DocumentRepository
     public function searchQuery($options)
     {
         $options = array_merge(array(
-            'tag' => null,
             'blog_uuid' => null,
         ), $options);
         $qb = $this->createQueryBuilder();
 
         $criterias = array();
-
-        if ($options['tag']) {
-            $criterias[] = $qb->expr()->eq('tags', $options['tag']);
-        }
 
         if ($options['blog_id']) {
             $criterias[] = $qb->expr()->descendant($options['blog_id']);
