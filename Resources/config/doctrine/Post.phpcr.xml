@@ -20,7 +20,6 @@
         <field fieldName="body" type="string"/>
         <field fieldName="date" type="date"/>
         <field fieldName="status" type="string"/>
-        <field fieldName="tags" type="string" multivalue="true"/>
         <referrers fieldName="routes" referring-document="Symfony\Cmf\Bundle\RoutingExtraBundle\Document\Route" referenced-by="routeContent"/>
     </document>
 
