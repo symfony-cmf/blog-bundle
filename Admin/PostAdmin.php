@@ -19,6 +19,11 @@ class PostAdmin extends Admin
 {
     protected $translationDomain = 'SymfonyCmfBlogBundle';
 
+    public function configure()
+    {
+        $this->setTemplate('edit', 'SymfonyCmfBlogBundle:Admin:theme_default_edit.html.twig');
+    }
+
     protected function configureFormFields(FormMapper $mapper)
     {
         // @todo: I think this would be better as a service,
@@ -29,7 +34,7 @@ class PostAdmin extends Admin
         // $csvToArrayTransformer = new CsvToArrayTransformer;
 
         $mapper->add('title');
-        $mapper->add('date', 'datetime', array(
+        $mapper->add('date', 'date', array(
             'widget' => 'single_text',
         ));
 
