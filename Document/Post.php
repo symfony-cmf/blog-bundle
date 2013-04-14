@@ -62,10 +62,9 @@ class Post implements RouteAwareInterface
     protected $status;
 
     /**
-     * List of tags associated with this post
-     * @var array
+     * List of referring routes
      */
-    protected $tags = array();
+    protected $routes;
 
     public function __construct()
     {
@@ -149,30 +148,6 @@ class Post implements RouteAwareInterface
         $this->status = $status;
     }
 
-    public function getTags()
-    {
-        $ret = array();
-        foreach ($this->tags as $tag) {
-            $tag = new Tag($this->blog, $tag);
-            $ret[] = $tag;
-        }
-
-        return $ret;
-    }
-
-    public function setTags($tags)
-    {
-        $this->tags = array();
-
-        foreach ($tags as $tag) {
-            $this->tags[] = (string) $tag;
-        }
-    }
-
-    public function getTagObjects()
-    {
-    }
-
     public function getBodyPreview($length = 255)
     {
         $suffix = strlen($this->body) > $length ? ' ...' : '';
@@ -182,7 +157,7 @@ class Post implements RouteAwareInterface
 
     public function getRoutes()
     {
-        return $this->blog->getPostsRoutes();
+        return $this->routes;
     }
 
     public function __toString()

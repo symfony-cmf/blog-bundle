@@ -19,7 +19,7 @@ class Tag implements RouteAwareInterface
 
     public function getRoutes()
     {
-        return $this->blog->getTagRoutes();
+        return array();
     }
 
     public function __toString()
