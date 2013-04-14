@@ -71,26 +71,26 @@ class Post implements RouteAwareInterface
         $this->date = new \DateTime();
     }
 
-    public function getId() 
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getName() 
+    public function getName()
     {
         return $this->name;
     }
-    
+
     public function setName($name)
     {
         $this->name = $name;
     }
-    
+
     public function getTitle()
     {
         return $this->title;
     }
-    
+
     public function setTitle($title)
     {
         $this->title = $title;
@@ -107,7 +107,7 @@ class Post implements RouteAwareInterface
     {
         return $this->body;
     }
-    
+
     public function setBody($body)
     {
         $this->body = $body;
@@ -117,7 +117,7 @@ class Post implements RouteAwareInterface
     {
         return $this->date;
     }
-    
+
     public function setDate($date)
     {
         $this->date = $date;
@@ -127,7 +127,7 @@ class Post implements RouteAwareInterface
     {
         return $this->blog;
     }
-    
+
     public function setBlog(Blog $blog)
     {
         $this->blog = $blog;
@@ -142,7 +142,7 @@ class Post implements RouteAwareInterface
     {
         return $this->status;
     }
-    
+
     public function setStatus($status)
     {
         $this->status = $status;
@@ -162,7 +162,7 @@ class Post implements RouteAwareInterface
 
     public function __toString()
     {
-        return (string) $this->title ?;
+        return (string) $this->title;
     }
 }
 
