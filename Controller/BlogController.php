@@ -49,24 +49,6 @@ class BlogController
         return $this->dm->getRepository('Symfony\Cmf\Bundle\BlogBundle\Document\Post');
     }
 
-    protected function getBlog(Request $request)
-    {
-        $blog = $request->get('_content');
-
-        if (!$blog) {
-            throw new NotFoundHttpException('Cannot find content in "_content" parameter');
-        }
-
-        if (!$blog instanceof Blog) {
-            throw new NotFoundHttpException(sprintf(
-                'Content associated with route is not a Blog, is a "%s"', 
-                get_class($blog)
-            ));
-        }
-
-        return $blog;
-    }
-
     public function viewPostAction(Request $request, $contentDocument)
     {
         $post = $contentDocument;
