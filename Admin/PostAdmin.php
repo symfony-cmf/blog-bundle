@@ -26,7 +26,7 @@ class PostAdmin extends Admin
         //        AND have all the Sonata magic from the
         //        FormMapper->add method.
         
-        $csvToArrayTransformer = new CsvToArrayTransformer;
+        // $csvToArrayTransformer = new CsvToArrayTransformer;
 
         $mapper->add('title');
         $mapper->add('date', 'datetime', array(
@@ -45,10 +45,10 @@ class PostAdmin extends Admin
             'class' => 'Symfony\Cmf\Bundle\BlogBundle\Document\Blog',
         ));
 
-        $tags = $mapper->create('tags', 'text')
-            ->addModelTransformer($csvToArrayTransformer);
+        //$tags = $mapper->create('tags', 'text')
+        //    ->addModelTransformer($csvToArrayTransformer);
 
-        $mapper->add($tags);
+        // $mapper->add($tags);
     }
 
     protected function configureDatagridFilters(DatagridMapper $dm)
@@ -62,9 +62,9 @@ class PostAdmin extends Admin
         $dm->add('date', 'datetime');
         $dm->addIdentifier('title');
         $dm->add('status');
-        $dm->add('tags', 'string', array(
-            'template' => 'SymfonyCmfBlogBundle:Admin:list_tags.html.twig'
-        ));
+        // $dm->add('tags', 'string', array(
+        //     'template' => 'SymfonyCmfBlogBundle:Admin:list_tags.html.twig'
+        // ));
     }
 
     public function validate(ErrorElement $ee, $obj)

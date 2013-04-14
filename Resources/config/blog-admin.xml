@@ -7,6 +7,8 @@
     <parameters>
         <parameter key="symfony_cmf_blog.blog_admin_class"></parameter>
         <parameter key="symfony_cmf_blog.post_admin_class"></parameter>
+        <parameter key="symfony_cmf_blog.blog_class"></parameter>
+        <parameter key="symfony_cmf_blog.post_class"></parameter>
     </parameters>
 
     <services>
@@ -20,7 +22,7 @@
                 label="dashboard.label_blog" 
                 label_translator_strategy="sonata.admin.label.strategy.underscore" />
             <argument/>
-            <argument>Symfony\Cmf\Bundle\BlogBundle\Document\Blog</argument>
+            <argument>%symfony_cmf_blog.blog_class%</argument>
             <argument>SonataAdminBundle:CRUD</argument>
 
             <call method="setRouteBuilder">
@@ -41,7 +43,7 @@
                 label="dashboard.label_post" 
                 label_translator_strategy="sonata.admin.label.strategy.underscore" />
             <argument/>
-            <argument>Symfony\Cmf\Bundle\BlogBundle\Document\Post</argument>
+            <argument>%symfony_cmf_blog.post_class%</argument>
             <argument>SonataAdminBundle:CRUD</argument>
 
             <call method="setRouteBuilder">
