@@ -1,0 +1,81 @@
+{% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
+{% block form %}
+    {% set url = admin.id(object) ? 'edit' : 'create' %}
+
+    <form class="" action="{{ admin.generateUrl(url, {'id': admin.id(object), 'uniqid': admin.uniqid, 'subclass': app.request.get('subclass')}) }}" {{ form_enctype(form) }} method="POST">
+        {% if form.vars.errors|length > 0 %}
+            <div class="sonata-ba-form-error">
+                {{ form_errors(form) }}
+            </div>
+        {% endif %}
+
+        <div class="span9">
+            <fieldset>
+                <legend>{{ "Post"|trans({}, admin.translationdomain) }}</legend>
+
+                <div class="controls controls-row">
+                    {{ form_widget(form.title, {'attr': {
+                        'class': 'span12',
+                        'style': 'font-size: 24px; height: 50px',
+                        'placeholder': 'Title'|trans({}, admin.translationdomain)
+                    }}) }}
+                </div>
+
+                <div class="controls controls-row">
+                    <input class="span6" type="text" disabled="disabled" placeholder="Tags, will, go, here"/>
+                    {{ form_errors(form.date, {'attr': {'class': 'span5'}}) }}
+                    {{ form_widget(form.date, {'attr': {'class': 'span5'}}) }}
+
+                </div>
+
+                <div class="controls">
+                    {{ form_widget(form.body, {'attr': {
+                        'class': 'span12',
+                        'rows': 20,
+                        'style': 'background-color: black; color: #eee; font-family: monospace'
+                    }}) }}
+                </div>
+
+                <div class="controls controls-row">
+                </div>
+
+            </fieldset>
+        </div>
+        <div class="span3">
+
+            {# Form Actions #}
+
+            <fieldset>
+                <legend>{% trans from admin.translationdomain %}Actions{% endtrans %}</legend>
+                    {% if admin.supportsPreviewMode %}
+                        <input class="btn btn-info persist-preview" name="btn_preview" type="submit" value="{{ 'btn_preview'|trans({}, 'SonataAdminBundle') }}"/>
+                    {% endif %}
+
+                    {% if admin.id(object) %}
+                    <input type="submit" class="btn btn-large btn-block btn-primary input-block-level" name="btn_update_and_edit" value="{{ 'btn_update_and_edit_again'|trans({}, 'SonataAdminBundle') }}" style="width: 100%"/>
+                        
+                        {% if admin.hasroute('list') %}
+                        <input type="submit" class="btn btn-block input-block-level" name="btn_update_and_list" value="{{ 'btn_update_and_return_to_list'|trans({}, 'SonataAdminBundle') }}" style="width: 100%"/>
+                        {% endif %}
+
+                        {% if admin.hasroute('delete') and admin.isGranted('DELETE', object) %}
+                            <a class="btn btn-block btn-danger" href="{{ admin.generateObjectUrl('delete', object) }}">{{ 'link_delete'|trans({}, 'SonataAdminBundle') }}</a>
+                        {% endif %}
+                    {% else %}
+                        <input class="btn btn-primary" type="submit" name="btn_create_and_edit" value="{{ 'btn_create_and_edit_again'|trans({}, 'SonataAdminBundle') }}"/>
+                        <input type="submit" class="btn" name="btn_create_and_list" value="{{ 'btn_create_and_return_to_list'|trans({}, 'SonataAdminBundle') }}"/>
+                        <input class="btn" type="submit" name="btn_create_and_create" value="{{ 'btn_create_and_create_a_new_one'|trans({}, 'SonataAdminBundle') }}"/>
+                    {% endif %}
+            </fieldset>
+
+            {# Properties #}
+            <fieldset>
+                <legend>{% trans from "admin.translationdomain" %}Properties{% endtrans %}</legend>
+                <div class="controls">
+                    {{ form_row(form.status) }}
+                    {{ form_rest(form) }}
+                </div>
+            </fieldset>
+        </div>
+    </form>
+{% endblock %}
