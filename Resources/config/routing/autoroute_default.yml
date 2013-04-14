@@ -1,0 +1,55 @@
+symfony_cmf_routing_auto:
+    auto_route_mapping:
+        Symfony\Cmf\Bundle\BlogBundle\Document\Blog:
+            content_path:
+                routing_path:
+                    provider:
+                        name: specified
+                        path: cms/routes
+                    exists_action:
+                        strategy: use
+                    not_exists_action:
+                        strategy: throw_exception
+                namespace:
+                    provider:
+                        name: specified
+                        path: blog
+                    exists_action:
+                        strategy: use
+                    not_exists_action:
+                        strategy: create
+            content_name:
+                provider:
+                    name: content_method
+                    method: getName
+                exists_action:
+                    strategy: auto_increment
+                not_exists_action:
+                    strategy: create
+        Symfony\Cmf\Bundle\BlogBundle\Document\Post:
+            content_path:
+                routing_path:
+                    provider:
+                        name: content_object
+                        method: getBlog
+                    exists_action:
+                        strategy: use
+                    not_exists_action:
+                        strategy: throw_exception
+                date:
+                    provider:
+                        name: content_datetime
+                        method: getDate
+                    exists_action:
+                        strategy: use
+                    not_exists_action:
+                        strategy: create
+            content_name:
+                provider:
+                    name: content_method
+                    method: getTitle
+                exists_action:
+                    strategy: auto_increment
+                not_exists_action:
+                    strategy: create
+
