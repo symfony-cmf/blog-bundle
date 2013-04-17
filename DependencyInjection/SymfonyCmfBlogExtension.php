@@ -30,6 +30,13 @@ class SymfonyCmfBlogExtension extends Extension
             $this->loadSonataAdmin($config, $loader, $container);
         }
 
+        $config['class'] = array_merge(array(
+            'blog_admin' => 'Symfony\Cmf\Bundle\BlogBundle\Admin\BlogAdmin',
+            'post_admin' => 'Symfony\Cmf\Bundle\BlogBundle\Admin\PostAdmin',
+            'blog' => 'Symfony\Cmf\Bundle\BlogBundle\Document\Blog',
+            'post' => 'Symfony\Cmf\Bundle\BlogBundle\Document\Post',
+        ), $config['class']);
+
         foreach ($config['class'] as $type => $classFqn) {
             $container->setParameter(
                 $param = sprintf('symfony_cmf_blog.%s_class', $type),
