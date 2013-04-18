@@ -35,7 +35,7 @@ class SymfonyCmfBlogExtension extends Extension
             'post_admin' => 'Symfony\Cmf\Bundle\BlogBundle\Admin\PostAdmin',
             'blog' => 'Symfony\Cmf\Bundle\BlogBundle\Document\Blog',
             'post' => 'Symfony\Cmf\Bundle\BlogBundle\Document\Post',
-        ), $config['class']);
+        ), isset($config['class']) ? $config['class'] : array());
 
         foreach ($config['class'] as $type => $classFqn) {
             $container->setParameter(
