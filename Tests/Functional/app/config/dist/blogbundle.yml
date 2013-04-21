@@ -1,0 +1,7 @@
+symfony_cmf_blog:
+    blog_basepath: /cms/content
+    class:
+        post: ~
+        blog: ~
+        blog_admin: ~
+        post_admin: ~
