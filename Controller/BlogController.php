@@ -49,13 +49,13 @@ class BlogController
         return $this->dm->getRepository('Symfony\Cmf\Bundle\BlogBundle\Document\Post');
     }
 
-    public function viewPostAction(Request $request, $contentDocument)
+    public function viewPostAction(Request $request, $contentDocument, $contentTemplate = null)
     {
         $post = $contentDocument;
         $prevPost = $this->getPostRepo()->fetchPrevPost($post);
         $nextPost = $this->getPostRepo()->fetchNextPost($post);
 
-        $contentTemplate = 'SymfonyCmfBlogBundle:Blog:view_post.html.twig';
+        $contentTemplate = $contentTemplate ?: 'SymfonyCmfBlogBundle:Blog:view_post.html.twig';
 
         return $this->renderResponse($contentTemplate, array(
             'post' => $post,
@@ -64,7 +64,7 @@ class BlogController
         ));
     }
 
-    public function listAction(Request $request, $contentDocument)
+    public function listAction(Request $request, $contentDocument, $contentTemplate = null)
     {
         $blog = $contentDocument;
         $tag = $request->get('tag', null);
@@ -75,7 +75,7 @@ class BlogController
             'blog_id' => $blog->getId(),
         ));
 
-        $contentTemplate = 'SymfonyCmfBlogBundle:Blog:list.{_format}.twig';
+        $contentTemplate = $contentTemplate ?: 'SymfonyCmfBlogBundle:Blog:list.{_format}.twig';
 
         // @todo: Copy and pasted from ContentBundle::ContentController
         //        I wonder if we can share some code between content-like
