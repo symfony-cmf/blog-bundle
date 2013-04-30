@@ -5,7 +5,6 @@ namespace Symfony\Cmf\Bundle\BlogBundle\DependencyInjection;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 /**
@@ -29,6 +28,9 @@ class SymfonyCmfBlogExtension extends Extension
         if ($config['use_sonata_admin']) {
             $this->loadSonataAdmin($config, $loader, $container);
         }
+        if ($config['integrate_menu'] !== false) {
+            $this->loadMenuIntegration($config, $loader, $container);
+        }
 
         $config['class'] = array_merge(array(
             'blog_admin' => 'Symfony\Cmf\Bundle\BlogBundle\Admin\BlogAdmin',
@@ -45,7 +47,7 @@ class SymfonyCmfBlogExtension extends Extension
         }
     }
 
-    public function loadSonataAdmin($config, XmlFileLoader $loader, ContainerBuilder $container)
+    private function loadSonataAdmin($config, XmlFileLoader $loader, ContainerBuilder $container)
     {
         $bundles = $container->getParameter('kernel.bundles');
         if ('auto' === $config['use_sonata_admin'] && !isset($bundles['SonataDoctrinePHPCRAdminBundle'])) {
@@ -54,5 +56,15 @@ class SymfonyCmfBlogExtension extends Extension
 
         $loader->load('blog-admin.xml');
         $container->setParameter($this->getAlias() . '.blog_basepath', $config['blog_basepath']);
+    }
+
+    private function loadMenuIntegration($config, XmlFileLoader $loader, ContainerBuilder $container)
+    {
+        $bundles = $container->getParameter('kernel.bundles');
+        if ('auto' === $config['integrate_menu'] && !isset($bundles['SymfonyCmfMenuBundle'])) {
+            return;
+        }
+
+        $loader->load('menu.xml');
     }
 }
