@@ -9,7 +9,7 @@
     <services>
 
         <service id="symfony_cmf_blog.menu_voter.parent" class="%symfony_cmf_blog.menu_voter.parent_class%">
-            <argument>%symfony_cmf_menu.content_key%</argument>
+            <argument>%symfony_cmf_blog.content_key%</argument>
             <argument>%symfony_cmf_blog.post_class%</argument>
             <tag name="symfony_cmf_menu.voter" request="true"/>
         </service>
