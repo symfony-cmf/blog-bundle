@@ -1,8 +1,8 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/phpcr/doctrine-mapping"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-      <document 
-          name="Symfony\Cmf\Bundle\BlogBundle\Document\Blog" 
+      <document
+          name="Symfony\Cmf\Bundle\BlogBundle\Document\Blog"
           referenceable="true"
           >
         <parentdocument name="parent"/>
@@ -11,7 +11,7 @@
             <generator strategy="parent"/>
         </id>
         <children fieldName="posts"/>
-        <referrers fieldName="routes" referring-document="Symfony\Cmf\Bundle\RoutingExtraBundle\Document\Route" referenced-by="routeContent"/>
+        <referrers fieldName="routes" referring-document="Symfony\Cmf\Bundle\RoutingBundle\Document\Route" referenced-by="routeContent"/>
     </document>
 
 </doctrine-mapping>
