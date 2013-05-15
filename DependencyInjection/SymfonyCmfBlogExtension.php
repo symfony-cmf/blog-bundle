@@ -7,7 +7,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
-use Symfony\Cmf\Bundle\RoutingExtraBundle\Routing\DynamicRouter;
+use Symfony\Cmf\Bundle\RoutingBundle\Routing\DynamicRouter;
 
 /**
  * This is the class that loads and manages your bundle configuration
@@ -30,7 +30,7 @@ class SymfonyCmfBlogExtension extends Extension
         if ($config['use_sonata_admin']) {
             $this->loadSonataAdmin($config, $loader, $container);
         }
-        if (isset($config['integrate_menu'])) {
+        if ($config['integrate_menu']['enabled']) {
             $this->loadMenuIntegration($config, $loader, $container);
         }
 
@@ -68,11 +68,11 @@ class SymfonyCmfBlogExtension extends Extension
         }
 
         if (empty($config['integrate_menu']['content_key'])) {
-            if (! class_exists('Symfony\\Cmf\\Bundle\\RoutingExtraBundle\\Routing\\DynamicRouter')) {
+            if (!class_exists('Symfony\\Cmf\\Bundle\\RoutingBundle\\Routing\\DynamicRouter')) {
                 if ('auto' === $config['integrate_menu']) {
                     return;
                 }
-                throw new \RuntimeException('You need to set the content_key when not using the SymfonyCmfRoutingExtraBundle DynamicRouter');
+                throw new \RuntimeException('You need to set the content_key when not using the SymfonyCmfRoutingBundle DynamicRouter');
             }
             $contentKey = DynamicRouter::CONTENT_KEY;
         } else {

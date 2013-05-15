@@ -31,6 +31,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
 
                 ->arrayNode('integrate_menu')
+                    ->addDefaultsIfNotSet()
                     ->children()
                         ->enumNode('enabled')
                             ->values(array(true, false, 'auto'))
