@@ -23,7 +23,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $treeBuilder->root('symfony_cmf_blog')
+        $treeBuilder->root('cmf_blog')
             ->children()
                 ->enumNode('use_sonata_admin')
                     ->values(array(true, false, 'auto'))
@@ -33,20 +33,20 @@ class Configuration implements ConfigurationInterface
                     ->isRequired()
                 ->end()
                 ->scalarNode('routing_post_controller')
-                    ->defaultValue('symfony_cmf_blog.blog_controller:viewPostAction')
+                    ->defaultValue('cmf_blog.blog_controller:viewPostAction')
                 ->end()
                 ->scalarNode('routing_post_prefix')
                     ->defaultValue('posts')
                 ->end()
                 ->scalarNode('routing_tag_controller')
-                    ->defaultValue('symfony_cmf_blog.blog_controller:listAction')
+                    ->defaultValue('cmf_blog.blog_controller:listAction')
                 ->end()
                 ->scalarNode('routing_tag_prefix')
                     ->defaultValue('tag')
                 ->end()
                 ->arrayNode('class')
                     ->children()
-                        # defaults defined in SymfonyCmfBlogExtension
+                        # defaults defined in CmfBlogExtension
                         ->scalarNode('blog_admin')->end()
                         ->scalarNode('post_admin')->end()
                         ->scalarNode('blog')->end()
