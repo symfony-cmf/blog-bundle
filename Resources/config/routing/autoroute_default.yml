@@ -1,4 +1,4 @@
-symfony_cmf_routing_auto:
+cmf_routing_auto:
     auto_route_mapping:
         Symfony\Cmf\Bundle\BlogBundle\Document\Blog:
             content_path:
