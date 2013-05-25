@@ -17,7 +17,7 @@ use Symfony\Cmf\Bundle\BlogBundle\Routing\BlogRouteManager;
  */
 class BlogAdmin extends Admin
 {
-    protected $translationDomain = 'SymfonyCmfBlogBundle';
+    protected $translationDomain = 'CmfBlogBundle';
     protected $blogRoot;
 
     protected function configureFormFields(FormMapper $mapper)

@@ -5,24 +5,24 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="symfony_cmf_blog.blog_admin_class"></parameter>
-        <parameter key="symfony_cmf_blog.post_admin_class"></parameter>
-        <parameter key="symfony_cmf_blog.blog_class"></parameter>
-        <parameter key="symfony_cmf_blog.post_class"></parameter>
+        <parameter key="cmf_blog.blog_admin_class"></parameter>
+        <parameter key="cmf_blog.post_admin_class"></parameter>
+        <parameter key="cmf_blog.blog_class"></parameter>
+        <parameter key="cmf_blog.post_class"></parameter>
     </parameters>
 
     <services>
 
-        <service id="symfony_cmf_blog.admin" class="%symfony_cmf_blog.blog_admin_class%">
+        <service id="cmf_blog.admin" class="%cmf_blog.blog_admin_class%">
             <tag 
                 name="sonata.admin" 
                 manager_type="doctrine_phpcr" 
                 group="dashboard.group_blog" 
-                label_catalogue="SymfonyCmfBlogBundle" 
+                label_catalogue="CmfBlogBundle" 
                 label="dashboard.label_blog" 
                 label_translator_strategy="sonata.admin.label.strategy.underscore" />
             <argument/>
-            <argument>%symfony_cmf_blog.blog_class%</argument>
+            <argument>%cmf_blog.blog_class%</argument>
             <argument>SonataAdminBundle:CRUD</argument>
 
             <call method="setRouteBuilder">
@@ -30,20 +30,20 @@
             </call>
 
            <call method="setBlogRoot">
-                <argument>%symfony_cmf_blog.blog_basepath%</argument>
+                <argument>%cmf_blog.blog_basepath%</argument>
             </call>
         </service>
 
-        <service id="symfony_cmf_post.admin" class="%symfony_cmf_blog.post_admin_class%">
+        <service id="cmf_post.admin" class="%cmf_blog.post_admin_class%">
             <tag 
                 name="sonata.admin" 
                 manager_type="doctrine_phpcr" 
                 group="dashboard.group_blog" 
-                label_catalogue="SymfonyCmfBlogBundle" 
+                label_catalogue="CmfBlogBundle" 
                 label="dashboard.label_post" 
                 label_translator_strategy="sonata.admin.label.strategy.underscore" />
             <argument/>
-            <argument>%symfony_cmf_blog.post_class%</argument>
+            <argument>%cmf_blog.post_class%</argument>
             <argument>SonataAdminBundle:CRUD</argument>
 
             <call method="setRouteBuilder">

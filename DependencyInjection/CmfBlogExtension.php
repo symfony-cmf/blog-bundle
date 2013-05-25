@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class SymfonyCmfBlogExtension extends Extension
+class CmfBlogExtension extends Extension
 {
     /**
      * {@inheritDoc}
@@ -39,7 +39,7 @@ class SymfonyCmfBlogExtension extends Extension
 
         foreach ($config['class'] as $type => $classFqn) {
             $container->setParameter(
-                $param = sprintf('symfony_cmf_blog.%s_class', $type),
+                $param = sprintf('cmf_blog.%s_class', $type),
                 $classFqn
             );
         }

@@ -17,7 +17,7 @@ use Symfony\Cmf\Bundle\BlogBundle\Form\DataTransformer\CsvToArrayTransformer;
  */
 class PostAdmin extends Admin
 {
-    protected $translationDomain = 'SymfonyCmfBlogBundle';
+    protected $translationDomain = 'CmfBlogBundle';
 
     protected function configureFormFields(FormMapper $mapper)
     {
@@ -63,7 +63,7 @@ class PostAdmin extends Admin
         $dm->addIdentifier('title');
         $dm->add('status');
         // $dm->add('tags', 'string', array(
-        //     'template' => 'SymfonyCmfBlogBundle:Admin:list_tags.html.twig'
+        //     'template' => 'CmfBlogBundle:Admin:list_tags.html.twig'
         // ));
     }
 

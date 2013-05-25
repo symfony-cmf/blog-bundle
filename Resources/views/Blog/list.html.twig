@@ -1,4 +1,4 @@
-{% extends "SymfonyCmfBlogBundle::default_layout.html.twig" %}
+{% extends "CmfBlogBundle::default_layout.html.twig" %}
 {% block content %}
 <div class="row-fluid">
     <div class="span12">
@@ -14,7 +14,7 @@
     <div class="span12">
         {% block posts %}
             {% for post in posts %}
-                {% include "SymfonyCmfBlogBundle:Blog:list_post.html.twig" %}
+                {% include "CmfBlogBundle:Blog:list_post.html.twig" %}
             {% endfor %}
         {% endblock %}
     </div>

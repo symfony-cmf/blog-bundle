@@ -29,7 +29,7 @@ class TagCloudBlockService extends BaseBlockService
     public function getDefaultSettings()
     {
         return array(
-            'path' => 'symfony_cmf_blog_post_index'
+            'path' => 'cmf_blog_post_index'
         );
     }
 
@@ -44,7 +44,7 @@ class TagCloudBlockService extends BaseBlockService
     public function execute(BlockInterface $block, Response $response = null)
     {
         $wTags = $this->repo->getWeightedTags();
-        return $this->renderResponse('SymfonyCmfBlogBundle:Block:tagCloud.html.twig', array(
+        return $this->renderResponse('CmfBlogBundle:Block:tagCloud.html.twig', array(
             'block' => $block,
             'wTags' => $wTags
         ));
