@@ -63,7 +63,7 @@ class CmfBlogExtension extends Extension
     private function loadMenuIntegration($config, XmlFileLoader $loader, ContainerBuilder $container)
     {
         $bundles = $container->getParameter('kernel.bundles');
-        if ('auto' === $config['integrate_menu']['enabled'] && !isset($bundles['SymfonyCmfMenuBundle'])) {
+        if ('auto' === $config['integrate_menu']['enabled'] && !isset($bundles['CmfMenuBundle'])) {
             return;
         }
 
@@ -72,14 +72,14 @@ class CmfBlogExtension extends Extension
                 if ('auto' === $config['integrate_menu']) {
                     return;
                 }
-                throw new \RuntimeException('You need to set the content_key when not using the SymfonyCmfRoutingBundle DynamicRouter');
+                throw new \RuntimeException('You need to set the content_key when not using the CmfRoutingBundle DynamicRouter');
             }
             $contentKey = DynamicRouter::CONTENT_KEY;
         } else {
             $contentKey = $config['integrate_menu']['content_key'];
         }
 
-        $container->setParameter('symfony_cmf_blog.content_key', $contentKey);
+        $container->setParameter('cmf_blog.content_key', $contentKey);
 
         $loader->load('menu.xml');
     }
