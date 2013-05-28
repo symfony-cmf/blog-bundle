@@ -51,7 +51,7 @@ class Post implements RouteAwareInterface
 
     /**
      * Date of publication
-     * @var DateTime
+     * @var \DateTime
      */
     protected $date;
 
@@ -121,6 +121,11 @@ class Post implements RouteAwareInterface
     public function setDate($date)
     {
         $this->date = $date;
+    }
+
+    public function getParent()
+    {
+        return $this->getBlog();
     }
 
     public function getBlog()

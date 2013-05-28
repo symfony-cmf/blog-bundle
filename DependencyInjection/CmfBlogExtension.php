@@ -5,8 +5,9 @@ namespace Symfony\Cmf\Bundle\BlogBundle\DependencyInjection;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+
+use Symfony\Cmf\Bundle\RoutingBundle\Routing\DynamicRouter;
 
 /**
  * This is the class that loads and manages your bundle configuration
@@ -29,6 +30,9 @@ class CmfBlogExtension extends Extension
         if ($config['use_sonata_admin']) {
             $this->loadSonataAdmin($config, $loader, $container);
         }
+        if ($config['integrate_menu']['enabled']) {
+            $this->loadMenuIntegration($config, $loader, $container);
+        }
 
         $config['class'] = array_merge(array(
             'blog_admin' => 'Symfony\Cmf\Bundle\BlogBundle\Admin\BlogAdmin',
@@ -45,7 +49,7 @@ class CmfBlogExtension extends Extension
         }
     }
 
-    public function loadSonataAdmin($config, XmlFileLoader $loader, ContainerBuilder $container)
+    private function loadSonataAdmin($config, XmlFileLoader $loader, ContainerBuilder $container)
     {
         $bundles = $container->getParameter('kernel.bundles');
         if ('auto' === $config['use_sonata_admin'] && !isset($bundles['SonataDoctrinePHPCRAdminBundle'])) {
@@ -54,5 +58,29 @@ class CmfBlogExtension extends Extension
 
         $loader->load('blog-admin.xml');
         $container->setParameter($this->getAlias() . '.blog_basepath', $config['blog_basepath']);
+    }
+
+    private function loadMenuIntegration($config, XmlFileLoader $loader, ContainerBuilder $container)
+    {
+        $bundles = $container->getParameter('kernel.bundles');
+        if ('auto' === $config['integrate_menu']['enabled'] && !isset($bundles['CmfMenuBundle'])) {
+            return;
+        }
+
+        if (empty($config['integrate_menu']['content_key'])) {
+            if (!class_exists('Symfony\\Cmf\\Bundle\\RoutingBundle\\Routing\\DynamicRouter')) {
+                if ('auto' === $config['integrate_menu']) {
+                    return;
+                }
+                throw new \RuntimeException('You need to set the content_key when not using the CmfRoutingBundle DynamicRouter');
+            }
+            $contentKey = DynamicRouter::CONTENT_KEY;
+        } else {
+            $contentKey = $config['integrate_menu']['content_key'];
+        }
+
+        $container->setParameter('cmf_blog.content_key', $contentKey);
+
+        $loader->load('menu.xml');
     }
 }
