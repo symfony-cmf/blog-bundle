@@ -55,7 +55,7 @@ class BlogController
         $prevPost = $this->getPostRepo()->fetchPrevPost($post);
         $nextPost = $this->getPostRepo()->fetchNextPost($post);
 
-        $contentTemplate = $contentTemplate ?: 'SymfonyCmfBlogBundle:Blog:view_post.html.twig';
+        $contentTemplate = $contentTemplate ?: 'CmfBlogBundle:Blog:view_post.html.twig';
 
         return $this->renderResponse($contentTemplate, array(
             'post' => $post,
@@ -75,7 +75,7 @@ class BlogController
             'blog_id' => $blog->getId(),
         ));
 
-        $contentTemplate = $contentTemplate ?: 'SymfonyCmfBlogBundle:Blog:list.{_format}.twig';
+        $contentTemplate = $contentTemplate ?: 'CmfBlogBundle:Blog:list.{_format}.twig';
 
         // @todo: Copy and pasted from ContentBundle::ContentController
         //        I wonder if we can share some code between content-like
