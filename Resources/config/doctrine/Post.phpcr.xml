@@ -1,5 +1,9 @@
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/phpcr/doctrine-mapping"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<doctrine-mapping
+    xmlns="http://doctrine-project.org/schemas/phpcr-odm/phpcr-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/phpcr-odm/phpcr-mapping
+        https://github.com/doctrine/phpcr-odm/raw/master/doctrine-phpcr-odm-mapping.xsd"
+>
 
     <document
         name="Symfony\Cmf\Bundle\BlogBundle\Document\Post"
@@ -7,20 +11,17 @@
         referenceable="true"
         >
 
-        <parentdocument name="blog"/>
-
-        <nodename name="name"/>
-
         <id name="id">
-            <generator strategy="parent"/>
+            <generator strategy="PARENT"/>
         </id>
-
-        <field fieldName="slug" type="string"/>
-        <field fieldName="title" type="string"/>
-        <field fieldName="body" type="string"/>
-        <field fieldName="date" type="date"/>
-        <field fieldName="status" type="string"/>
-        <referrers fieldName="routes" referring-document="Symfony\Cmf\Bundle\RoutingBundle\Document\Route" referenced-by="routeContent"/>
+        <field name="slug" type="string"/>
+        <field name="title" type="string"/>
+        <field name="body" type="string"/>
+        <field name="date" type="date"/>
+        <field name="status" type="string"/>
+        <nodename name="name"/>
+        <parent-document name="blog"/>
+        <referrers name="routes" referring-document="Symfony\Cmf\Bundle\RoutingBundle\Document\Route" referenced-by="routeContent"/>
     </document>
 
 </doctrine-mapping>
