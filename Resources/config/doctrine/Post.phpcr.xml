@@ -18,7 +18,9 @@
         <field name="title" type="string"/>
         <field name="body" type="string"/>
         <field name="date" type="date"/>
-        <field name="status" type="string"/>
+        <field name="isPublishable" type="boolean"/>
+        <field name="publishStartDate" type="date"/>
+        <field name="publishEndDate" type="date"/>
         <nodename name="name"/>
         <parent-document name="blog"/>
         <referrers name="routes" referring-document="Symfony\Cmf\Bundle\RoutingBundle\Document\Route" referenced-by="routeContent"/>

@@ -6,13 +6,14 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 use Symfony\Cmf\Bundle\BlogBundle\Util\PostUtils;
 use Symfony\Cmf\Bundle\BlogBundle\Tagging\Tag;
 use Symfony\Cmf\Component\Routing\RouteAwareInterface;
+use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowInterface;
 
 /**
  * Object representing a blog post.
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
-class Post implements RouteAwareInterface
+class Post implements RouteAwareInterface, PublishWorkflowInterface
 {
     /**
      * ID / Path to to this object
@@ -56,15 +57,27 @@ class Post implements RouteAwareInterface
     protected $date;
 
     /**
-     * Post status [draft|published]
-     * @var string
-     */
-    protected $status;
-
-    /**
      * List of referring routes
      */
     protected $routes;
+
+    /**
+     * Date to start publishing from
+     * @var \DateTime
+     */
+    protected $publishStartDate;
+
+    /**
+     * Date to stop publishing from
+     * @var \DateTime
+     */
+    protected $publishEndDate;
+
+    /**
+     * If the document should be publishable
+     * @var Boolean
+     */
+    protected $isPublishable;
 
     public function __construct()
     {
@@ -143,16 +156,6 @@ class Post implements RouteAwareInterface
         $this->parent = $blog;
     }
 
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    public function setStatus($status)
-    {
-        $this->status = $status;
-    }
-
     public function getBodyPreview($length = 255)
     {
         $suffix = strlen($this->body) > $length ? ' ...' : '';
@@ -169,5 +172,37 @@ class Post implements RouteAwareInterface
     {
         return (string) $this->title;
     }
+
+    public function isPublishable()
+    {
+        return $this->isPublishable;
+    }
+
+    public function setPublishable($publishable)
+    {
+        $this->isPublishable = $publishable;
+    }
+
+    public function getPublishStartDate() 
+    {
+        return $this->publishStartDate;
+    }
+    
+    public function setPublishStartDate(\DateTime $publishStartDate = null)
+    {
+        $this->publishStartDate = $publishStartDate;
+    }
+
+    public function getPublishEndDate() 
+    {
+        return $this->publishEndDate;
+    }
+    
+    public function setPublishEndDate(\DateTime $publishEndDate = null)
+    {
+        $this->publishEndDate = $publishEndDate;
+    }
+    
+    
 }
 
