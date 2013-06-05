@@ -70,11 +70,13 @@ class PostRepository extends DocumentRepository
 
         // hmm, if two adjacent posts were created in the same second this
         // will not work.
-        if (false === $prev) {
+        if (true === $prev) {
             $qb->where($qb->expr()->lt('date', $post->getDate()));
             $qb->orderBy('date', 'desc');
         } else {
-            $qb->where($qb->expr()->gt('date', $post->getDate()));
+            $targetDate = clone $post->getDate();
+            $targetDate->modify('+1 minute');
+            $qb->where($qb->expr()->gt('date', $targetDate));
             $qb->orderBy('date', 'asc');
         }
 
