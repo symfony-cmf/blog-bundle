@@ -1,30 +1,36 @@
 [WIP] Symfony Cmf Blog Bundle
 =============================
 
-Features
---------
+This is part of the Symfony Cmf: <https://github.com/symfony-cmf/symfony-cmf>
 
-- Sonata backoffice admin
-- Frontoffice controllers:
-  - Blog archive w/pagination (knp-paginator??) and postView
-- Tags
-  - Support for native PHPCR or ORM, or other strategies.
-- Blocks
-  - TagCloudBlock
-- Very simple structure for now. Blog>Post*
-- RSS/ATOM feed
+## About
 
-Next?
------
+The blog bundle is a very much "work in progress" and will only be complete
+when all the necessary pieces of the CMF are available.
 
- - Frontend editing with create.js
-  - On blog post page
- - Preview/Leader text for posts, with frontoffice edition.
- - Have dedicated Blog>Posts>Post* folder for posts
- - Or have post repositories, and have Blog with no children
-   - E.g. reference a service which can provide a single set of posts
-   - Or an aggregation of posts from multiple sets of posts.
- - Create PostInterface and BlogInterface
- - Blog statuses (published, draft, etc)
-   - From ODM? Probably.
-   - From configuration? Alternatively.
+The missing pieces:
+
+* **TaxonomyBundle**: for tagging
+* **phpcr-odm/something-else**: Way to automatically order nodes when saving
+  (ensure next / previous posts are indeed the next and previous posts
+  according to date)
+
+Currently implemented:
+
+* **PublishWorkFlowChecker**: The PWFC from the CoreBundle handles the
+  publication status of blog posts.
+
+## Links
+
+- GitHub: <https://github.com/symfony-cmf/symfony-cmf>
+- Sandbox: <https://github.com/symfony-cmf/cmf-sandbox>
+- Web: <http://cmf.symfony.com/>
+- Wiki: <http://github.com/symfony-cmf/symfony-cmf/wiki>
+- Issue Tracker: <http://cmf.symfony-project.org/redmine/>
+- IRC: irc://freenode/#symfony-cmf
+- Users mailing list: <http://groups.google.com/group/symfony-cmf-users>
+- Devs mailing list: <http://groups.google.com/group/symfony-cmf-devs>
+
+## Documentation
+
+http://symfony.com/doc/master/cmf/bundles/content.html

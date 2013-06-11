@@ -33,13 +33,6 @@ class PostAdmin extends Admin
             'widget' => 'single_text',
         ));
 
-        // @todo: Make these choicess configurable somehow
-        $mapper->add('status', 'choice', array(
-            'choices' => array(
-                'draft' => 'Draft',
-                'published' => 'Published',
-            ),
-        ));
         $mapper->add('body', 'textarea');
         $mapper->add('blog', 'phpcr_document', array(
             'class' => 'Symfony\Cmf\Bundle\BlogBundle\Document\Blog',
@@ -61,10 +54,6 @@ class PostAdmin extends Admin
         $dm->add('blog');
         $dm->add('date', 'datetime');
         $dm->addIdentifier('title');
-        $dm->add('status');
-        // $dm->add('tags', 'string', array(
-        //     'template' => 'CmfBlogBundle:Admin:list_tags.html.twig'
-        // ));
     }
 
     public function validate(ErrorElement $ee, $obj)

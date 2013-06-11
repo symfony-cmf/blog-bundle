@@ -2,13 +2,13 @@
 {% block content %}
 <div class="row-fluid">
     <div class="span6">
-        {% if prevPost %}
-            <a href="{{ path(prevPost, {'slug': prevPost.slug}) }}">&lt;&lt; {{ prevPost.title }}</a>
+        {% if cmf_prev(post) %}
+            <a href="{{ path(cmf_prev(post)) }}">&lt;&lt; {{ cmf_prev(post).title }}</a>
         {% endif %}
     </div>
     <div class="span6" style="text-align: right">
-        {% if nextPost %}
-            <a href="{{ path(nextPost, {'slug': nextPost.slug}) }}">{{ nextPost.title }} &gt;&gt;</a>
+        {% if cmf_next(post) %}
+            <a href="{{ path(cmf_next(post)) }}">{{ cmf_next(post).title }} &gt;&gt;</a>
         {% endif %}
     </div>
 </div>

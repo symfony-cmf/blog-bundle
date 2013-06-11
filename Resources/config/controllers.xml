@@ -12,6 +12,7 @@
             <argument type="service" id="templating" />
             <argument type="service" id="fos_rest.view_handler" on-invalid="ignore"/>
             <argument type="service" id="doctrine_phpcr.odm.default_document_manager"/>
+            <argument type="service" id="cmf_core.publish_workflow_checker"/>
         </service>
 
     </services>

@@ -11,6 +11,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Cmf\Bundle\BlogBundle\Document\Blog;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use FOS\RestBundle\View\View;
+use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowCheckerInterface;
 
 /**
  * Blog Controller
@@ -22,15 +23,18 @@ class BlogController
     protected $templating;
     protected $viewHandler;
     protected $dm;
+    protected $pwfc;
 
     public function __construct(
         EngineInterface $templating, 
         ViewHandlerInterface $viewHandler = null,
-        DocumentManager $dm
+        DocumentManager $dm,
+        PublishWorkflowCheckerInterface $pwfc
     ) {
         $this->templating = $templating;
         $this->viewHandler = $viewHandler;
         $this->dm = $dm;
+        $this->pwfc = $pwfc;
     }
 
     protected function renderResponse($contentTemplate, $params)
@@ -52,15 +56,17 @@ class BlogController
     public function viewPostAction(Request $request, $contentDocument, $contentTemplate = null)
     {
         $post = $contentDocument;
-        $prevPost = $this->getPostRepo()->fetchPrevPost($post);
-        $nextPost = $this->getPostRepo()->fetchNextPost($post);
 
-        $contentTemplate = $contentTemplate ?: 'CmfBlogBundle:Blog:view_post.html.twig';
+        if (true !== $this->pwfc->checkIsPublished($post)) {
+            throw new NotFoundHttpException(sprintf(
+                'Post "%s" is not published'
+            , $post->getTitle()));
+        }
+
+        $contentTemplate = $contentTemplate ? : 'CmfBlogBundle:Blog:view_post.html.twig';
 
         return $this->renderResponse($contentTemplate, array(
             'post' => $post,
-            'nextPost' => $nextPost,
-            'prevPost' => $prevPost,
         ));
     }
 
