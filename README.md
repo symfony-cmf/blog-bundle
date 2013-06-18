@@ -33,4 +33,4 @@ Currently implemented:
 
 ## Documentation
 
-http://symfony.com/doc/master/cmf/bundles/content.html
+http://symfony.com/doc/master/cmf/bundles/blog.html
