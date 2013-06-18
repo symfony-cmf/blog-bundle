@@ -1,6 +1,6 @@
 <?php
 
-namespace Symfony\Cmf\Bundle\BlogBundle\Tests\Form\DataTransformer;
+namespace Symfony\Cmf\Bundle\BlogBundle\Tests\Unit\Form\DataTransformer;
 
 use Symfony\Cmf\Bundle\BlogBundle\Form\DataTransformer\CsvToArrayTransformer;
 
