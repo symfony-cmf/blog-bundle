@@ -1,6 +1,6 @@
 <?php
 
-namespace Symfony\Cmf\Bundle\BlogBundle\Tests\Util;
+namespace Symfony\Cmf\Bundle\BlogBundle\Tests\Unit\Util;
 
 use Symfony\Cmf\Bundle\BlogBundle\Util\PostUtils;
 

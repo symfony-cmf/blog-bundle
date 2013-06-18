@@ -1,8 +1,0 @@
-imports:
-    - { resource: dist/parameters.yml }
-    - { resource: dist/framework.yml }
-    - { resource: dist/monolog.yml }
-    - { resource: dist/doctrine.yml }
-    - { resource: dist/phpcrodm.yml }
-    - { resource: dist/blogbundle.yml }
-    - { resource: dist/sonata.yml }
