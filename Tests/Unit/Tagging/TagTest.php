@@ -1,6 +1,6 @@
 <?php
 
-namespace Symfony\Cmf\Bundle\BlogBundle\Tests\Tagging;
+namespace Symfony\Cmf\Bundle\BlogBundle\Tests\Unit\Tagging;
 
 use Symfony\Cmf\Bundle\BlogBundle\Tagging\Tag;
 
