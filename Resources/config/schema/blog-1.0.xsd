@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xsd:schema xmlns="http://cmf.symfony.com/schema/dic/blog"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://cmf.symfony.com/schema/dic/blog"
+    elementFormDefault="qualified">
+
+    <xsd:element name="config" type="config" />
+
+    <xsd:complexType name="config">
+        <xsd:sequence>
+            <xsd:element name="integrate-menu" type="integrate_menu" minOccurs="0" />
+            <xsd:element name="class" type="class" minOccurs="0" />
+        </xsd:sequence>
+
+        <xsd:attribute name="use-sonata-admin" type="enabled" />
+        <xsd:attribute name="blog-basepath" type="xsd:string" use="required" />
+        <xsd:attribute name="routing-post-controller" type="xsd:string" />
+        <xsd:attribute name="routing-post-prefix" type="xsd:string" />
+        <xsd:attribute name="routing-tag-controller" type="xsd:string" />
+        <xsd:attribute name="routing-tag-prefix" type="xsd:string" />
+    </xsd:complexType>
+
+    <xsd:complexType name="integrate_menu">
+        <xsd:attribute name="enabled" type="enabled" />
+        <xsd:attribute name="content_key" type="xsd:string" />
+    </xsd:complexType>
+
+    <xsd:complexType name="class">
+        <xsd:attribute name="blog-admin" type="xsd:string" />
+        <xsd:attribute name="post-admin" type="xsd:string" />
+        <xsd:attribute name="blog" type="xsd:string" />
+        <xsd:attribute name="post" type="xsd:string" />
+    </xsd:complexType>
+
+    <xsd:simpleType name="enabled">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="true" />
+            <xsd:enumeration value="false" />
+            <xsd:enumeration value="auto" />
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>
