@@ -6,14 +6,15 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 use Symfony\Cmf\Bundle\BlogBundle\Util\PostUtils;
 use Symfony\Cmf\Bundle\BlogBundle\Tagging\Tag;
 use Symfony\Cmf\Component\Routing\RouteAwareInterface;
-use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowInterface;
+use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodWriteInterface;
+use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableWriteInterface;
 
 /**
  * Object representing a blog post.
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
-class Post implements RouteAwareInterface, PublishWorkflowInterface
+class Post implements RouteAwareInterface, PublishTimePeriodWriteInterface, PublishableWriteInterface
 {
     /**
      * ID / Path to to this object
@@ -183,26 +184,23 @@ class Post implements RouteAwareInterface, PublishWorkflowInterface
         $this->isPublishable = $publishable;
     }
 
-    public function getPublishStartDate() 
+    public function getPublishStartDate()
     {
         return $this->publishStartDate;
     }
-    
+
     public function setPublishStartDate(\DateTime $publishStartDate = null)
     {
         $this->publishStartDate = $publishStartDate;
     }
 
-    public function getPublishEndDate() 
+    public function getPublishEndDate()
     {
         return $this->publishEndDate;
     }
-    
+
     public function setPublishEndDate(\DateTime $publishEndDate = null)
     {
         $this->publishEndDate = $publishEndDate;
     }
-    
-    
 }
-
