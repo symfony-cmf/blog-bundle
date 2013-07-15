@@ -2,16 +2,15 @@
 
 namespace Symfony\Cmf\Bundle\BlogBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\HttpFoundation\Request;
-use FOS\RestBundle\View\ViewHandlerInterface;
-use Symfony\Component\Templating\EngineInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Cmf\Bundle\BlogBundle\Document\Blog;
 use Doctrine\ODM\PHPCR\DocumentManager;
+use Symfony\Cmf\Bundle\BlogBundle\Document\Post;
+use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowChecker;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Templating\EngineInterface;
+use FOS\RestBundle\View\ViewHandlerInterface;
 use FOS\RestBundle\View\View;
-use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowCheckerInterface;
 
 /**
  * Blog Controller
@@ -20,21 +19,55 @@ use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowCheckerInterfac
  */
 class BlogController
 {
+    /**
+     * @var EngineInterface
+     */
     protected $templating;
+
+    /**
+     * @var ViewHandlerInterface
+     */
     protected $viewHandler;
+
+    /**
+     * @var DocumentManager
+     */
     protected $dm;
-    protected $pwfc;
+
+    /**
+     * @var SecurityContextInterface
+     */
+    protected $securityContext;
+
+    /**
+     * The permission to check for when doing the publish workflow check.
+     *
+     * @var string
+     */
+    private $publishWorkflowPermission = PublishWorkflowChecker::VIEW_ATTRIBUTE;
+
 
     public function __construct(
-        EngineInterface $templating, 
+        EngineInterface $templating,
         ViewHandlerInterface $viewHandler = null,
         DocumentManager $dm,
-        PublishWorkflowCheckerInterface $pwfc
+        SecurityContextInterface $securityContext
     ) {
         $this->templating = $templating;
         $this->viewHandler = $viewHandler;
         $this->dm = $dm;
-        $this->pwfc = $pwfc;
+        $this->securityContext = $securityContext;
+    }
+
+    /**
+     * What attribute to use in the publish workflow check. This typically
+     * is VIEW or VIEW_ANONYMOUS.
+     *
+     * @param string $attribute
+     */
+    public function setPublishWorkflowPermission($attribute)
+    {
+        $this->publishWorkflowPermission = $attribute;
     }
 
     protected function renderResponse($contentTemplate, $params)
@@ -53,11 +86,11 @@ class BlogController
         return $this->dm->getRepository('Symfony\Cmf\Bundle\BlogBundle\Document\Post');
     }
 
-    public function viewPostAction(Request $request, $contentDocument, $contentTemplate = null)
+    public function viewPostAction(Post $contentDocument, $contentTemplate = null)
     {
         $post = $contentDocument;
 
-        if (true !== $this->pwfc->checkIsPublished($post)) {
+        if (true !== $this->securityContext->isGranted($this->publishWorkflowPermission, $post)) {
             throw new NotFoundHttpException(sprintf(
                 'Post "%s" is not published'
             , $post->getTitle()));
