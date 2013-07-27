@@ -16,7 +16,7 @@
         <parent-document name="parent"/>
 
         <children name="posts"/>
-        <referrers name="routes" referring-document="Symfony\Cmf\Bundle\RoutingBundle\Document\Route" referenced-by="routeContent"/>
+        <referrers name="routes" referring-document="Symfony\Cmf\Bundle\RoutingBundle\Document\Route" referenced-by="content"/>
     </document>
 
 </doctrine-mapping>
