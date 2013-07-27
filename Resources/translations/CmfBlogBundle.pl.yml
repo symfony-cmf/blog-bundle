@@ -1,0 +1,36 @@
+breadcrumb:
+    link_blog_list: Listy wpisów
+    link_blog_create: Dodaj
+    link_blog_edit: Edytuj
+    link_blog_delete: Usuń
+
+    link_post_list: Wpisy
+    link_post_create: Dodaj
+    link_post_edit: Edytuj
+    link_post_delete: Usuń
+
+list:
+    label_blog: Blog
+    label_date: Data
+    label_id: Id
+    label_name: Nazwa
+    label_status: Status
+    label_tags: Tagi
+    label_title: Tytuł
+
+form:
+    group_general: Ogólne
+    label_blog: Wydarzenia
+    label_body: Zawartość
+    label_date: Data
+    label_id: Id
+    label_name: Nazwa
+    label_parent: Nadrzędny
+    label_status: Status
+    label_tags: Tagi
+    label_title: Tytuł
+
+dashboard:
+    label_post: Wpisy
+    label_blog: Blog
+
