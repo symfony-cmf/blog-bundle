@@ -23,7 +23,7 @@
         <field name="publishEndDate" type="date"/>
         <nodename name="name"/>
         <parent-document name="blog"/>
-        <referrers name="routes" referring-document="Symfony\Cmf\Bundle\RoutingBundle\Document\Route" referenced-by="content"/>
+        <referrers name="routes" referring-document="Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route" referenced-by="content" cascade="persist"/>
     </document>
 
 </doctrine-mapping>
