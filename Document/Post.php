@@ -3,9 +3,11 @@
 namespace Symfony\Cmf\Bundle\BlogBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
+
+use Symfony\Cmf\Component\Routing\RouteReferrersInterface;
+
 use Symfony\Cmf\Bundle\BlogBundle\Util\PostUtils;
-use Symfony\Cmf\Bundle\BlogBundle\Tagging\Tag;
-use Symfony\Cmf\Component\Routing\RouteAwareInterface;
+
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodWriteInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableWriteInterface;
 
@@ -14,7 +16,7 @@ use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableWriteInterface;
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
-class Post implements RouteAwareInterface, PublishTimePeriodWriteInterface, PublishableWriteInterface
+class Post implements RouteReferrersInterface, PublishTimePeriodWriteInterface, PublishableWriteInterface
 {
     /**
      * ID / Path to to this object

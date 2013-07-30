@@ -3,7 +3,7 @@
 namespace Symfony\Cmf\Bundle\BlogBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
-use Symfony\Cmf\Component\Routing\RouteAwareInterface;
+use Symfony\Cmf\Component\Routing\RouteReferrersInterface;
 use Symfony\Component\Routing\Route;
 
 /**
@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Route;
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
-class Blog implements RouteAwareInterface
+class Blog implements RouteReferrersInterface
 {
     /**
      * Identifier

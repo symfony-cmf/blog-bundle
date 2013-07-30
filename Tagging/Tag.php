@@ -2,10 +2,10 @@
 
 namespace Symfony\Cmf\Bundle\BlogBundle\Tagging;
 
-use Symfony\Cmf\Component\Routing\RouteAwareInterface;
+use Symfony\Cmf\Component\Routing\RouteReferrersInterface;
 use Symfony\Cmf\Bundle\BlogBundle\Document\Blog;
 
-class Tag implements RouteAwareInterface
+class Tag implements RouteReferrersInterface
 {
     protected $name;
     protected $blog;
@@ -15,7 +15,6 @@ class Tag implements RouteAwareInterface
         $this->name = $name;
         $this->blog = $blog;
     }
-
 
     public function getRoutes()
     {
