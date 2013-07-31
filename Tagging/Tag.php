@@ -2,10 +2,10 @@
 
 namespace Symfony\Cmf\Bundle\BlogBundle\Tagging;
 
-use Symfony\Cmf\Component\Routing\RouteReferrersInterface;
+use Symfony\Cmf\Component\Routing\RouteReferrersReadInterface;
 use Symfony\Cmf\Bundle\BlogBundle\Document\Blog;
 
-class Tag implements RouteReferrersInterface
+class Tag implements RouteReferrersReadInterface
 {
     protected $name;
     protected $blog;
