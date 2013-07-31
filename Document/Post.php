@@ -8,15 +8,15 @@ use Symfony\Cmf\Component\Routing\RouteReferrersReadInterface;
 
 use Symfony\Cmf\Bundle\BlogBundle\Util\PostUtils;
 
-use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodWriteInterface;
-use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableWriteInterface;
+use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodInterface;
+use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
 
 /**
  * Object representing a blog post.
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
-class Post implements RouteReferrersReadInterface, PublishTimePeriodWriteInterface, PublishableWriteInterface
+class Post implements RouteReferrersReadInterface, PublishTimePeriodInterface, PublishableInterface
 {
     /**
      * ID / Path to to this object
