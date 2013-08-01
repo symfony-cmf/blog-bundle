@@ -1,36 +1,54 @@
-[WIP] Symfony Cmf Blog Bundle
-=============================
+# Symfony CMF Blog Bundle
 
-This is part of the Symfony Cmf: <https://github.com/symfony-cmf/symfony-cmf>
+[![Build Status](https://travis-ci.org/symfony-cmf/BlogBundle.png?branch=master)](https://travis-ci.org/symfony-cmf/BlogBundle)
+[![Latest Stable Version](https://poser.pugx.org/symfony-cmf/blog-bundle/v/stable.png)](https://packagist.org/packages/symfony-cmf/blog-bundle)
+[![Total Downloads](https://poser.pugx.org/symfony-cmf/blog-bundle/downloads.png)](https://packagist.org/packages/symfony-cmf/blog-bundle)
 
-## About
+This bundle is part of the [Symfony Content Management Framework (CMF)](http://cmf.symfony.com/)
+and licensed under the [MIT License](LICENSE).
 
-The blog bundle is a very much "work in progress" and will only be complete
-when all the necessary pieces of the CMF are available.
+This bundle aims to provide everything you need to create a full blog or
+blog-like system. It also includes in-built support for the Sonata Admin
+bundle to help you get up-and-running quickly.
 
-The missing pieces:
+Current features:
 
-* **TaxonomyBundle**: for tagging
-* **phpcr-odm/something-else**: Way to automatically order nodes when saving
-  (ensure next / previous posts are indeed the next and previous posts
-  according to date)
+* Host multiple blogs within a single website;
+* Place blogs anywhere within your route hierarchy;
+* Sonata Admin integration.
 
-Currently implemented:
+Pending features:
 
-* **PublishWorkFlowChecker**: The PWFC from the CoreBundle handles the
-  publication status of blog posts.
+* Full tag support;
+* Frontend pagination (using knp-paginator);
+* RSS/ATOM feed;
+* Comments;
+* User support (FOSUserBundle).
 
-## Links
 
-- GitHub: <https://github.com/symfony-cmf/symfony-cmf>
-- Sandbox: <https://github.com/symfony-cmf/cmf-sandbox>
-- Web: <http://cmf.symfony.com/>
-- Wiki: <http://github.com/symfony-cmf/symfony-cmf/wiki>
-- Issue Tracker: <http://cmf.symfony-project.org/redmine/>
-- IRC: irc://freenode/#symfony-cmf
-- Users mailing list: <http://groups.google.com/group/symfony-cmf-users>
-- Devs mailing list: <http://groups.google.com/group/symfony-cmf-devs>
+## Requirements
+
+* Symfony 2.2.x
+* [CoreBundle](https://github.com/symfony-cmf/CoreBundle)
+* [RoutingAutoBundle](https://github.com/symfony-cmf/RoutingAutoBundle)
+
 
 ## Documentation
 
-http://symfony.com/doc/master/cmf/bundles/blog.html
+For the install guide and reference, see:
+
+* [BlogBundle documentation](http://symfony.com/doc/master/cmf/bundles/blog.html)
+
+See also:
+
+* [All Symfony CMF documentation](http://symfony.com/doc/master/cmf/index.html) - complete Symfony CMF reference
+* [Symfony CMF Website](http://cmf.symfony.com/) - introduction, live demo, support and community links
+
+
+## Contributing
+
+Pull requests are welcome. Please see our [CONTRIBUTING](https://github.com/symfony-cmf/BlogBundle/blob/master/CONTRIBUTING.md) guide.
+
+Unit and/or functional tests exist for this bundle. See the [Testing documentation](http://symfony.com/doc/master/cmf/components/testing.html) for a guide to running the tests.
+
+Thanks to [everyone who has contributed](https://github.com/symfony-cmf/BlogBundle/contributors) already.
