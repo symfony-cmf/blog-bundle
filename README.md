@@ -7,6 +7,9 @@
 This bundle is part of the [Symfony Content Management Framework (CMF)](http://cmf.symfony.com/)
 and licensed under the [MIT License](LICENSE).
 
+ > **WARNING** The Blog Bundle is a "work in progress" and will only be
+ > complete when all the neessary pieces of the CMF are available.
+
 This bundle aims to provide everything you need to create a full blog or
 blog-like system. It also includes in-built support for the Sonata Admin
 bundle to help you get up-and-running quickly.
