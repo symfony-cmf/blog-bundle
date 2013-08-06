@@ -16,7 +16,9 @@
         <parent-document name="parent"/>
 
         <children name="posts"/>
-        <referrers name="routes" referring-document="Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route" referenced-by="content" cascade="persist"/>
+        <referrers name="routes" referring-document="Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route" referenced-by="content">
+            <cascade><cascade-persist /></cascade>
+        </referrers>
     </document>
 
 </doctrine-mapping>
