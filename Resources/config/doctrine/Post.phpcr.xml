@@ -24,7 +24,7 @@
         <nodename name="name"/>
         <parent-document name="blog"/>
         <referrers name="routes" referring-document="Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route" referenced-by="content">
-            <cascade><cascade-persist /></cascade>
+            <cascade><cascade-persist /><cascade-remove /></cascade>
         </referrers>
     </document>
 
