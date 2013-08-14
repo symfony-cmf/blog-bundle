@@ -19,8 +19,8 @@
         <field name="body" type="string"/>
         <field name="date" type="date"/>
         <field name="isPublishable" type="boolean"/>
-        <field name="publishStartDate" type="date"/>
-        <field name="publishEndDate" type="date"/>
+        <field name="publishStartDate" type="date" nullable="true"/>
+        <field name="publishEndDate" type="date" nullable="true"/>
         <nodename name="name"/>
         <parent-document name="blog"/>
         <referrers name="routes" referring-document="Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route" referenced-by="content">
