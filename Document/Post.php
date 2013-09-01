@@ -171,11 +171,6 @@ class Post implements RouteReferrersReadInterface, PublishTimePeriodInterface, P
         return $this->routes;
     }
 
-    public function __toString()
-    {
-        return (string) $this->title;
-    }
-
     public function isPublishable()
     {
         return $this->isPublishable;
