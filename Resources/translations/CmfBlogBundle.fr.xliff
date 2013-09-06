@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="breadcrumb.link_blog_list">
+                <source>breadcrumb.link_blog_list</source>
+                <target>Blogs</target>
+            </trans-unit>
+
+            <trans-unit id="breadcrumb.link_blog_create">
+                <source>breadcrumb.link_blog_create</source>
+                <target>Créer</target>
+            </trans-unit>
+
+            <trans-unit id="breadcrumb.link_blog_edit">
+                <source>breadcrumb.link_blog_edit</source>
+                <target>Modifier</target>
+            </trans-unit>
+
+            <trans-unit id="breadcrumb.link_blog_delete">
+                <source>breadcrumb.link_blog_delete</source>
+                <target>Supprimer</target>
+            </trans-unit>
+
+            <trans-unit id="breadcrumb.link_post_list">
+                <source>breadcrumb.link_post_list</source>
+                <target>Articles</target>
+            </trans-unit>
+
+            <trans-unit id="breadcrumb.link_post_create">
+                <source>breadcrumb.link_post_create</source>
+                <target>Créer</target>
+            </trans-unit>
+
+            <trans-unit id="breadcrumb.link_post_edit">
+                <source>breadcrumb.link_post_edit</source>
+                <target>Modifier</target>
+            </trans-unit>
+
+            <trans-unit id="breadcrumb.link_post_delete">
+                <source>breadcrumb.link_post_delete</source>
+                <target>Supprimer</target>
+            </trans-unit>
+
+            <trans-unit id="list.label_blog">
+                <source>list.label_blog</source>
+                <target>Blog</target>
+            </trans-unit>
+
+            <trans-unit id="list.label_date">
+                <source>list.label_date</source>
+                <target>Date</target>
+            </trans-unit>
+
+            <trans-unit id="list.label_id">
+                <source>list.label_id</source>
+                <target>Id</target>
+            </trans-unit>
+
+            <trans-unit id="list.label_name">
+                <source>list.label_name</source>
+                <target>Nom</target>
+            </trans-unit>
+
+            <trans-unit id="list.label_status">
+                <source>list.label_status</source>
+                <target>Statut</target>
+            </trans-unit>
+
+            <trans-unit id="list.label_tags">
+                <source>list.label_tags</source>
+                <target>Tags</target>
+            </trans-unit>
+
+            <trans-unit id="list.label_title">
+                <source>list.label_title</source>
+                <target>Titre</target>
+            </trans-unit>
+
+            <trans-unit id="form.group_general">
+                <source>form.group_general</source>
+                <target>Général</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_blog">
+                <source>form.label_blog</source>
+                <target>Blog</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_body">
+                <source>form.label_body</source>
+                <target>Contenu</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_date">
+                <source>form.label_date</source>
+                <target>Date</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_id">
+                <source>form.label_id</source>
+                <target>Id</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_name">
+                <source>form.label_name</source>
+                <target>Nom</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_parent">
+                <source>form.label_parent</source>
+                <target>Parent</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_status">
+                <source>form.label_status</source>
+                <target>Statut</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_tags">
+                <source>form.label_tags</source>
+                <target>Tags</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_title">
+                <source>form.label_title</source>
+                <target>Titre</target>
+            </trans-unit>
+
+            <trans-unit id="dashboard.label_post">
+                <source>dashboard.label_post</source>
+                <target>Article</target>
+            </trans-unit>
+
+            <trans-unit id="dashboard.label_blog">
+                <source>dashboard.label_blog</source>
+                <target>Blog</target>
+            </trans-unit>
+
+            <trans-unit id="filter.label_title">
+                <source>filter.label_title</source>
+                <target>Titre</target>
+            </trans-unit>
+
+        </body>
+    </file>
+</xliff>
