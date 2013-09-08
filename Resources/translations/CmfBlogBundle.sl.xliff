@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="breadcrumb.link_blog_list">
+                <source>breadcrumb.link_blog_list</source>
+                <target>Blogi</target>
+            </trans-unit>
+
+            <trans-unit id="breadcrumb.link_blog_create">
+                <source>breadcrumb.link_blog_create</source>
+                <target>Ustvari</target>
+            </trans-unit>
+
+            <trans-unit id="breadcrumb.link_blog_edit">
+                <source>breadcrumb.link_blog_edit</source>
+                <target>Uredi</target>
+            </trans-unit>
+
+            <trans-unit id="breadcrumb.link_blog_delete">
+                <source>breadcrumb.link_blog_delete</source>
+                <target>Izbriši</target>
+            </trans-unit>
+
+            <trans-unit id="breadcrumb.link_post_list">
+                <source>breadcrumb.link_post_list</source>
+                <target>Objave</target>
+            </trans-unit>
+
+            <trans-unit id="breadcrumb.link_post_create">
+                <source>breadcrumb.link_post_create</source>
+                <target>Ustvari</target>
+            </trans-unit>
+
+            <trans-unit id="breadcrumb.link_post_edit">
+                <source>breadcrumb.link_post_edit</source>
+                <target>Uredi</target>
+            </trans-unit>
+
+            <trans-unit id="breadcrumb.link_post_delete">
+                <source>breadcrumb.link_post_delete</source>
+                <target>Izbriši</target>
+            </trans-unit>
+
+            <trans-unit id="list.label_blog">
+                <source>list.label_blog</source>
+                <target>Blog</target>
+            </trans-unit>
+
+            <trans-unit id="list.label_date">
+                <source>list.label_date</source>
+                <target>Datum</target>
+            </trans-unit>
+
+            <trans-unit id="list.label_id">
+                <source>list.label_id</source>
+                <target>Id</target>
+            </trans-unit>
+
+            <trans-unit id="list.label_name">
+                <source>list.label_name</source>
+                <target>Ime</target>
+            </trans-unit>
+
+            <trans-unit id="list.label_status">
+                <source>list.label_status</source>
+                <target>Status</target>
+            </trans-unit>
+
+            <trans-unit id="list.label_tags">
+                <source>list.label_tags</source>
+                <target>Značke</target>
+            </trans-unit>
+
+            <trans-unit id="list.label_title">
+                <source>list.label_title</source>
+                <target>Naslov</target>
+            </trans-unit>
+
+            <trans-unit id="form.group_general">
+                <source>form.group_general</source>
+                <target>Splošno</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_blog">
+                <source>form.label_blog</source>
+                <target>Blog</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_body">
+                <source>form.label_body</source>
+                <target>Vsebina</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_date">
+                <source>form.label_date</source>
+                <target>Datum</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_id">
+                <source>form.label_id</source>
+                <target>Id</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_name">
+                <source>form.label_name</source>
+                <target>Ime</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_parent">
+                <source>form.label_parent</source>
+                <target>Vrhnji</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_status">
+                <source>form.label_status</source>
+                <target>Status</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_tags">
+                <source>form.label_tags</source>
+                <target>Značke</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_title">
+                <source>form.label_title</source>
+                <target>Naslov</target>
+            </trans-unit>
+
+            <trans-unit id="dashboard.label_post">
+                <source>dashboard.label_post</source>
+                <target>Objava</target>
+            </trans-unit>
+
+            <trans-unit id="dashboard.label_blog">
+                <source>dashboard.label_blog</source>
+                <target>Blog</target>
+            </trans-unit>
+
+        </body>
+    </file>
+</xliff>
