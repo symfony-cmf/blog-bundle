@@ -14,10 +14,10 @@ class PostRepository extends DocumentRepository
         $qb = $this->createQueryBuilder('a');
 
         if ($options['blog_id']) {
-            $qb->where()->descendant('a.' . $options['blog_id']);
+            $qb->where()->descendant($options['blog_id'], 'a');
         }
 
-        $qb->orderBy()->descending()->field('a.date');
+        $qb->orderBy()->desc()->field('a.date');
         return $qb->getQuery();
     }
 

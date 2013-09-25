@@ -18,7 +18,7 @@ class PHPCRStringStrategy implements StrategyInterface
     {
         $qb = $this->postRep->createQueryBuilder('a');
         $qb->select('tags');
-        $qb->where()->descendant('a', $blogId); // select only children of given blog
+        $qb->where()->descendant($blogId, 'a'); // select only children of given blog
         $q = $qb->getQuery();
         $res = $q->getPhpcrNodeResult();
         $rows = $res->getRows();
