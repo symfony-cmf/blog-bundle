@@ -16,9 +16,9 @@ class PHPCRStringStrategy implements StrategyInterface
      */
     public function getWeightedTags($blogId)
     {
-        $qb = $this->postRep->createQueryBuilder();
+        $qb = $this->postRep->createQueryBuilder('a');
         $qb->select('tags');
-        $qb->descendant($blogId); // select only children of given blog
+        $qb->where()->descendant('a', $blogId); // select only children of given blog
         $q = $qb->getQuery();
         $res = $q->getPhpcrNodeResult();
         $rows = $res->getRows();
@@ -44,6 +44,6 @@ class PHPCRStringStrategy implements StrategyInterface
             $tag['weight'] = $tag['count'] / $max;
         }
 
-        return $wTags;
+        return $weightedTags;
     }
 }
