@@ -25,7 +25,7 @@ class PostAdmin extends Admin
         //        but I don't know how integrate the form
         //        AND have all the Sonata magic from the
         //        FormMapper->add method.
-        
+
         // $csvToArrayTransformer = new CsvToArrayTransformer;
 
         $mapper->add('title');

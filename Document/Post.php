@@ -80,7 +80,7 @@ class Post implements RouteReferrersReadInterface, PublishTimePeriodInterface, P
      * If the document should be publishable
      * @var Boolean
      */
-    protected $isPublishable;
+    protected $isPublishable = true;
 
     public function __construct()
     {
@@ -199,5 +199,10 @@ class Post implements RouteReferrersReadInterface, PublishTimePeriodInterface, P
     public function setPublishEndDate(\DateTime $publishEndDate = null)
     {
         $this->publishEndDate = $publishEndDate;
+    }
+
+    public function __toString()
+    {
+        return (string) $this->name;
     }
 }
