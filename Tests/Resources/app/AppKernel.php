@@ -8,7 +8,9 @@ class AppKernel extends TestKernel
     public function configure()
     {
         $this->requireBundleSets(array(
-            'default', 'sonata_admin', 'phpcr_odm'
+            'default',
+            'phpcr_odm',
+            'sonata_admin_phpcr',
         ));
 
         $this->addBundles(array(
