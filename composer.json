@@ -1,5 +1,5 @@
 {
-    "name": "symfony-cmf/blog-bundle",
+    "name": "briancappello/blog-bundle",
     "type": "symfony-bundle",
     "description": "Symfony CMF Blog Bundle",
     "keywords": ["Symfony CMF"],
@@ -11,19 +11,19 @@
             "homepage": "https://github.com/symfony-cmf/BlogBundle/contributors"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
         "php": ">=5.3.3",
-        "symfony/framework-bundle": "~2.2",
-        "symfony-cmf/core-bundle": "1.0.*",
+        "symfony/framework-bundle": "~2.3",
+        "symfony-cmf/core-bundle": "1.2.*",
         "symfony-cmf/routing-auto-bundle": "1.0.*",
-        "doctrine/phpcr-bundle": "1.0.*",
-        "doctrine/phpcr-odm": "1.0.*"
+        "doctrine/phpcr-bundle": "~1.1",
+        "doctrine/phpcr-odm": "~1.1"
     },
     "require-dev": {
-        "symfony-cmf/testing": "1.1.*",
-        "sonata-project/doctrine-phpcr-admin-bundle": "1.0.*",
-        "symfony-cmf/core-bundle": "1.0.*"
+        "symfony-cmf/testing": "1.2.*",
+        "sonata-project/doctrine-phpcr-admin-bundle": "1.2.*",
+        "symfony-cmf/core-bundle": "1.2.*"
     },
     "suggest": {
         "sonata-project/doctrine-phpcr-admin-bundle": "For sonata administration"
