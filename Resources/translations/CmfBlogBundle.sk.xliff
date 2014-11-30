@@ -107,8 +107,8 @@
                 <target>Názov</target>
             </trans-unit>
 
-            <trans-unit id="form.label_parent">
-                <source>form.label_parent</source>
+            <trans-unit id="form.label_parent_document">
+                <source>form.label_parent_document</source>
                 <target>Rodič</target>
             </trans-unit>
 

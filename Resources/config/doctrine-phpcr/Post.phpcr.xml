@@ -1,0 +1,35 @@
+<doctrine-mapping
+    xmlns="http://doctrine-project.org/schemas/phpcr-odm/phpcr-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/phpcr-odm/phpcr-mapping
+        https://github.com/doctrine/phpcr-odm/raw/master/doctrine-phpcr-odm-mapping.xsd">
+
+    <document name="Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Post"
+              repository-class="Symfony\Cmf\Bundle\BlogBundle\Repository\PostRepository"
+              referenceable="true">
+
+        <id name="id">
+            <generator strategy="PARENT" />
+        </id>
+
+        <nodename name="slug" />
+        <parent-document name="blog" />
+
+        <field name="title" type="string" />
+        <field name="bodyPreview" type="string" />
+        <field name="body" type="string" />
+        <field name="date" type="date" />
+        <field name="isPublishable" type="boolean" />
+        <field name="publishStartDate" type="date" nullable="true" />
+        <field name="publishEndDate" type="date" nullable="true" />
+
+        <referrers name="routes" referring-document="Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route" referenced-by="content">
+            <cascade>
+                <cascade-persist />
+                <cascade-remove />
+            </cascade>
+        </referrers>
+
+    </document>
+
+</doctrine-mapping>

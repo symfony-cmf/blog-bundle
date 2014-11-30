@@ -14,11 +14,8 @@ namespace Symfony\Cmf\Bundle\BlogBundle\Admin;
 
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
-use Symfony\Cmf\Bundle\BlogBundle\Form\PostType;
-use Symfony\Cmf\Bundle\BlogBundle\Form\DataTransformer\CsvToArrayTransformer;
 
 /**
  * Post Admin
@@ -28,46 +25,52 @@ use Symfony\Cmf\Bundle\BlogBundle\Form\DataTransformer\CsvToArrayTransformer;
 class PostAdmin extends Admin
 {
     protected $translationDomain = 'CmfBlogBundle';
+    protected $blogClass;
 
-    protected function configureFormFields(FormMapper $mapper)
+    /**
+     * Constructor
+     *
+     * @param string $code
+     * @param string $class
+     * @param string $baseControllerName
+     * @param string $blogClass
+     */
+    public function __construct($code, $class, $baseControllerName, $blogClass)
     {
-        // @todo: I think this would be better as a service,
-        //        but I don't know how integrate the form
-        //        AND have all the Sonata magic from the
-        //        FormMapper->add method.
-
-        // $csvToArrayTransformer = new CsvToArrayTransformer;
-
-        $mapper->add('title');
-        $mapper->add('date', 'datetime', array(
-            'widget' => 'single_text',
-        ));
-
-        $mapper->add('body', 'textarea');
-        $mapper->add('blog', 'phpcr_document', array(
-            'class' => 'Symfony\Cmf\Bundle\BlogBundle\Document\Blog',
-        ));
-
-        //$tags = $mapper->create('tags', 'text')
-        //    ->addModelTransformer($csvToArrayTransformer);
-
-        // $mapper->add($tags);
+        parent::__construct($code, $class, $baseControllerName);
+        $this->blogClass = $blogClass;
     }
 
-    protected function configureDatagridFilters(DatagridMapper $dm)
+    protected function configureFormFields(FormMapper $formMapper)
     {
-        $dm->add('title', 'doctrine_phpcr_string');
+        $formMapper
+            ->with('dashboard.label_post')
+                ->add('title')
+                ->add('date', 'datetime', array(
+                    'widget' => 'single_text',
+                ))
+                ->add('bodyPreview', 'textarea')
+                ->add('body', 'textarea')
+                ->add('blog', 'phpcr_document', array(
+                    'class' => $this->blogClass,
+                ))
+            ->end()
+        ;
     }
 
-    protected function configureListFields(ListMapper $dm)
+    protected function configureDatagridFilters(DatagridMapper $filterMapper)
     {
-        $dm->add('blog');
-        $dm->add('date', 'datetime');
-        $dm->addIdentifier('title');
+        $filterMapper
+            ->add('title', 'doctrine_phpcr_string')
+        ;
     }
 
-    public function validate(ErrorElement $ee, $obj)
+    protected function configureListFields(ListMapper $listMapper)
     {
-        $ee->with('title')->assertNotBlank()->end();
+        $listMapper
+            ->addIdentifier('title')
+            ->add('blog')
+            ->add('date', 'datetime')
+        ;
     }
 }

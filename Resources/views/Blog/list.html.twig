@@ -1,22 +1,28 @@
-{% extends "CmfBlogBundle::default_layout.html.twig" %}
+{# CmfBlogBundle:Blog:list.html.twig #}
+
+{% extends "CmfBlogBundle::layout.html.twig" %}
+
 {% block content %}
-<div class="row-fluid">
-    <div class="span12">
-        {% if tag %}
-            <div class="alert alert-info">
-                {# @todo: Translation #}
-                Showing posts with tag "{{ tag }}"
+    <div class="blogs">
+
+        <h1>Blogs</h1>
+
+        {% for blog in blogs %}
+
+            <div class="blog">
+                <h2>
+                    <a href="{{ path(blog) }}">{{ blog.name }}</a>
+                </h2>
+                {% if blog.description %}
+                    <p class="description">
+                        {{ blog.description|nl2br|raw }}
+                    </p>
+                {% endif %}
             </div>
-        {% endif %}
+
+        {% else %}
+            <p class="empty">No blogs found.</p>
+        {% endfor %}
+
     </div>
-</div>
-<div class="row-fluid">
-    <div class="span12">
-        {% block posts %}
-            {% for post in posts %}
-                {% include "CmfBlogBundle:Blog:list_post.html.twig" %}
-            {% endfor %}
-        {% endblock %}
-    </div>
-</div>
 {% endblock %}
