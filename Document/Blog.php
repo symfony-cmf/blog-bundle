@@ -54,6 +54,11 @@ class Blog implements RouteReferrersReadInterface
         return $this->id;
     }
 
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
     public function getName()
     {
         return $this->name;
@@ -64,12 +69,28 @@ class Blog implements RouteReferrersReadInterface
         $this->name = $name;
     }
 
+    /**
+     * @deprecated Use getParentDocument instead
+     */
     public function getParent()
     {
         return $this->parent;
     }
 
+    public function getParentDocument()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @deprecated Use setParentDocument instead
+     */
     public function setParent($parent)
+    {
+        $this->parent = $parent;
+    }
+
+    public function setParentDocument($parent)
     {
         $this->parent = $parent;
     }
@@ -82,6 +103,7 @@ class Blog implements RouteReferrersReadInterface
     public function setPosts($posts)
     {
         $this->posts = array();
+
         foreach ($posts as $post) {
             $this->addPost($post);
         }

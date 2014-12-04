@@ -1,0 +1,11 @@
+Symfony\Cmf\Bundle\BlogBundle\Document\Blog:
+    uri_schema: /blogs/{blog}
+    token_providers:
+        blog: [content_method, { method: getName }]
+
+Symfony\Cmf\Bundle\BlogBundle\Document\Post:
+    uri_schema: /blogs/{blog}/{date}/{title}
+    token_providers:
+        blog:  [content_method,   { method: getBlog  }]
+        date:  [content_datetime, { method: getDate  }]
+        title: [content_method,   { method: getTitle }]

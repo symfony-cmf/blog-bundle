@@ -1,5 +1,5 @@
 {
-    "name": "briancappello/blog-bundle",
+    "name": "symfony-cmf/blog-bundle",
     "type": "symfony-bundle",
     "description": "Symfony CMF Blog Bundle",
     "keywords": ["Symfony CMF"],

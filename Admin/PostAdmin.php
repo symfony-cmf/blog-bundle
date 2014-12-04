@@ -17,7 +17,6 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
-use Symfony\Cmf\Bundle\BlogBundle\Form\PostType;
 use Symfony\Cmf\Bundle\BlogBundle\Form\DataTransformer\CsvToArrayTransformer;
 
 /**
@@ -38,15 +37,18 @@ class PostAdmin extends Admin
 
         // $csvToArrayTransformer = new CsvToArrayTransformer;
 
-        $mapper->add('title');
-        $mapper->add('date', 'datetime', array(
-            'widget' => 'single_text',
-        ));
-
-        $mapper->add('body', 'textarea');
-        $mapper->add('blog', 'phpcr_document', array(
-            'class' => 'Symfony\Cmf\Bundle\BlogBundle\Document\Blog',
-        ));
+        $mapper
+            ->with('dashboard.label_post')
+                ->add('title')
+                ->add('date', 'datetime', array(
+                    'widget' => 'single_text',
+                ))
+                ->add('body', 'textarea')
+                ->add('blog', 'phpcr_document', array(
+                    'class' => 'Symfony\Cmf\Bundle\BlogBundle\Document\Blog',
+                ))
+            ->end()
+        ;
 
         //$tags = $mapper->create('tags', 'text')
         //    ->addModelTransformer($csvToArrayTransformer);

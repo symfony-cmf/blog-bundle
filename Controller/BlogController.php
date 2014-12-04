@@ -12,13 +12,13 @@
 
 namespace Symfony\Cmf\Bundle\BlogBundle\Controller;
 
-use Doctrine\ODM\PHPCR\DocumentManager;
 use Symfony\Cmf\Bundle\BlogBundle\Document\Post;
+use Symfony\Cmf\Bundle\BlogBundle\Repository\PostRepository;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowChecker;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\SecurityContextInterface;
-use Symfony\Component\Templating\EngineInterface;
+use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use FOS\RestBundle\View\ViewHandlerInterface;
 use FOS\RestBundle\View\View;
 
@@ -40,14 +40,14 @@ class BlogController
     protected $viewHandler;
 
     /**
-     * @var DocumentManager
-     */
-    protected $dm;
-
-    /**
      * @var SecurityContextInterface
      */
     protected $securityContext;
+
+    /**
+     * @var PostRepository
+     */
+    protected $postRepository;
 
     /**
      * The permission to check for when doing the publish workflow check.
@@ -56,17 +56,16 @@ class BlogController
      */
     private $publishWorkflowPermission = PublishWorkflowChecker::VIEW_ATTRIBUTE;
 
-
     public function __construct(
         EngineInterface $templating,
         ViewHandlerInterface $viewHandler = null,
-        DocumentManager $dm,
-        SecurityContextInterface $securityContext
+        SecurityContextInterface $securityContext,
+        PostRepository $postRepository
     ) {
         $this->templating = $templating;
         $this->viewHandler = $viewHandler;
-        $this->dm = $dm;
         $this->securityContext = $securityContext;
+        $this->postRepository = $postRepository;
     }
 
     /**
@@ -89,11 +88,6 @@ class BlogController
         }
 
         return $this->templating->renderResponse($contentTemplate, $params);
-    }
-
-    protected function getPostRepo()
-    {
-        return $this->dm->getRepository('Symfony\Cmf\Bundle\BlogBundle\Document\Post');
     }
 
     public function viewPostAction(Post $contentDocument, $contentTemplate = null)
@@ -119,7 +113,7 @@ class BlogController
         $tag = $request->get('tag', null);
 
         // @todo: Pagination
-        $posts = $this->getPostRepo()->search(array(
+        $posts = $this->postRepository->search(array(
             'tag' => $tag,
             'blog_id' => $blog->getId(),
         ));

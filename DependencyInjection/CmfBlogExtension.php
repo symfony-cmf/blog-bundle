@@ -35,7 +35,8 @@ class CmfBlogExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('controllers.xml');
+        $loader->load('services.xml');
+        $loader->load('initializer-phpcr.xml');
 
         if ($config['use_sonata_admin']) {
             $this->loadSonataAdmin($config, $loader, $container);
@@ -43,13 +44,6 @@ class CmfBlogExtension extends Extension
         if ($config['integrate_menu']['enabled']) {
             $this->loadMenuIntegration($config, $loader, $container);
         }
-
-        $config['class'] = array_merge(array(
-            'blog_admin' => 'Symfony\Cmf\Bundle\BlogBundle\Admin\BlogAdmin',
-            'post_admin' => 'Symfony\Cmf\Bundle\BlogBundle\Admin\PostAdmin',
-            'blog' => 'Symfony\Cmf\Bundle\BlogBundle\Document\Blog',
-            'post' => 'Symfony\Cmf\Bundle\BlogBundle\Document\Post',
-        ), isset($config['class']) ? $config['class'] : array());
 
         foreach ($config['class'] as $type => $classFqn) {
             $container->setParameter(
@@ -66,7 +60,7 @@ class CmfBlogExtension extends Extension
             return;
         }
 
-        $loader->load('blog-admin.xml');
+        $loader->load('admin.xml');
         $container->setParameter($this->getAlias() . '.blog_basepath', $config['blog_basepath']);
     }
 

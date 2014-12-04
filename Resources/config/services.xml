@@ -1,0 +1,35 @@
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+<parameters>
+    <parameter key="cmf_blog.blog_controller.class">Symfony\Cmf\Bundle\BlogBundle\Controller\BlogController</parameter>
+</parameters>
+
+<services>
+
+    <service id="cmf_blog.blog_controller" class="%cmf_blog.blog_controller.class%">
+        <argument type="service" id="templating" />
+        <argument type="service" id="fos_rest.view_handler" on-invalid="ignore"/>
+        <argument type="service" id="cmf_core.publish_workflow.checker"/>
+        <argument type="service" id="cmf_blog.post_repository" />
+    </service>
+
+    <service id="cmf_blog.blog_repository"
+             class="Doctrine\Common\Persistence\ObjectRepository"
+             factory-service="doctrine_phpcr"
+             factory-method="getRepository">
+        <argument>%cmf_blog.blog_class%</argument>
+    </service>
+
+    <service id="cmf_blog.post_repository"
+             class="Doctrine\Common\Persistence\ObjectRepository"
+             factory-service="doctrine_phpcr"
+             factory-method="getRepository">
+        <argument>%cmf_blog.post_class%</argument>
+    </service>
+
+</services>
+
+</container>
+
