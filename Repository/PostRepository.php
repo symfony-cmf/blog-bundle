@@ -12,7 +12,7 @@
 
 namespace Symfony\Cmf\Bundle\BlogBundle\Repository;
 use Doctrine\ODM\PHPCR\DocumentRepository;
-use Symfony\Cmf\Bundle\BlogBundle\Document\Post;
+use Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Post;
 
 class PostRepository extends DocumentRepository
 { 
@@ -21,13 +21,15 @@ class PostRepository extends DocumentRepository
         $options = array_merge(array(
             'blog_uuid' => null,
         ), $options);
-        $qb = $this->createQueryBuilder('a');
+
+        $qb = $this->createQueryBuilder('p');
 
         if ($options['blog_id']) {
-            $qb->where()->descendant($options['blog_id'], 'a');
+            $qb->where()->descendant($options['blog_id'], 'p');
         }
 
-        $qb->orderBy()->desc()->field('a.date');
+        $qb->orderBy()->desc()->field('p.publicationDate');
+
         return $qb->getQuery();
     }
 

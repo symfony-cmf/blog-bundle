@@ -47,8 +47,8 @@
                 <target>Blog</target>
             </trans-unit>
 
-            <trans-unit id="list.label_date">
-                <source>list.label_date</source>
+            <trans-unit id="list.label_publication_date">
+                <source>list.label_publication_date</source>
                 <target>Data</target>
             </trans-unit>
 
@@ -87,13 +87,13 @@
                 <target>Wydarzenia</target>
             </trans-unit>
 
-            <trans-unit id="form.label_body">
-                <source>form.label_body</source>
+            <trans-unit id="form.label_content">
+                <source>form.label_content</source>
                 <target>Zawarto&#x15B;&#x107;</target>
             </trans-unit>
 
-            <trans-unit id="form.label_date">
-                <source>form.label_date</source>
+            <trans-unit id="form.label_publication_date">
+                <source>form.label_publication_date</source>
                 <target>Data</target>
             </trans-unit>
 

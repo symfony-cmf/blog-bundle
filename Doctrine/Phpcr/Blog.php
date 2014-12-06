@@ -10,28 +10,23 @@
  */
 
 
-namespace Symfony\Cmf\Bundle\BlogBundle\Document;
+namespace Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr;
 
-use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
+use Symfony\Cmf\Bundle\BlogBundle\Model\Blog as BlogModel;
+use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 use Symfony\Cmf\Component\Routing\RouteReferrersReadInterface;
-use Symfony\Component\Routing\Route;
 
 /**
  * Blog Document
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
-class Blog implements RouteReferrersReadInterface
+class Blog extends BlogModel implements RouteReferrersReadInterface, RouteObjectInterface
 {
     /**
-     * Identifier
+     * @var string
      */
     protected $id;
-
-    /**
-     * Node Name / Blog Title
-     */
-    protected $name;
 
     /**
      * Parent Document
@@ -39,79 +34,42 @@ class Blog implements RouteReferrersReadInterface
     protected $parent;
 
     /**
-     * Posts (mapped as children)
-     */
-    protected $posts;
-
-    /**
      * Routes (mapped from Route::content)
+     *
+     * @var \Symfony\Component\Routing\Route[]
      */
     protected $routes;
 
 
+    /**
+     * Get id
+     *
+     * @return string
+     */
     public function getId()
     {
         return $this->id;
     }
 
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
     /**
-     * @deprecated Use getParentDocument instead
+     * Get parent document
      */
-    public function getParent()
-    {
-        return $this->parent;
-    }
-
     public function getParentDocument()
     {
         return $this->parent;
     }
 
     /**
-     * @deprecated Use setParentDocument instead
+     * Set parent document
+     *
+     * @param $parent
+     * @return Blog
      */
-    public function setParent($parent)
-    {
-        $this->parent = $parent;
-    }
-
     public function setParentDocument($parent)
     {
         $this->parent = $parent;
-    }
 
-    public function getPosts()
-    {
-        return $this->posts;
-    }
-
-    public function setPosts($posts)
-    {
-        $this->posts = array();
-
-        foreach ($posts as $post) {
-            $this->addPost($post);
-        }
-    }
-
-    public function addPost(Post $post)
-    {
-        $this->posts[] = $post;
+        return $this;
     }
 
     /**
@@ -122,14 +80,16 @@ class Blog implements RouteReferrersReadInterface
         return $this->routes;
     }
 
+    // FIXME: these getRoutes functions should probably go into a repository so classes aren't hard coded
+
     public function getPostsRoutes()
     {
-        return $this->getSubRoutes('Symfony\Cmf\Bundle\BlogBundle\Document\PostRoute');
+        return $this->getSubRoutes('Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\PostRoute');
     }
 
     public function getTagRoutes()
     {
-        return $this->getSubRoutes('Symfony\Cmf\Bundle\BlogBundle\Document\TagRoute');
+        return $this->getSubRoutes('Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\TagRoute');
     }
 
     public function getSubRoutes($routeClass)
@@ -140,7 +100,7 @@ class Blog implements RouteReferrersReadInterface
             foreach ($route->getRouteChildren() as $routeChild)
                 if ($routeChild instanceof $routeClass) {
                     $subRoutes[] = $routeChild;
-            }
+                }
         }
 
         if (empty($subRoutes)) {
@@ -154,8 +114,13 @@ class Blog implements RouteReferrersReadInterface
         return $subRoutes;
     }
 
-    public function __toString()
+    public function getContent()
     {
-        return (string) $this->name;
+        return $this;
+    }
+
+    public function getRouteKey()
+    {
+        return null;
     }
 }

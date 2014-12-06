@@ -20,7 +20,7 @@ class TagTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $blog = $this->getMock('Symfony\Cmf\Bundle\BlogBundle\Document\Blog');
+        $blog = $this->getMock('Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Blog');
         $this->tag = new Tag($blog, 'foo');
     }
 

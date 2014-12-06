@@ -1,11 +1,14 @@
-Symfony\Cmf\Bundle\BlogBundle\Document\Blog:
+Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Blog:
     uri_schema: /blogs/{blog}
+#    attributes:
+#        defaults:
+#            _template: '::blog.html.twig'
     token_providers:
         blog: [content_method, { method: getName }]
 
-Symfony\Cmf\Bundle\BlogBundle\Document\Post:
+Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Post:
     uri_schema: /blogs/{blog}/{date}/{title}
     token_providers:
         blog:  [content_method,   { method: getBlog  }]
-        date:  [content_datetime, { method: getDate  }]
+        date:  [content_datetime, { method: getPublicationDate  }]
         title: [content_method,   { method: getTitle }]

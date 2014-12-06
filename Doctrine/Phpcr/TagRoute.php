@@ -10,7 +10,7 @@
  */
 
 
-namespace Symfony\Cmf\Bundle\BlogBundle\Document;
+namespace Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr;
 
 use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route;
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;

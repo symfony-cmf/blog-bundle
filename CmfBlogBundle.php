@@ -26,11 +26,11 @@ class CmfBlogBundle extends Bundle
             $container->addCompilerPass(
                 DoctrinePhpcrMappingsPass::createXmlMappingDriver(
                     array(
-                        realpath(__DIR__ . '/Resources/config/doctrine-phpcr') => 'Symfony\Cmf\Bundle\BlogBundle\Document',
+                        realpath(__DIR__ . '/Resources/config/doctrine-phpcr') => 'Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr',
                     ),
                     array('cmf_blog.persistence.phpcr.manager_name'),
                     false,
-                    array('CmfBlogBundle' => 'Symfony\Cmf\Bundle\BlogBundle\Document')
+                    array('CmfBlogBundle' => 'Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr')
                 )
             );
         }

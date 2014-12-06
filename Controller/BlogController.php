@@ -12,7 +12,7 @@
 
 namespace Symfony\Cmf\Bundle\BlogBundle\Controller;
 
-use Symfony\Cmf\Bundle\BlogBundle\Document\Post;
+use Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Post;
 use Symfony\Cmf\Bundle\BlogBundle\Repository\PostRepository;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowChecker;
 use Symfony\Component\HttpFoundation\Request;

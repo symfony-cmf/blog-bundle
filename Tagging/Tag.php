@@ -13,7 +13,7 @@
 namespace Symfony\Cmf\Bundle\BlogBundle\Tagging;
 
 use Symfony\Cmf\Component\Routing\RouteReferrersReadInterface;
-use Symfony\Cmf\Bundle\BlogBundle\Document\Blog;
+use Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Blog;
 
 class Tag implements RouteReferrersReadInterface
 {

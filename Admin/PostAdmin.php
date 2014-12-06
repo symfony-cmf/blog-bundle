@@ -27,6 +27,21 @@ use Symfony\Cmf\Bundle\BlogBundle\Form\DataTransformer\CsvToArrayTransformer;
 class PostAdmin extends Admin
 {
     protected $translationDomain = 'CmfBlogBundle';
+    protected $blogClass;
+
+    /**
+     * Constructor
+     *
+     * @param string $code
+     * @param string $class
+     * @param string $baseControllerName
+     * @param string $blogClass
+     */
+    public function __construct($code, $class, $baseControllerName, $blogClass)
+    {
+        parent::__construct($code, $class, $baseControllerName);
+        $this->blogClass = $blogClass;
+    }
 
     protected function configureFormFields(FormMapper $mapper)
     {
@@ -40,12 +55,12 @@ class PostAdmin extends Admin
         $mapper
             ->with('dashboard.label_post')
                 ->add('title')
-                ->add('date', 'datetime', array(
+                ->add('publicationDate', 'datetime', array(
                     'widget' => 'single_text',
                 ))
-                ->add('body', 'textarea')
+                ->add('content', 'textarea')
                 ->add('blog', 'phpcr_document', array(
-                    'class' => 'Symfony\Cmf\Bundle\BlogBundle\Document\Blog',
+                    'class' => $this->blogClass,
                 ))
             ->end()
         ;
@@ -68,8 +83,4 @@ class PostAdmin extends Admin
         $dm->addIdentifier('title');
     }
 
-    public function validate(ErrorElement $ee, $obj)
-    {
-        $ee->with('title')->assertNotBlank()->end();
-    }
 }

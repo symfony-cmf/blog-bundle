@@ -35,6 +35,7 @@
             <argument/>
             <argument>%cmf_blog.post_class%</argument>
             <argument>SonataAdminBundle:CRUD</argument>
+            <argument>%cmf_blog.blog_class%</argument>
 
             <call method="setRouteBuilder">
                 <argument type="service" id="sonata.admin.route.path_info_slashes" />
