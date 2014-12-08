@@ -12,7 +12,6 @@
 
 namespace Symfony\Cmf\Bundle\BlogBundle\Model;
 
-use Symfony\Cmf\Bundle\BlogBundle\Util\PostUtils;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
 
@@ -36,12 +35,17 @@ class Post implements PublishTimePeriodInterface, PublishableInterface
     /**
      * @var string
      */
-    protected $content;
+    protected $bodyPreview;
+
+    /**
+     * @var string
+     */
+    protected $body;
 
     /**
      * @var \DateTime
      */
-    protected $publicationDate;
+    protected $date;
 
     /**
      * @var \DateTime
@@ -62,9 +66,13 @@ class Post implements PublishTimePeriodInterface, PublishableInterface
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(Blog $blog = null, $title = null, $bodyPreview = null, $body = null)
     {
-        $this->publicationDate = new \DateTime();
+        $this->blog = $blog;
+        $this->title = $title;
+        $this->bodyPreview = $bodyPreview;
+        $this->body = $body;
+        $this->date = new \DateTime();
     }
 
     /**
@@ -114,24 +122,47 @@ class Post implements PublishTimePeriodInterface, PublishableInterface
     }
 
     /**
-     * Get the post's content
+     * Get body preview
      *
      * @return string
      */
-    public function getContent()
+    public function getBodyPreview()
     {
-        return $this->content;
+        return $this->bodyPreview;
     }
 
     /**
-     * Set the post's content
+     * Set body preview
      *
-     * @param string $content
+     * @param string $bodyPreview
      * @return Post
      */
-    public function setContent($content)
+    public function setBodyPreview($bodyPreview)
     {
-        $this->content = $content;
+        $this->bodyPreview = $bodyPreview;
+
+        return $this;
+    }
+
+    /**
+     * Get body (the post's content)
+     *
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    /**
+     * Set body (the post's content)
+     *
+     * @param string $body
+     * @return Post
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
 
         return $this;
     }
@@ -141,20 +172,20 @@ class Post implements PublishTimePeriodInterface, PublishableInterface
      *
      * @return \DateTime
      */
-    public function getPublicationDate()
+    public function getDate()
     {
-        return $this->publicationDate;
+        return $this->date;
     }
 
     /**
      * Set publication date
      *
-     * @param \DateTime $publicationDate
+     * @param \DateTime $date
      * @return Post
      */
-    public function setPublicationDate($publicationDate)
+    public function setDate($date)
     {
-        $this->publicationDate = $publicationDate;
+        $this->date = $date;
 
         return $this;
     }

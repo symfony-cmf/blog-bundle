@@ -10,5 +10,5 @@ Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Post:
     uri_schema: /blogs/{blog}/{date}/{title}
     token_providers:
         blog:  [content_method,   { method: getBlog  }]
-        date:  [content_datetime, { method: getPublicationDate  }]
+        date:  [content_datetime, { method: getDate }]
         title: [content_method,   { method: getTitle }]

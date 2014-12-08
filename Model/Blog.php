@@ -29,6 +29,13 @@ class Blog
     protected $name;
 
     /**
+     * Description of the blog
+     *
+     * @var string
+     */
+    protected $description;
+
+    /**
      * Posts
      *
      * @var ArrayCollection
@@ -39,8 +46,10 @@ class Blog
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct($name = null, $description = null)
     {
+        $this->name = $name;
+        $this->description = $description;
         $this->posts = new ArrayCollection();
     }
 
@@ -63,6 +72,29 @@ class Blog
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Blog
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
 
         return $this;
     }

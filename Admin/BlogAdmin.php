@@ -46,6 +46,7 @@ class BlogAdmin extends Admin
         $formMapper
             ->with('dashboard.label_blog')
                 ->add('name', 'text')
+                ->add('description', 'textarea')
                 ->add('parentDocument', 'doctrine_phpcr_odm_tree', array(
                     'root_node' => $this->blogRoot,
                     'choice_list' => array(),

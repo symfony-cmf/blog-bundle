@@ -4,11 +4,9 @@
     xsi:schemaLocation="http://doctrine-project.org/schemas/phpcr-odm/phpcr-mapping
         https://github.com/doctrine/phpcr-odm/raw/master/doctrine-phpcr-odm-mapping.xsd">
 
-    <document
-        name="Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Post"
-        repository-class="Symfony\Cmf\Bundle\BlogBundle\Repository\PostRepository"
-        referenceable="true"
-        >
+    <document name="Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Post"
+              repository-class="Symfony\Cmf\Bundle\BlogBundle\Repository\PostRepository"
+              referenceable="true">
 
         <id name="id">
             <generator strategy="PARENT" />
@@ -19,8 +17,9 @@
 
         <field name="slug" type="string" />
         <field name="title" type="string" />
-        <field name="content" type="string" />
-        <field name="publicationDate" type="date" />
+        <field name="bodyPreview" type="string" />
+        <field name="body" type="string" />
+        <field name="date" type="date" />
         <field name="isPublishable" type="boolean" />
         <field name="publishStartDate" type="date" nullable="true" />
         <field name="publishEndDate" type="date" nullable="true" />

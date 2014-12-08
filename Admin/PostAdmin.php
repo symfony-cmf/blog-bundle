@@ -55,10 +55,11 @@ class PostAdmin extends Admin
         $mapper
             ->with('dashboard.label_post')
                 ->add('title')
-                ->add('publicationDate', 'datetime', array(
+                ->add('date', 'datetime', array(
                     'widget' => 'single_text',
                 ))
-                ->add('content', 'textarea')
+                ->add('bodyPreview', 'textarea')
+                ->add('body', 'textarea')
                 ->add('blog', 'phpcr_document', array(
                     'class' => $this->blogClass,
                 ))

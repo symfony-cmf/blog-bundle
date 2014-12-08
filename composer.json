@@ -17,16 +17,17 @@
         "symfony/framework-bundle": "~2.3",
         "symfony-cmf/core-bundle": "1.2.*",
         "symfony-cmf/routing-auto-bundle": "1.0.*",
-        "doctrine/phpcr-bundle": "~1.1",
-        "doctrine/phpcr-odm": "~1.1"
+        "doctrine/phpcr-bundle": "~1.2",
+        "doctrine/phpcr-odm": "~1.2"
     },
     "require-dev": {
         "symfony-cmf/testing": "1.2.*",
         "sonata-project/doctrine-phpcr-admin-bundle": "1.2.*",
-        "symfony-cmf/core-bundle": "1.2.*"
+        "nelmio/alice": "~1.7.2"
     },
     "suggest": {
-        "sonata-project/doctrine-phpcr-admin-bundle": "For sonata administration"
+        "sonata-project/doctrine-phpcr-admin-bundle": "For sonata administration",
+        "knplabs/knp-paginator-bundle": "To enable pagination of posts"
     },
     "autoload": {
         "psr-4": {

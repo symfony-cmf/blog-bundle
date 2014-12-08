@@ -12,37 +12,25 @@
 
 namespace Symfony\Cmf\Bundle\BlogBundle\Controller;
 
-use Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Post;
+use Symfony\Cmf\Bundle\BlogBundle\Model\Blog;
+use Symfony\Cmf\Bundle\BlogBundle\Repository\BlogRepository;
 use Symfony\Cmf\Bundle\BlogBundle\Repository\PostRepository;
-use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowChecker;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use FOS\RestBundle\View\ViewHandlerInterface;
-use FOS\RestBundle\View\View;
 
 /**
  * Blog Controller
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
-class BlogController
+class BlogController extends BaseController
 {
     /**
-     * @var EngineInterface
+     * @var BlogRepository
      */
-    protected $templating;
-
-    /**
-     * @var ViewHandlerInterface
-     */
-    protected $viewHandler;
-
-    /**
-     * @var SecurityContextInterface
-     */
-    protected $securityContext;
+    protected $blogRepository;
 
     /**
      * @var PostRepository
@@ -50,89 +38,71 @@ class BlogController
     protected $postRepository;
 
     /**
-     * The permission to check for when doing the publish workflow check.
-     *
-     * @var string
+     * @var \Knp\Component\Pager\Paginator
      */
-    private $publishWorkflowPermission = PublishWorkflowChecker::VIEW_ATTRIBUTE;
+    protected $paginator;
+
+    /**
+     * @var int
+     */
+    protected $postsPerPage;
 
     public function __construct(
         EngineInterface $templating,
-        ViewHandlerInterface $viewHandler = null,
         SecurityContextInterface $securityContext,
-        PostRepository $postRepository
+        ViewHandlerInterface $viewHandler = null,
+        BlogRepository $blogRepository,
+        PostRepository $postRepository,
+        $paginator = null,
+        $postsPerPage = 0
     ) {
-        $this->templating = $templating;
-        $this->viewHandler = $viewHandler;
-        $this->securityContext = $securityContext;
+        parent::__construct($templating, $securityContext, $viewHandler);
+        $this->blogRepository = $blogRepository;
         $this->postRepository = $postRepository;
+        $this->paginator = $paginator;
+        $this->postsPerPage = $postsPerPage;
     }
 
     /**
-     * What attribute to use in the publish workflow check. This typically
-     * is VIEW or VIEW_ANONYMOUS.
-     *
-     * @param string $attribute
+     * List blogs
      */
-    public function setPublishWorkflowPermission($attribute)
+    public function listAction(Request $request)
     {
-        $this->publishWorkflowPermission = $attribute;
+        return $this->renderResponse(
+            $this->getTemplateForResponse($request, 'CmfBlogBundle:Blog:list.{_format}.twig'),
+            array(
+                'blogs' => $this->blogRepository->findAll(),
+            )
+        );
     }
 
-    protected function renderResponse($contentTemplate, $params)
-    {
-        if ($this->viewHandler) {
-            $view = new View($params);
-            $view->setTemplate($contentTemplate);
-            return $this->viewHandler->handle($view);
-        }
-
-        return $this->templating->renderResponse($contentTemplate, $params);
-    }
-
-    public function viewPostAction(Post $contentDocument, $contentTemplate = null)
-    {
-        $post = $contentDocument;
-
-        if (true !== $this->securityContext->isGranted($this->publishWorkflowPermission, $post)) {
-            throw new NotFoundHttpException(sprintf(
-                'Post "%s" is not published'
-            , $post->getTitle()));
-        }
-
-        $contentTemplate = $contentTemplate ? : 'CmfBlogBundle:Blog:view_post.html.twig';
-
-        return $this->renderResponse($contentTemplate, array(
-            'post' => $post,
-        ));
-    }
-
-    public function listAction(Request $request, $contentDocument, $contentTemplate = null)
+    /**
+     * Blog detail - list posts in a blog, optionally paginated
+     */
+    public function detailAction(Request $request, Blog $contentDocument, $contentTemplate = null)
     {
         $blog = $contentDocument;
-        $tag = $request->get('tag', null);
 
-        // @todo: Pagination
         $posts = $this->postRepository->search(array(
-            'tag' => $tag,
-            'blog_id' => $blog->getId(),
+            'blogId' => $blog->getId(),
         ));
 
-        $contentTemplate = $contentTemplate ?: 'CmfBlogBundle:Blog:list.{_format}.twig';
+        $pager = false;
+        if ($this->postsPerPage) {
+            $pager = $posts = $this->paginator->paginate(
+                $posts,
+                $request->query->get('page', 1),
+                $this->postsPerPage
+            );
+        }
 
-        // @todo: Copy and pasted from ContentBundle::ContentController
-        //        I wonder if we can share some code between content-like
-        //        bundles.
-        $contentTemplate = str_replace(
-            array('{_format}', '{_locale}'),
-            array($request->getRequestFormat(), $request->getLocale()),
-            $contentTemplate
+        $templateFilename = $pager ? 'detailPaginated' : 'detail';
+        $contentTemplate = $this->getTemplateForResponse(
+            $request,
+            $contentTemplate ?: sprintf('CmfBlogBundle:Blog:%s.{_format}.twig', $templateFilename)
         );
 
-        return $this->renderResponse($contentTemplate, array(
-            'blog' => $blog,
-            'posts' => $posts,
-            'tag' => $tag
-        ));
+        return $this->renderResponse($contentTemplate, compact('blog', 'posts', 'pager'));
     }
+
 }

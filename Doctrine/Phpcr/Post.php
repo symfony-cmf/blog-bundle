@@ -12,10 +12,10 @@
 
 namespace Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr;
 
-use Symfony\Cmf\Component\Routing\RouteReferrersReadInterface;
 use Symfony\Cmf\Bundle\BlogBundle\Util\PostUtils;
 use Symfony\Cmf\Bundle\BlogBundle\Model\Post as PostModel;
 use Symfony\Cmf\Bundle\BlogBundle\Model\Blog as BlogModel;
+use Symfony\Cmf\Component\Routing\RouteReferrersReadInterface;
 
 /**
  * Object representing a blog post.
@@ -38,7 +38,7 @@ class Post extends PostModel implements RouteReferrersReadInterface
      */
     protected $name;
 
-    // FIXME what is this cannot query shit
+    // FIXME investigate this cannot query note
     /**
      * READ ONLY: Post slug (cannot query directly on name field)
      *
@@ -53,6 +53,16 @@ class Post extends PostModel implements RouteReferrersReadInterface
      */
     protected $routes;
 
+
+    /**
+     * Constructor
+     */
+    public function __construct(BlogModel $blog = null, $title = null, $bodyPreview = null, $body = null)
+    {
+        parent::__construct($blog, $title, $bodyPreview, $body);
+        if ($blog) $this->setParentDocument($blog);
+        if ($title) $this->setTitle($title);
+    }
 
     /**
      * Get id

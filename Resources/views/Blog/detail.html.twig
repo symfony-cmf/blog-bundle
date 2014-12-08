@@ -1,0 +1,37 @@
+{# CmfBlogBundle:Blog:detail.html.twig #}
+
+{% extends "CmfBlogBundle::layout.html.twig" %}
+
+{% block content %}
+    <div class="blog">
+
+        <h1>{{ blog.name }}</h1>
+
+        <p class="description">
+            {{ blog.description|nl2br|raw }}
+        </p>
+
+        <div class="posts">
+
+            <h2>Posts</h2>
+
+            {% for post in posts %}
+
+                <div class="post clearfix">
+                    <h3>
+                        <a href="{{ path(post) }}">{{ post.title }}</a>
+                    </h3>
+                    <p class="date-posted">
+                        <i>Posted on {{ post.date|date('F jS, Y') }} at {{ post.date|date('H:i') }}</i>
+                    </p>
+                    <p class="body-preview">{{ post.bodyPreview }}</p>
+                </div>
+
+            {% else %}
+                <p class="empty">No posts found.</p>
+            {% endfor %}
+
+        </div>
+
+    </div>
+{% endblock %}

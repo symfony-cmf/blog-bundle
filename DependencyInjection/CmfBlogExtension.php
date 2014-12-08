@@ -45,9 +45,18 @@ class CmfBlogExtension extends Extension
             $this->loadMenuIntegration($config, $loader, $container);
         }
 
+        if ($config['pagination']['enabled']) {
+            $container->setParameter($this->getAlias().'.pagination.enabled', true);
+            $container->setParameter($this->getAlias().'.pagination.posts_per_page', $config['pagination']['posts_per_page']);
+        } else {
+            // this parameter is used in the cmf_blog.blog_controller service definition, so
+            // it must be defined until it's a viable option to use the expression language instead
+            $container->setParameter($this->getAlias().'.pagination.posts_per_page', 0);
+        }
+
         foreach ($config['class'] as $type => $classFqn) {
             $container->setParameter(
-                $param = sprintf('cmf_blog.%s_class', $type),
+                $param = sprintf('cmf_blog.%s.class', $type),
                 $classFqn
             );
         }

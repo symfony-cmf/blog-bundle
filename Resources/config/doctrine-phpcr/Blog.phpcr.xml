@@ -4,7 +4,9 @@
     xsi:schemaLocation="http://doctrine-project.org/schemas/phpcr-odm/phpcr-mapping
         https://github.com/doctrine/phpcr-odm/raw/master/doctrine-phpcr-odm-mapping.xsd">
 
-    <document name="Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Blog" referenceable="true">
+    <document name="Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Blog"
+              repository-class="Symfony\Cmf\Bundle\BlogBundle\Repository\BlogRepository"
+              referenceable="true">
 
         <id name="id">
             <generator strategy="PARENT" />
@@ -12,8 +14,9 @@
 
         <nodename name="name" />
         <parent-document name="parent" />
-
         <children name="posts" />
+
+        <field name="description" type="string" />
 
         <referrers name="routes" referring-document="Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route" referenced-by="content">
             <cascade>

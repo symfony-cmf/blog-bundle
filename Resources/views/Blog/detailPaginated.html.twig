@@ -1,0 +1,11 @@
+{# CmfBlogBundle:Blog:detailPaginated.html.twig #}
+
+{% extends "CmfBlogBundle:Blog:detail.html.twig" %}
+
+{% block content %}
+    {{ parent() }}
+
+    {% if pager.totalItemCount %}
+        {{ knp_pagination_render(pager) }}
+    {% endif %}
+{% endblock %}
