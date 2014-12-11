@@ -17,14 +17,16 @@
 
             {% for post in posts %}
 
-                <div class="post clearfix">
+                <div class="post">
                     <h3>
                         <a href="{{ path(post) }}">{{ post.title }}</a>
                     </h3>
                     <p class="date-posted">
                         <i>Posted on {{ post.date|date('F jS, Y') }} at {{ post.date|date('H:i') }}</i>
                     </p>
-                    <p class="body-preview">{{ post.bodyPreview }}</p>
+                    <p class="body-preview">
+                        {{ post.bodyPreview }}
+                    </p>
                 </div>
 
             {% else %}

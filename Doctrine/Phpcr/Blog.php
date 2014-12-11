@@ -47,6 +47,7 @@ class Blog extends BlogModel implements RouteReferrersReadInterface
      * Constructor
      *
      * @param string $name
+     * @param string $description
      * @param Generic $parent
      */
     public function __construct($name = null, $description = null, Generic $parent = null)

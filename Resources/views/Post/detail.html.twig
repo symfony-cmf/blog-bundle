@@ -7,9 +7,13 @@
 
         <h1>{{ post.title }}</h1>
 
-        <p class="date-posted"><i>Posted on {{ post.date|date('F jS, Y') }} at {{ post.date|date('H:i') }}</i></p>
+        <p class="date-posted">
+            <i>Posted on {{ post.date|date('F jS, Y') }} at {{ post.date|date('H:i') }}</i>
+        </p>
 
-        <p class="body-content">{{ post.body|nl2br|raw }}</p>
+        <p class="body-content">
+            {{ post.body|nl2br|raw }}
+        </p>
 
         <div style="text-align: center; margin-top: 20px; margin-bottom: -20px;">
             <a href="{{ path(post.blog) }}">All Blog Posts</a>

@@ -40,7 +40,7 @@ class PostRepository extends DocumentRepository
      * Find post by title
      *
      * @param string $title
-     * @return null|Post
+     * @return Post|null
      */
     public function findByTitle($title)
     {
@@ -53,7 +53,7 @@ class PostRepository extends DocumentRepository
     /**
      * Search for posts by an array of options:
      *   - blogId: string (required)
-     *   - isPublishable: boolean (optional)
+     *   - isPublishable: boolean (optional, default true)
      *   - title: string (optional)
      *   - limit: integer (optional)
      *   - orderBy: array of arrays('field' => $field, 'order' => 'ASC or DESC') (optional)

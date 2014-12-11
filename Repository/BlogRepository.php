@@ -47,7 +47,7 @@ class BlogRepository extends DocumentRepository
     }
 
     /**
-     * Find post by name
+     * Find blog by name
      *
      * @param string $name
      * @return null|Blog
@@ -61,7 +61,7 @@ class BlogRepository extends DocumentRepository
     }
 
     /**
-     * Search for posts by an array of options
+     * Search for blogs by an array of options
      *
      * @param array $options
      * @return Blog[] When limit is not provided or is greater than 1
