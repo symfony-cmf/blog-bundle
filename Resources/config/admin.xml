@@ -6,7 +6,7 @@
 
     <services>
 
-        <service id="cmf_blog.blog_admin" class="%cmf_blog.blog_admin.class%">
+        <service id="cmf_blog.blog_admin" class="%cmf_blog.phpcr.blog_admin.class%">
             <tag
                 name="sonata.admin"
                 manager_type="doctrine_phpcr"
@@ -15,7 +15,7 @@
                 label="dashboard.label_blog"
                 label_translator_strategy="sonata.admin.label.strategy.underscore" />
             <argument/>
-            <argument>%cmf_blog.blog.class%</argument>
+            <argument>%cmf_blog.phpcr.blog.class%</argument>
             <argument>SonataAdminBundle:CRUD</argument>
             <argument>%cmf_blog.blog_basepath%</argument>
 
@@ -24,7 +24,7 @@
             </call>
         </service>
 
-        <service id="cmf_blog.post_admin" class="%cmf_blog.post_admin.class%">
+        <service id="cmf_blog.post_admin" class="%cmf_blog.phpcr.post_admin.class%">
             <tag
                 name="sonata.admin"
                 manager_type="doctrine_phpcr"
@@ -33,9 +33,9 @@
                 label="dashboard.label_post"
                 label_translator_strategy="sonata.admin.label.strategy.underscore" />
             <argument/>
-            <argument>%cmf_blog.post.class%</argument>
+            <argument>%cmf_blog.phpcr.post.class%</argument>
             <argument>SonataAdminBundle:CRUD</argument>
-            <argument>%cmf_blog.blog.class%</argument>
+            <argument>%cmf_blog.phpcr.blog.class%</argument>
 
             <call method="setRouteBuilder">
                 <argument type="service" id="sonata.admin.route.path_info_slashes" />

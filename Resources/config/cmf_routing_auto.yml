@@ -1,8 +1,5 @@
 Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Blog:
     uri_schema: /blogs/{blog}
-#    attributes:
-#        defaults:
-#            _template: '::blog.html.twig'
     token_providers:
         blog: [content_method, { method: getName }]
 

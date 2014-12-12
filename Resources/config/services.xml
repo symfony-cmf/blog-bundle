@@ -26,24 +26,6 @@
         <argument type="service" id="cmf_blog.post_repository" />
     </service>
 
-    <service id="cmf_blog.blog_repository"
-             class="Doctrine\Common\Persistence\ObjectRepository"
-             factory-service="doctrine_phpcr"
-             factory-method="getRepository">
-        <argument>%cmf_blog.blog.class%</argument>
-        <call method="setBasepath">
-            <argument>%cmf_blog.blog_basepath%</argument>
-        </call>
-    </service>
-
-    <service id="cmf_blog.post_repository"
-             class="Doctrine\Common\Persistence\ObjectRepository"
-             factory-service="doctrine_phpcr"
-             factory-method="getRepository">
-        <argument>%cmf_blog.post.class%</argument>
-    </service>
-
 </services>
 
 </container>
-
