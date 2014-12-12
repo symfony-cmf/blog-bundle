@@ -42,9 +42,9 @@ class PostAdmin extends Admin
         $this->blogClass = $blogClass;
     }
 
-    protected function configureFormFields(FormMapper $mapper)
+    protected function configureFormFields(FormMapper $formMapper)
     {
-        $mapper
+        $formMapper
             ->with('dashboard.label_post')
                 ->add('title')
                 ->add('date', 'datetime', array(
@@ -59,16 +59,20 @@ class PostAdmin extends Admin
         ;
     }
 
-    protected function configureDatagridFilters(DatagridMapper $dm)
+    protected function configureDatagridFilters(DatagridMapper $filterMapper)
     {
-        $dm->add('title', 'doctrine_phpcr_string');
+        $filterMapper
+            ->add('title', 'doctrine_phpcr_string')
+        ;
     }
 
-    protected function configureListFields(ListMapper $dm)
+    protected function configureListFields(ListMapper $listMapper)
     {
-        $dm->add('blog');
-        $dm->add('date', 'datetime');
-        $dm->addIdentifier('title');
+        $listMapper
+            ->addIdentifier('title')
+            ->add('blog')
+            ->add('date', 'datetime')
+        ;
     }
 
 }
