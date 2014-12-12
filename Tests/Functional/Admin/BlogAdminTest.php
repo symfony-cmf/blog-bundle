@@ -16,7 +16,7 @@ use Symfony\Cmf\Component\Testing\Functional\BaseTestCase;
 
 class BlogAdminTest extends BaseTestCase
 {
-    public function testList()
+    public function testDashboard()
     {
         $client = $this->createClient();
 

@@ -17,7 +17,6 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
-use Symfony\Cmf\Bundle\BlogBundle\Form\DataTransformer\CsvToArrayTransformer;
 
 /**
  * Post Admin
@@ -45,13 +44,6 @@ class PostAdmin extends Admin
 
     protected function configureFormFields(FormMapper $mapper)
     {
-        // @todo: I think this would be better as a service,
-        //        but I don't know how integrate the form
-        //        AND have all the Sonata magic from the
-        //        FormMapper->add method.
-
-        // $csvToArrayTransformer = new CsvToArrayTransformer;
-
         $mapper
             ->with('dashboard.label_post')
                 ->add('title')
@@ -65,11 +57,6 @@ class PostAdmin extends Admin
                 ))
             ->end()
         ;
-
-        //$tags = $mapper->create('tags', 'text')
-        //    ->addModelTransformer($csvToArrayTransformer);
-
-        // $mapper->add($tags);
     }
 
     protected function configureDatagridFilters(DatagridMapper $dm)

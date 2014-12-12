@@ -1,2 +1,5 @@
 cmf_blog:
-    blog_basepath: /cms/content
+    sonata_admin: ~
+    persistence:
+        phpcr:
+            blog_basepath: /cms/content

@@ -21,6 +21,7 @@
         "doctrine/phpcr-odm": "~1.2"
     },
     "require-dev": {
+        "phpunit/phpunit": "~3.7.28",
         "symfony-cmf/testing": "1.2.*",
         "sonata-project/doctrine-phpcr-admin-bundle": "1.2.*",
         "nelmio/alice": "~1.7.2"

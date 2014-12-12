@@ -151,35 +151,19 @@ class PostRepository extends DocumentRepository
                 return $value > 0;
             },
             'orderBy' => function(array $orderBys) {
-
-                $allowedFields = array('id', 'title', 'date', 'publishStartDate', 'publishEndDate');
-                $allowedOrders = array('asc', 'desc');
-
-                $throwIfNotFound = function ($optionName, $value, array $allowedValues, $joinBy = ', ') {
-                    if(!in_array($value, $allowedValues, true)) {
-                        throw new \InvalidArgumentException(
-                            sprintf('Unrecognized orderBy %s value "%s". %s must be one of %s.',
-                                $optionName,
-                                $value,
-                                $optionName,
-                                implode($joinBy, $allowedValues)
-                            )
-                        );
-                    }
-                };
-
                 $validOrderBys = array();
                 foreach ($orderBys as $orderBy) {
 
-                    if ($fieldValid = isset($orderBy['field'])) {
-                        $throwIfNotFound('field', $orderBy['field'], $allowedFields);
-                    }
-
                     if ($orderByValid = isset($orderBy['order'])) {
-                        $throwIfNotFound('order', strtolower($orderBy['order']), $allowedOrders, ' or ');
+                        if(!in_array(strtolower($orderBy['order']), array('asc', 'desc'), true)) {
+                            throw new \InvalidArgumentException(sprintf(
+                                'Unrecognized orderBy order value "%s". order must be one of ASC or DESC.',
+                                $orderBy['order']
+                            ));
+                        }
                     }
 
-                    $validOrderBys[] = $fieldValid && $orderByValid;
+                    $validOrderBys[] = isset($orderBy['field']) && $orderByValid;
                 }
 
                 return count(array_filter($validOrderBys)) == count($orderBys);

@@ -61,5 +61,4 @@ class PostController extends BaseController
 
         return $this->renderResponse($contentTemplate, compact('post'));
     }
-
 }

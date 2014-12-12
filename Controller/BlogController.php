@@ -104,5 +104,4 @@ class BlogController extends BaseController
 
         return $this->renderResponse($contentTemplate, compact('blog', 'posts', 'pager'));
     }
-
 }
