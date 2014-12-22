@@ -37,24 +37,21 @@ class BaseTestCase extends CmfBaseTestCase
 
     public function setUp()
     {
-
         $this->client = $this->createClient($this->getKernelConfiguration());
 
         $this->application = new Application($this->client->getKernel());
         $this->application->setAutoExit(false);
 
-        $this->router = $this->client->getContainer()->get('router');
+        $this->router = $this->get('router');
 
-        $this->runConsole('doctrine:database:drop', array('--force' => true));
-        $this->runConsole('doctrine:database:create');
+//        $this->db('PHPCR')->loadFixtures(array(
+//            'Symfony\Cmf\Bundle\BlogBundle\Tests\Resources\DataFixtures\PHPCR\LoadBlogData',
+//        ));
 
-        $this->runConsole('doctrine:phpcr:init:dbal');
-        $this->runConsole('doctrine:phpcr:repo:init');
         $this->runConsole('doctrine:phpcr:fixtures:load', array(
             '--fixtures' => __DIR__.'/../Resources/DataFixtures/PHPCR',
             '--no-interaction' => true,
         ));
-
     }
 
     /**

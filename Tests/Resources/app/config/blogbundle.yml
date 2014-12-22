@@ -2,6 +2,7 @@ parameters:
     phpcr_basepath: /cms
 
 doctrine:
+    orm: ~
     dbal:
         driver: pdo_sqlite
         path: %kernel.root_dir%/../test_db.sqlite
