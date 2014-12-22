@@ -121,7 +121,7 @@ class BaseTestCase extends CmfBaseTestCase
     protected function runConsole($command, array $options = array())
     {
         $options['-e'] = 'test'; // test environment
-//        $options['-q'] = null;   // suppress the command's output
+        $options['-q'] = null;   // suppress the command's output
         $options['command'] = $command;
 
         return $this->application->run(new ArrayInput($options));

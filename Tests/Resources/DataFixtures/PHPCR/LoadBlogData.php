@@ -33,13 +33,16 @@ class LoadBlogData implements FixtureInterface, ContainerAwareInterface
 
         $rootNode = $manager->find(null, $this->getBasePath());
 
-        $numBlogs = 5;
         $numPostsPerBlog = (2 * $this->getPostsPerPage()) + 2; // 3 pages
+        $blogNames = array(
+            'Blog One',
+            'Blog Two',
+            'Blog Three',
+        );
 
-        $blogIdx = 0;
-        while ($blogIdx++ < $numBlogs) {
+        foreach ($blogNames as $blogName) {
             $blog = new Blog();
-            $blog->setName($faker->sentence(3));
+            $blog->setName($blogName);
             $blog->setDescription(implode("\n\n", $faker->paragraphs(3)));
             $blog->setParentDocument($rootNode);
 

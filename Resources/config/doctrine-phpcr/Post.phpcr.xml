@@ -12,10 +12,9 @@
             <generator strategy="PARENT" />
         </id>
 
-        <nodename name="name"/>
-        <parent-document name="blog"/>
+        <nodename name="slug" />
+        <parent-document name="blog" />
 
-        <field name="slug" type="string" />
         <field name="title" type="string" />
         <field name="bodyPreview" type="string" />
         <field name="body" type="string" />

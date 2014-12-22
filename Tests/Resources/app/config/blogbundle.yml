@@ -1,5 +1,5 @@
 parameters:
-    phpcr_basepath: /cms/test
+    phpcr_basepath: /cms
 
 doctrine:
     dbal:
@@ -17,7 +17,7 @@ cmf_blog:
     sonata_admin: ~
     persistence:
         phpcr:
-            blog_basepath: /cms/test
+            blog_basepath: /cms/blogs
 
 cmf_routing:
     chain:

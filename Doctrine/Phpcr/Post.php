@@ -25,23 +25,11 @@ use Symfony\Cmf\Component\Routing\RouteReferrersReadInterface;
 class Post extends PostModel implements RouteReferrersReadInterface
 {
     /**
-     * ID / Path to to this object
-     *
      * @var string
      */
     protected $id;
 
     /**
-     * Node name (same as slug)
-     *
-     * @var string
-     */
-    protected $name;
-
-    // FIXME investigate this cannot query note
-    /**
-     * READ ONLY: Post slug (cannot query directly on name field)
-     *
      * @var string
      */
     protected $slug;
@@ -64,13 +52,13 @@ class Post extends PostModel implements RouteReferrersReadInterface
     }
 
     /**
-     * Get name
+     * Get slug
      *
      * @return string
      */
-    public function getName()
+    public function getSlug()
     {
-        return $this->name;
+        return $this->slug;
     }
 
     /**
@@ -80,20 +68,9 @@ class Post extends PostModel implements RouteReferrersReadInterface
     {
         parent::setTitle($title);
 
-        $this->name = PostUtils::slugify($title); // FIXME does gedmo work with phpcr?
-        $this->slug = $this->name;
+        $this->slug = PostUtils::slugify($title);
 
         return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
     }
 
     /**
@@ -114,20 +91,7 @@ class Post extends PostModel implements RouteReferrersReadInterface
      */
     public function setParentDocument(BlogModel $blog)
     {
-        $this->blog = $blog;
-        $this->parent = $blog;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setBlog(BlogModel $blog)
-    {
         parent::setBlog($blog);
-
-        $this->parent = $blog;
 
         return $this;
     }
@@ -141,5 +105,4 @@ class Post extends PostModel implements RouteReferrersReadInterface
     {
         return $this->routes;
     }
-
 }

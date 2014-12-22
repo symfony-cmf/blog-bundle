@@ -14,7 +14,6 @@ namespace Symfony\Cmf\Bundle\BlogBundle\Admin;
 
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
 
@@ -74,5 +73,4 @@ class PostAdmin extends Admin
             ->add('date', 'datetime')
         ;
     }
-
 }

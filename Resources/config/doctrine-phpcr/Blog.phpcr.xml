@@ -12,7 +12,7 @@
             <generator strategy="PARENT" />
         </id>
 
-        <nodename name="name" />
+        <nodename name="slug" />
         <parent-document name="parentDocument" />
         <children name="posts" />
 

@@ -13,6 +13,7 @@
 namespace Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr;
 
 use Symfony\Cmf\Bundle\BlogBundle\Model\Blog as BlogModel;
+use Symfony\Cmf\Bundle\BlogBundle\Util\PostUtils;
 use Symfony\Cmf\Component\Routing\RouteReferrersReadInterface;
 use Doctrine\ODM\PHPCR\Document\Generic;
 
@@ -27,6 +28,11 @@ class Blog extends BlogModel implements RouteReferrersReadInterface
      * @var string
      */
     protected $id;
+
+    /**
+     * @var string
+     */
+    protected $slug;
 
     /**
      * Parent Document
@@ -53,6 +59,16 @@ class Blog extends BlogModel implements RouteReferrersReadInterface
     }
 
     /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
      * Get parent document
      *
      * @return Generic
@@ -65,7 +81,7 @@ class Blog extends BlogModel implements RouteReferrersReadInterface
     /**
      * Set parent document
      *
-     * @param Generic $parent
+     * @param Generic $parentDocument
      * @return Blog
      */
     public function setParentDocument(Generic $parentDocument)
@@ -83,5 +99,17 @@ class Blog extends BlogModel implements RouteReferrersReadInterface
     public function getRoutes()
     {
         return $this->routes;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setName($name)
+    {
+        parent::setName($name);
+
+        $this->slug = PostUtils::slugify($name);
+
+        return $this;
     }
 }
