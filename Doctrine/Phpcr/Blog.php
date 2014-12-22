@@ -33,7 +33,7 @@ class Blog extends BlogModel implements RouteReferrersReadInterface
      *
      * @var Generic
      */
-    protected $parent;
+    protected $parentDocument;
 
     /**
      * Routes (mapped from Route::content)
@@ -41,20 +41,6 @@ class Blog extends BlogModel implements RouteReferrersReadInterface
      * @var \Symfony\Component\Routing\Route[]
      */
     protected $routes;
-
-
-    /**
-     * Constructor
-     *
-     * @param string $name
-     * @param string $description
-     * @param Generic $parent
-     */
-    public function __construct($name = null, $description = null, Generic $parent = null)
-    {
-        parent::__construct($name, $description);
-        $this->parent = $parent;
-    }
 
     /**
      * Get id
@@ -73,7 +59,7 @@ class Blog extends BlogModel implements RouteReferrersReadInterface
      */
     public function getParentDocument()
     {
-        return $this->parent;
+        return $this->parentDocument;
     }
 
     /**
@@ -82,9 +68,9 @@ class Blog extends BlogModel implements RouteReferrersReadInterface
      * @param Generic $parent
      * @return Blog
      */
-    public function setParentDocument(Generic $parent)
+    public function setParentDocument(Generic $parentDocument)
     {
-        $this->parent = $parent;
+        $this->parentDocument = $parentDocument;
 
         return $this;
     }

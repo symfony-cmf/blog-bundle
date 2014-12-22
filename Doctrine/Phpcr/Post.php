@@ -54,22 +54,6 @@ class Post extends PostModel implements RouteReferrersReadInterface
     protected $routes;
 
     /**
-     * Constructor
-     */
-    public function __construct(BlogModel $blog = null, $title = null, $bodyPreview = null, $body = null)
-    {
-        parent::__construct($blog, $title, $bodyPreview, $body);
-
-        if ($blog) {
-            $this->setParentDocument($blog);
-        }
-
-        if ($title) {
-            $this->setTitle($title);
-        }
-    }
-
-    /**
      * Get id
      *
      * @return string

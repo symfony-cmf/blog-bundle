@@ -62,16 +62,11 @@ class Post implements PublishTimePeriodInterface, PublishableInterface
      */
     protected $isPublishable = true;
 
-
     /**
      * Constructor
      */
-    public function __construct(Blog $blog = null, $title = null, $bodyPreview = null, $body = null)
+    public function __construct()
     {
-        $this->blog = $blog;
-        $this->title = $title;
-        $this->bodyPreview = $bodyPreview;
-        $this->body = $body;
         $this->date = new \DateTime();
     }
 

@@ -12,16 +12,28 @@
 
 namespace Symfony\Cmf\Bundle\BlogBundle\Tests\Functional\Admin;
 
-use Symfony\Cmf\Component\Testing\Functional\BaseTestCase;
+use Symfony\Cmf\Bundle\BlogBundle\Tests\Functional\BaseTestCase;
 
 class BlogAdminTest extends BaseTestCase
 {
-    public function testDashboard()
+    public function testCreate()
     {
-        $client = $this->createClient();
+        $crawler = $this->requestRoute('GET', 'admin_cmf_blog_blog_create');
 
-        $client->request('GET', '/admin/dashboard');
-        $response = $client->getResponse();
-        $this->assertEquals(200, $response->getStatusCode());
+        $form = $crawler->selectButton('Create')->form();
+        $formPrefix = $this->getAdminFormNamePrefix($crawler);
+
+        $form->setValues(array(
+            $formPrefix.'[name]'           => 'Test Blog',
+            $formPrefix.'[description]'    => 'A blog lives here.',
+            $formPrefix.'[parentDocument]' => '/cms/test',
+        ));
+
+        $this->client->followRedirects();
+        $crawler = $this->client->submit($form);
+
+        $this->assertCount(1, $crawler->filter("html:contains('has been successfully created')"),
+            'Expected a success flash message, but none was found.'
+        );
     }
 }

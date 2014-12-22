@@ -42,14 +42,11 @@ class Blog
      */
     protected $posts;
 
-
     /**
      * Constructor
      */
-    public function __construct($name = null, $description = null)
+    public function __construct()
     {
-        $this->name = $name;
-        $this->description = $description;
         $this->posts = new ArrayCollection();
     }
 

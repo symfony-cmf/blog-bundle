@@ -13,7 +13,7 @@
         </id>
 
         <nodename name="name" />
-        <parent-document name="parent" />
+        <parent-document name="parentDocument" />
         <children name="posts" />
 
         <field name="description" type="string" />

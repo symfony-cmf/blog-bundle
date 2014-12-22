@@ -10,7 +10,7 @@
  */
 
 
-namespace Symfony\Cmf\Bundle\BlogBundle\DataFixtures\PHPCR;
+namespace Symfony\Cmf\Bundle\BlogBundle\Tests\Resources\DataFixtures\PHPCR;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -38,22 +38,22 @@ class LoadBlogData implements FixtureInterface, ContainerAwareInterface
 
         $blogIdx = 0;
         while ($blogIdx++ < $numBlogs) {
-            $blog = new Blog(
-                $faker->sentence(3),                    // name
-                implode("\n\n", $faker->paragraphs(3)), // description
-                $rootNode                               // parent
-            );
+            $blog = new Blog();
+            $blog->setName($faker->sentence(3));
+            $blog->setDescription(implode("\n\n", $faker->paragraphs(3)));
+            $blog->setParentDocument($rootNode);
+
             $manager->persist($blog);
 
             $postIdx = 0;
             while ($postIdx++ < $numPostsPerBlog) {
                 $paragraphs = $faker->paragraphs(5);
-                $post = new Post(
-                    $blog,                       // blog
-                    $faker->sentence(5),         // title
-                    $paragraphs[0],              // body preview
-                    implode("\n\n", $paragraphs) // body
-                );
+                $post = new Post();
+                $post->setBlog($blog);
+                $post->setTitle($faker->sentence(5));
+                $post->setBodyPreview($paragraphs[0]);
+                $post->setBody(implode("\n\n", $paragraphs));
+
                 $manager->persist($post);
             }
         }
