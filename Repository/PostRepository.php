@@ -146,30 +146,6 @@ class PostRepository extends DocumentRepository
             'orderBy' => 'array',
         ));
 
-        $resolver->setAllowedValues(array(
-            'limit' => function($value) {
-                return $value > 0;
-            },
-            'orderBy' => function(array $orderBys) {
-                $validOrderBys = array();
-                foreach ($orderBys as $orderBy) {
-
-                    if ($orderByValid = isset($orderBy['order'])) {
-                        if(!in_array(strtolower($orderBy['order']), array('asc', 'desc'), true)) {
-                            throw new \InvalidArgumentException(sprintf(
-                                'Unrecognized orderBy order value "%s". order must be one of ASC or DESC.',
-                                $orderBy['order']
-                            ));
-                        }
-                    }
-
-                    $validOrderBys[] = isset($orderBy['field']) && $orderByValid;
-                }
-
-                return count(array_filter($validOrderBys)) == count($orderBys);
-            },
-        ));
-
         return $resolver;
     }
 }

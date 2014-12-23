@@ -116,12 +116,6 @@ class BlogRepository extends DocumentRepository
             'limit' => 'int',
         ));
 
-        $resolver->setAllowedValues(array(
-            'limit' => function($value) {
-                return $value > 0;
-            },
-        ));
-
         return $resolver;
     }
 
