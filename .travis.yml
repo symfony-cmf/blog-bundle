@@ -19,14 +19,10 @@ matrix:
     - php: 5.5
       env: SYMFONY_VERSION=dev-master
 
-
-
 before_script:
   - composer self-update
   - echo 'memory_limit = -1' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - composer require symfony/symfony:${SYMFONY_VERSION} --prefer-source
-  - rm -fr Tests/Resources/app/cache
-  - vendor/symfony-cmf/testing/bin/travis/doctrine_orm.sh
   - vendor/symfony-cmf/testing/bin/travis/phpcr_odm_doctrine_dbal.sh
 
 script: phpunit --coverage-text
