@@ -44,13 +44,8 @@ class BaseTestCase extends CmfBaseTestCase
 
         $this->router = $this->get('router');
 
-//        $this->db('PHPCR')->loadFixtures(array(
-//            'Symfony\Cmf\Bundle\BlogBundle\Tests\Resources\DataFixtures\PHPCR\LoadBlogData',
-//        ));
-
-        $this->runConsole('doctrine:phpcr:fixtures:load', array(
-            '--fixtures' => __DIR__.'/../Resources/DataFixtures/PHPCR',
-            '--no-interaction' => true,
+        $this->db('PHPCR')->loadFixtures(array(
+            'Symfony\Cmf\Bundle\BlogBundle\Tests\Resources\DataFixtures\PHPCR\LoadBlogData',
         ));
     }
 

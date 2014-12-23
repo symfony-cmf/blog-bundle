@@ -5,7 +5,7 @@ doctrine:
     orm: ~
     dbal:
         driver: pdo_sqlite
-        path: %kernel.root_dir%/../test_db.sqlite
+        path: %kernel.root_dir%/cache/test_db.sqlite
         memory: true
         types:
             json: Sonata\Doctrine\Types\JsonType
@@ -31,6 +31,10 @@ cmf_routing:
                 admin_basepath:       %phpcr_basepath%
                 route_basepaths:      [%phpcr_basepath%]
                 content_basepath:     %phpcr_basepath%
+        controllers_by_class:
+            Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Blog: cmf_blog.blog_controller:detailAction
+        templates_by_class:
+            Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Post: CmfBlogBundle:Post:detail.html.twig
 
 cmf_routing_auto:
     persistence:

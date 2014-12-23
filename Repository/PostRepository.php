@@ -37,23 +37,9 @@ class PostRepository extends DocumentRepository
     }
 
     /**
-     * Find post by title
-     *
-     * @param string $title
-     * @return Post|null
-     */
-    public function findByTitle($title)
-    {
-        return $this->search(array(
-            'title' => $title,
-            'limit' => 1,
-        ));
-    }
-
-    /**
      * Search for posts by an array of options:
      *   - blogId: string (required)
-     *   - isPublishable: boolean (optional, default true)
+     *   - isPublishable: boolean (optional, default true) // TODO: https://github.com/symfony-cmf/CoreBundle/issues/126
      *   - title: string (optional)
      *   - limit: integer (optional)
      *   - orderBy: array of arrays('field' => $field, 'order' => 'ASC or DESC') (optional)
@@ -144,30 +130,6 @@ class PostRepository extends DocumentRepository
             'title' => 'string',
             'limit' => 'int',
             'orderBy' => 'array',
-        ));
-
-        $resolver->setAllowedValues(array(
-            'limit' => function($value) {
-                return $value > 0;
-            },
-            'orderBy' => function(array $orderBys) {
-                $validOrderBys = array();
-                foreach ($orderBys as $orderBy) {
-
-                    if ($orderByValid = isset($orderBy['order'])) {
-                        if(!in_array(strtolower($orderBy['order']), array('asc', 'desc'), true)) {
-                            throw new \InvalidArgumentException(sprintf(
-                                'Unrecognized orderBy order value "%s". order must be one of ASC or DESC.',
-                                $orderBy['order']
-                            ));
-                        }
-                    }
-
-                    $validOrderBys[] = isset($orderBy['field']) && $orderByValid;
-                }
-
-                return count(array_filter($validOrderBys)) == count($orderBys);
-            },
         ));
 
         return $resolver;
