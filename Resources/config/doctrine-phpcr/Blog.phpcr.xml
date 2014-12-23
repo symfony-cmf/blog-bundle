@@ -16,6 +16,7 @@
         <parent-document name="parentDocument" />
         <children name="posts" />
 
+        <field name="name" type="string" />
         <field name="description" type="string" />
 
         <referrers name="routes" referring-document="Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route" referenced-by="content">
