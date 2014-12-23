@@ -1,6 +1,5 @@
 Tests/Resources/app/cache
 Tests/Resources/app/logs
-Tests/Resources/test_db.sqlite
 bin/
 composer.lock
 vendor/

@@ -54,7 +54,7 @@ class BlogAdminTest extends BaseTestCase
         $crawler = $this->client->submit($form);
 
         $this->assertCount(1, $crawler->filter("html:contains('has been successfully updated')"),
-            'Expected a success flash message, but none as found.'
+            'Expected a success flash message, but none was found.'
         );
 
         $dm = $this->db('PHPCR')->getOm();

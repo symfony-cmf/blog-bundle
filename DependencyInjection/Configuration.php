@@ -39,10 +39,6 @@ class Configuration implements ConfigurationInterface
                 // admin
                 ->arrayNode('sonata_admin')
                     ->canBeEnabled()
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->booleanNode('enabled')->defaultTrue()->end()
-                    ->end()
                 ->end()
 
                 // menu
@@ -50,7 +46,6 @@ class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->canBeEnabled()
                     ->children()
-                        ->booleanNode('enabled')->defaultTrue()->end()
                         ->scalarNode('content_key')->defaultNull()->end()
                     ->end()
                 ->end()
@@ -60,7 +55,6 @@ class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->canBeEnabled()
                     ->children()
-                        ->booleanNode('enabled')->defaultTrue()->end()
                         ->scalarNode('posts_per_page')->defaultValue(5)->end()
                     ->end()
                 ->end()

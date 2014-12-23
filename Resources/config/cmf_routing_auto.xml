@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<auto-mapping xmlns="http://cmf.symfony.com/schema/routing_auto">
+
+    <mapping class="Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Blog" uri-schema="/blogs/{blog}">
+
+        <token-provider token="blog" name="content_method">
+            <option name="method">getName</option>
+        </token-provider>
+
+    </mapping>
+
+    <mapping class="Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Post" uri-schema="/blogs/{blog}/{date}/{title}">
+
+        <token-provider token="blog" name="content_method">
+            <option name="method">getBlog</option>
+        </token-provider>
+
+        <token-provider token="date" name="content_datetime">
+            <option name="method">getDate</option>
+        </token-provider>
+
+        <token-provider token="title" name="content_method">
+            <option name="method">getTitle</option>
+        </token-provider>
+
+    </mapping>
+
+</auto-mapping>

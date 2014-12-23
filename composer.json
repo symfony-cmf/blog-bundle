@@ -16,18 +16,19 @@
         "php": ">=5.3.9",
         "symfony/framework-bundle": "~2.3",
         "symfony-cmf/core-bundle": "1.2.*",
+        "symfony-cmf/content-bundle": "1.2.*",
         "symfony-cmf/routing-auto-bundle": "1.0.*",
-        "sonata-project/doctrine-extensions": "~1.0.2",
+        "sonata-project/doctrine-extensions": "~1.0,>=1.0.2",
         "doctrine/phpcr-bundle": "~1.2",
         "doctrine/phpcr-odm": "~1.2",
-        "friendsofsymfony/rest-bundle": "~1.4.0"
+        "friendsofsymfony/rest-bundle": "~1.4"
     },
     "require-dev": {
         "phpunit/phpunit": "~3.7.28",
         "symfony-cmf/testing": "1.2.*",
         "sonata-project/doctrine-phpcr-admin-bundle": "1.2.*",
         "doctrine/orm": "~2.4.7",
-        "nelmio/alice": "~1.7.2",
+        "nelmio/alice": "~1.7,>=1.7.2",
         "phpcr/phpcr-shell": "@alpha"
     },
     "suggest": {

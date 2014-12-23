@@ -47,20 +47,6 @@ class BlogRepository extends DocumentRepository
     }
 
     /**
-     * Find blog by name
-     *
-     * @param string $name
-     * @return null|Blog
-     */
-    public function findByName($name)
-    {
-        return $this->search(array(
-            'name' => $name,
-            'limit' => 1,
-        ));
-    }
-
-    /**
      * Search for blogs by an array of options
      *
      * @param array $options
@@ -114,12 +100,6 @@ class BlogRepository extends DocumentRepository
         $resolver->setAllowedTypes(array(
             'name' => 'string',
             'limit' => 'int',
-        ));
-
-        $resolver->setAllowedValues(array(
-            'limit' => function($value) {
-                return $value > 0;
-            },
         ));
 
         return $resolver;
