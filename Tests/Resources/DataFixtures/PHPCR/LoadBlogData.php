@@ -48,8 +48,7 @@ class LoadBlogData implements FixtureInterface, ContainerAwareInterface
 
             $manager->persist($blog);
 
-            $postIdx = 0;
-            while ($postIdx++ < $numPostsPerBlog) {
+            for ($i = 0; $i < $numPostsPerBlog; $i++) {
                 $paragraphs = $faker->paragraphs(5);
                 $post = new Post();
                 $post->setBlog($blog);

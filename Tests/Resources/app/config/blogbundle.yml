@@ -31,6 +31,9 @@ cmf_routing:
                 admin_basepath:       %phpcr_basepath%
                 route_basepaths:      [%phpcr_basepath%]
                 content_basepath:     %phpcr_basepath%
+        controllers_by_class:
+            Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Blog: cmf_blog.blog_controller:detailAction
+            Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Post: cmf_blog.post_controller:detailAction
 
 cmf_routing_auto:
     persistence:
