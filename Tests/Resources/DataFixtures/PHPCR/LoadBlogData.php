@@ -15,6 +15,7 @@ namespace Symfony\Cmf\Bundle\BlogBundle\Tests\Resources\DataFixtures\PHPCR;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker;
+use PHPCR\Util\NodeHelper;
 use Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Blog;
 use Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Post;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -31,6 +32,8 @@ class LoadBlogData implements FixtureInterface, ContainerAwareInterface
     {
         $faker = Faker\Factory::create();
 
+        NodeHelper::createPath($manager->getPhpcrSession(), '/cms/routes');
+        NodeHelper::createPath($manager->getPhpcrSession(), $this->getBasePath());
         $rootNode = $manager->find(null, $this->getBasePath());
 
         $numPostsPerBlog = (2 * $this->getPostsPerPage()) + 2; // 3 pages
@@ -55,6 +58,11 @@ class LoadBlogData implements FixtureInterface, ContainerAwareInterface
                 $post->setTitle($faker->sentence(5));
                 $post->setBodyPreview($paragraphs[0]);
                 $post->setBody(implode("\n\n", $paragraphs));
+
+                if ($i == 0) {
+                    $post->setTitle('First Post');
+                    $post->setDate(new \DateTime('2014-01-01'));
+                }
 
                 $manager->persist($post);
             }
