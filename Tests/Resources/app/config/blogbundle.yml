@@ -33,7 +33,8 @@ cmf_routing:
                 content_basepath:     %phpcr_basepath%
         controllers_by_class:
             Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Blog: cmf_blog.blog_controller:detailAction
-            Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Post: cmf_blog.post_controller:detailAction
+        templates_by_class:
+            Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Post: CmfBlogBundle:Post:detail.html.twig
 
 cmf_routing_auto:
     persistence:

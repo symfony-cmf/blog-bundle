@@ -47,20 +47,6 @@ class BlogRepository extends DocumentRepository
     }
 
     /**
-     * Find blog by name
-     *
-     * @param string $name
-     * @return null|Blog
-     */
-    public function findByName($name)
-    {
-        return $this->search(array(
-            'name' => $name,
-            'limit' => 1,
-        ));
-    }
-
-    /**
      * Search for blogs by an array of options
      *
      * @param array $options

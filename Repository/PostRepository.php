@@ -37,23 +37,9 @@ class PostRepository extends DocumentRepository
     }
 
     /**
-     * Find post by title
-     *
-     * @param string $title
-     * @return Post|null
-     */
-    public function findByTitle($title)
-    {
-        return $this->search(array(
-            'title' => $title,
-            'limit' => 1,
-        ));
-    }
-
-    /**
      * Search for posts by an array of options:
      *   - blogId: string (required)
-     *   - isPublishable: boolean (optional, default true)
+     *   - isPublishable: boolean (optional, default true) // TODO: https://github.com/symfony-cmf/CoreBundle/issues/126
      *   - title: string (optional)
      *   - limit: integer (optional)
      *   - orderBy: array of arrays('field' => $field, 'order' => 'ASC or DESC') (optional)
