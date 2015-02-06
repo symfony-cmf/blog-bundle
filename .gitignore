@@ -1,4 +1,6 @@
 Tests/Resources/app/cache
 Tests/Resources/app/logs
+bin/
 composer.lock
-vendor
+vendor/
+.idea

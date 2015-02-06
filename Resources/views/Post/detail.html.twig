@@ -1,0 +1,38 @@
+{% extends "CmfBlogBundle::layout.html.twig" %}
+
+{% set post = cmfMainContent %}
+
+{% block content %}
+    <div class="post">
+
+        <h1>{{ post.title }}</h1>
+
+        <p class="date-posted">
+            <i>Posted on {{ post.date|date('F jS, Y') }} at {{ post.date|date('H:i') }}</i>
+        </p>
+
+        <p class="body-content">
+            {{ post.body|nl2br|raw }}
+        </p>
+
+        <div style="text-align: center; margin-top: 20px; margin-bottom: -20px;">
+            <a href="{{ path(post.blog) }}">All Blog Posts</a>
+        </div>
+
+        <div class="prev-next-links clearfix">
+
+            {% if cmf_prev(post) %}
+                <div class="prev pull-left">
+                    <a href="{{ path(cmf_prev(post)) }}">&lt;&lt; {{ cmf_prev(post).title }}</a>
+                </div>
+            {% endif %}
+
+            {% if cmf_next(post) %}
+                <div class="next pull-right">
+                    <a href="{{ path(cmf_next(post)) }}">{{ cmf_next(post).title }} &gt;&gt;</a>
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}

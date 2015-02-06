@@ -35,53 +35,57 @@ class CmfBlogExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('controllers.xml');
+        $loader->load('services.xml');
 
-        if ($config['use_sonata_admin']) {
+        if (isset($config['persistence']['phpcr'])) {
+            $this->loadPhpcrPersistence($config, $loader, $container);
+        }
+
+        if (isset($config['sonata_admin']) && $config['sonata_admin']['enabled']) {
             $this->loadSonataAdmin($config, $loader, $container);
         }
-        if ($config['integrate_menu']['enabled']) {
+
+        if (isset($config['integrate_menu']) && $config['integrate_menu']['enabled']) {
             $this->loadMenuIntegration($config, $loader, $container);
         }
 
-        $config['class'] = array_merge(array(
-            'blog_admin' => 'Symfony\Cmf\Bundle\BlogBundle\Admin\BlogAdmin',
-            'post_admin' => 'Symfony\Cmf\Bundle\BlogBundle\Admin\PostAdmin',
-            'blog' => 'Symfony\Cmf\Bundle\BlogBundle\Document\Blog',
-            'post' => 'Symfony\Cmf\Bundle\BlogBundle\Document\Post',
-        ), isset($config['class']) ? $config['class'] : array());
+        $this->loadPaginationIntegration($config, $container);
+    }
 
-        foreach ($config['class'] as $type => $classFqn) {
+    protected function loadPhpcrPersistence($config, XmlFileLoader $loader, ContainerBuilder $container)
+    {
+        $container->setParameter($this->getAlias().'.blog_basepath', $config['persistence']['phpcr']['blog_basepath']);
+
+        foreach ($config['persistence']['phpcr']['class'] as $type => $classFqn) {
             $container->setParameter(
-                $param = sprintf('cmf_blog.%s_class', $type),
+                $param = sprintf('cmf_blog.phpcr.%s.class', $type),
                 $classFqn
             );
         }
+
+        $loader->load('initializer-phpcr.xml');
+        $loader->load('doctrine-phpcr.xml');
     }
 
-    private function loadSonataAdmin($config, XmlFileLoader $loader, ContainerBuilder $container)
+    protected function loadSonataAdmin(array $config, XmlFileLoader $loader, ContainerBuilder $container)
     {
         $bundles = $container->getParameter('kernel.bundles');
-        if ('auto' === $config['use_sonata_admin'] && !isset($bundles['SonataDoctrinePHPCRAdminBundle'])) {
+        if (!isset($bundles['SonataDoctrinePHPCRAdminBundle'])) {
             return;
         }
 
-        $loader->load('blog-admin.xml');
-        $container->setParameter($this->getAlias() . '.blog_basepath', $config['blog_basepath']);
+        $loader->load('admin.xml');
     }
 
-    private function loadMenuIntegration($config, XmlFileLoader $loader, ContainerBuilder $container)
+    protected function loadMenuIntegration(array $config, XmlFileLoader $loader, ContainerBuilder $container)
     {
         $bundles = $container->getParameter('kernel.bundles');
-        if ('auto' === $config['integrate_menu']['enabled'] && !isset($bundles['CmfMenuBundle'])) {
+        if (!isset($bundles['CmfMenuBundle'])) {
             return;
         }
 
         if (empty($config['integrate_menu']['content_key'])) {
             if (!class_exists('Symfony\\Cmf\\Bundle\\RoutingBundle\\Routing\\DynamicRouter')) {
-                if ('auto' === $config['integrate_menu']) {
-                    return;
-                }
                 throw new \RuntimeException('You need to set the content_key when not using the CmfRoutingBundle DynamicRouter');
             }
             $contentKey = DynamicRouter::CONTENT_KEY;
@@ -92,6 +96,18 @@ class CmfBlogExtension extends Extension
         $container->setParameter('cmf_blog.content_key', $contentKey);
 
         $loader->load('menu.xml');
+    }
+
+    protected function loadPaginationIntegration(array $config, ContainerBuilder $container)
+    {
+        if (isset($config['pagination']) && $config['pagination']['enabled']) {
+            $container->setParameter($this->getAlias().'.pagination.enabled', true);
+            $container->setParameter($this->getAlias().'.pagination.posts_per_page', $config['pagination']['posts_per_page']);
+        } else {
+            // this parameter is used in the cmf_blog.blog_controller service definition, so
+            // it must be defined until it's a viable option to use the expression language instead
+            $container->setParameter($this->getAlias().'.pagination.posts_per_page', 0);
+        }
     }
 
     /**
@@ -106,6 +122,6 @@ class CmfBlogExtension extends Extension
 
     public function getNamespace()
     {
-        return 'http://cmf.symfony.com/schema/dic/blog';
+        return 'http://cmf.symfony.com/schema/dic/cmf_blog';
     }
 }

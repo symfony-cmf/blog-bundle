@@ -1,0 +1,31 @@
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+<parameters>
+    <parameter key="cmf_blog.blog_controller.class">Symfony\Cmf\Bundle\BlogBundle\Controller\BlogController</parameter>
+    <parameter key="cmf_blog.post_controller.class">Symfony\Cmf\Bundle\BlogBundle\Controller\PostController</parameter>
+</parameters>
+
+<services>
+
+    <service id="cmf_blog.blog_controller" class="%cmf_blog.blog_controller.class%">
+        <argument type="service" id="templating" />
+        <argument type="service" id="security.context" />
+        <argument type="service" id="fos_rest.view_handler" on-invalid="ignore" />
+        <argument type="service" id="cmf_blog.blog_repository" />
+        <argument type="service" id="cmf_blog.post_repository" />
+        <argument type="service" id="knp_paginator" on-invalid="ignore" />
+        <argument>%cmf_blog.pagination.posts_per_page%</argument> <!--<argument type="expression">container.hasParameter('cmf_blog.pagination.posts_per_page') ? parameter('cmf_blog.pagination.posts_per_page') : 0</argument>-->
+    </service>
+
+    <service id="cmf_blog.post_controller" class="%cmf_blog.post_controller.class%">
+        <argument type="service" id="templating" />
+        <argument type="service" id="security.context" />
+        <argument type="service" id="fos_rest.view_handler" on-invalid="ignore" />
+        <argument type="service" id="cmf_blog.post_repository" />
+    </service>
+
+</services>
+
+</container>

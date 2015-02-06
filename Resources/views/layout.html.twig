@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Default Blog Layout</title>
+    </head>
+    <body>
+    <div class="container">
+        <h1>Default Blog Layout</h1>
+        <p>
+            This is the default Symfony CMF Blog layout. You probably want to
+            override this template to integrate the blog bundle system into
+            your website.
+        </p>
+        <div class="row-fluid">
+            <div class="span12">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+    </body>
+</html>

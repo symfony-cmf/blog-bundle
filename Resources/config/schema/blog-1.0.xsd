@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<xsd:schema xmlns="http://cmf.symfony.com/schema/dic/blog"
+<xsd:schema xmlns="http://cmf.symfony.com/schema/dic/cmf_blog"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    targetNamespace="http://cmf.symfony.com/schema/dic/blog"
+    targetNamespace="http://cmf.symfony.com/schema/dic/cmf_blog"
     elementFormDefault="qualified">
 
     <xsd:element name="config" type="config" />
