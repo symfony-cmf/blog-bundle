@@ -9,20 +9,19 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\BlogBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 
 /**
-* This class contains the configuration information for the bundle
-*
-* This information is solely responsible for how the different configuration
-* sections are normalized, and merged.
-*
-* @author David Buchmann
-*/
+ * This class contains the configuration information for the bundle.
+ *
+ * This information is solely responsible for how the different configuration
+ * sections are normalized, and merged.
+ *
+ * @author David Buchmann
+ */
 class Configuration implements ConfigurationInterface
 {
     /**
@@ -38,14 +37,22 @@ class Configuration implements ConfigurationInterface
 
                 // admin
                 ->arrayNode('sonata_admin')
-                    ->canBeEnabled()
+                    ->children()
+                        ->enumNode('enabled')
+                            ->values(array(true, false, 'auto'))
+                            ->defaultValue('auto')
+                        ->end()
+                    ->end()
                 ->end()
 
                 // menu
-                ->arrayNode('integrate_menu')
+                ->arrayNode('menu')
                     ->addDefaultsIfNotSet()
-                    ->canBeEnabled()
                     ->children()
+                        ->enumNode('enabled')
+                            ->values(array(true, false, 'auto'))
+                            ->defaultValue('auto')
+                        ->end()
                         ->scalarNode('content_key')->defaultNull()->end()
                     ->end()
                 ->end()

@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\BlogBundle\Tests\Functional\Admin;
 
 use Symfony\Cmf\Bundle\BlogBundle\Tests\Functional\BaseTestCase;
@@ -24,8 +23,8 @@ class BlogAdminTest extends BaseTestCase
         $formPrefix = $this->getAdminFormNamePrefix($crawler);
 
         $form->setValues(array(
-            $formPrefix.'[name]'           => 'Test Blog',
-            $formPrefix.'[description]'    => 'A blog lives here.',
+            $formPrefix.'[name]' => 'Test Blog',
+            $formPrefix.'[description]' => 'A blog lives here.',
             $formPrefix.'[parentDocument]' => '/cms/blogs',
         ));
 

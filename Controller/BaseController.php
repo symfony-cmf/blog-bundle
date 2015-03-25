@@ -9,25 +9,16 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\BlogBundle\Controller;
 
-use Knp\Component\Pager\Paginator;
-use Symfony\Cmf\Bundle\BlogBundle\Model\Post;
-use Symfony\Cmf\Bundle\BlogBundle\Model\Blog;
-use Symfony\Cmf\Bundle\BlogBundle\Repository\PostRepository;
-use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowChecker;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use FOS\RestBundle\View\ViewHandlerInterface;
 use FOS\RestBundle\View\View;
 
 /**
- * Base Controller
- *
- * @author Daniel Leech <daniel@dantleech.com>
+ * Base Controller.
  */
 abstract class BaseController
 {
@@ -47,11 +38,11 @@ abstract class BaseController
     protected $viewHandler;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param EngineInterface $templating
+     * @param EngineInterface          $templating
      * @param SecurityContextInterface $securityContext
-     * @param ViewHandlerInterface $viewHandler
+     * @param ViewHandlerInterface     $viewHandler
      */
     public function __construct(
         EngineInterface $templating,
@@ -68,6 +59,7 @@ abstract class BaseController
         if ($this->viewHandler) {
             $view = new View($params);
             $view->setTemplate($contentTemplate);
+
             return $this->viewHandler->handle($view);
         }
 

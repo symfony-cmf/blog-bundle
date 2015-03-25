@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\BlogBundle\Model;
 
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
 
 /**
- * Post Model
+ * Post Model.
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
@@ -63,7 +62,7 @@ class Post implements PublishTimePeriodInterface, PublishableInterface
     protected $isPublishable = true;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -71,7 +70,7 @@ class Post implements PublishTimePeriodInterface, PublishableInterface
     }
 
     /**
-     * Get blog
+     * Get blog.
      *
      * @return Blog
      */
@@ -81,9 +80,10 @@ class Post implements PublishTimePeriodInterface, PublishableInterface
     }
 
     /**
-     * Set blog
+     * Set blog.
      *
      * @param Blog $blog
+     *
      * @return Post
      */
     public function setBlog(Blog $blog)
@@ -94,7 +94,7 @@ class Post implements PublishTimePeriodInterface, PublishableInterface
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -104,9 +104,10 @@ class Post implements PublishTimePeriodInterface, PublishableInterface
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
+     *
      * @return Post
      */
     public function setTitle($title)
@@ -117,7 +118,7 @@ class Post implements PublishTimePeriodInterface, PublishableInterface
     }
 
     /**
-     * Get body preview
+     * Get body preview.
      *
      * @return string
      */
@@ -127,9 +128,10 @@ class Post implements PublishTimePeriodInterface, PublishableInterface
     }
 
     /**
-     * Set body preview
+     * Set body preview.
      *
      * @param string $bodyPreview
+     *
      * @return Post
      */
     public function setBodyPreview($bodyPreview)
@@ -140,7 +142,7 @@ class Post implements PublishTimePeriodInterface, PublishableInterface
     }
 
     /**
-     * Get body (the post's content)
+     * Get body (the post's content).
      *
      * @return string
      */
@@ -150,9 +152,10 @@ class Post implements PublishTimePeriodInterface, PublishableInterface
     }
 
     /**
-     * Set body (the post's content)
+     * Set body (the post's content).
      *
      * @param string $body
+     *
      * @return Post
      */
     public function setBody($body)
@@ -163,7 +166,7 @@ class Post implements PublishTimePeriodInterface, PublishableInterface
     }
 
     /**
-     * Get publication date
+     * Get publication date.
      *
      * @return \DateTime
      */
@@ -173,9 +176,10 @@ class Post implements PublishTimePeriodInterface, PublishableInterface
     }
 
     /**
-     * Set publication date
+     * Set publication date.
      *
      * @param \DateTime $date
+     *
      * @return Post
      */
     public function setDate($date)
@@ -186,7 +190,7 @@ class Post implements PublishTimePeriodInterface, PublishableInterface
     }
 
     /**
-     * Is publishable
+     * Is publishable.
      *
      * @return bool
      */
@@ -196,9 +200,10 @@ class Post implements PublishTimePeriodInterface, PublishableInterface
     }
 
     /**
-     * Set publishable
+     * Set publishable.
      *
      * @param bool $publishable
+     *
      * @return Post
      */
     public function setPublishable($publishable)
@@ -209,7 +214,7 @@ class Post implements PublishTimePeriodInterface, PublishableInterface
     }
 
     /**
-     * Get publish start date
+     * Get publish start date.
      *
      * @return \DateTime
      */
@@ -219,9 +224,10 @@ class Post implements PublishTimePeriodInterface, PublishableInterface
     }
 
     /**
-     * Set publish start date
+     * Set publish start date.
      *
      * @param \DateTime $publishStartDate
+     *
      * @return Post
      */
     public function setPublishStartDate(\DateTime $publishStartDate = null)
@@ -232,7 +238,7 @@ class Post implements PublishTimePeriodInterface, PublishableInterface
     }
 
     /**
-     * Get publish end date
+     * Get publish end date.
      *
      * @return \DateTime
      */
@@ -242,9 +248,10 @@ class Post implements PublishTimePeriodInterface, PublishableInterface
     }
 
     /**
-     * Set publish end date
+     * Set publish end date.
      *
      * @param \DateTime $publishEndDate
+     *
      * @return Post
      */
     public function setPublishEndDate(\DateTime $publishEndDate = null)

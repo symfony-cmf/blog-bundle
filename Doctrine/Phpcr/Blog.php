@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr;
 
 use Symfony\Cmf\Bundle\BlogBundle\Model\Blog as BlogModel;
@@ -18,7 +17,7 @@ use Symfony\Cmf\Component\Routing\RouteReferrersReadInterface;
 use Doctrine\ODM\PHPCR\Document\Generic;
 
 /**
- * Blog Document
+ * Blog Document.
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
@@ -35,21 +34,21 @@ class Blog extends BlogModel implements RouteReferrersReadInterface
     protected $slug;
 
     /**
-     * Parent Document
+     * Parent Document.
      *
      * @var Generic
      */
     protected $parentDocument;
 
     /**
-     * Routes (mapped from Route::content)
+     * Routes (mapped from Route::content).
      *
      * @var \Symfony\Component\Routing\Route[]
      */
     protected $routes;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return string
      */
@@ -59,7 +58,7 @@ class Blog extends BlogModel implements RouteReferrersReadInterface
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
      * @return string
      */
@@ -69,7 +68,7 @@ class Blog extends BlogModel implements RouteReferrersReadInterface
     }
 
     /**
-     * Get parent document
+     * Get parent document.
      *
      * @return Generic
      */
@@ -79,9 +78,10 @@ class Blog extends BlogModel implements RouteReferrersReadInterface
     }
 
     /**
-     * Set parent document
+     * Set parent document.
      *
      * @param Generic $parentDocument
+     *
      * @return Blog
      */
     public function setParentDocument(Generic $parentDocument)
@@ -92,7 +92,7 @@ class Blog extends BlogModel implements RouteReferrersReadInterface
     }
 
     /**
-     * Get routes that point to this content
+     * Get routes that point to this content.
      *
      * @return \Symfony\Component\Routing\Route[]
      */

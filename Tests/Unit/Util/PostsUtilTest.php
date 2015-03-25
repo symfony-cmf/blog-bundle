@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\BlogBundle\Tests\Unit\Util;
 
 use Symfony\Cmf\Bundle\BlogBundle\Util\PostUtils;

@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\BlogBundle\Repository;
 
 use Doctrine\ODM\PHPCR\DocumentRepository;
@@ -30,10 +29,10 @@ class BlogRepository extends DocumentRepository
     protected $basepath;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param \Doctrine\ODM\PHPCR\DocumentManager $dm
-     * @param ClassMetadata $class
+     * @param ClassMetadata                       $class
      */
     public function __construct($dm, ClassMetadata $class)
     {
@@ -47,10 +46,11 @@ class BlogRepository extends DocumentRepository
     }
 
     /**
-     * Search for blogs by an array of options
+     * Search for blogs by an array of options.
      *
      * @param array $options
-     * @return Blog[] When limit is not provided or is greater than 1
+     *
+     * @return Blog[]    When limit is not provided or is greater than 1
      * @return Blog|null When limit is set to 1
      */
     public function search(array $options)
@@ -104,5 +104,4 @@ class BlogRepository extends DocumentRepository
 
         return $resolver;
     }
-
 }

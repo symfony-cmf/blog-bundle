@@ -9,4 +9,5 @@ $collection->addCollection(
 $collection->addCollection(
     $loader->import(__DIR__.'/routing.yml')
 );
+
 return $collection;

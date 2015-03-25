@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\BlogBundle\Admin;
 
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -18,7 +17,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
 
 /**
- * Blog Admin
+ * Blog Admin.
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
@@ -28,7 +27,7 @@ class BlogAdmin extends Admin
     protected $blogRoot;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $code
      * @param string $class
