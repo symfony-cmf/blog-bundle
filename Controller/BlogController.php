@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\BlogBundle\Controller;
 
 use Symfony\Cmf\Bundle\BlogBundle\Model\Blog;
@@ -19,9 +18,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use FOS\RestBundle\View\ViewHandlerInterface;
+use Knp\Component\Pager\Paginator;
 
 /**
- * Blog Controller
+ * Blog Controller.
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
@@ -38,7 +38,7 @@ class BlogController extends BaseController
     protected $postRepository;
 
     /**
-     * @var \Knp\Component\Pager\Paginator
+     * @var Paginator
      */
     protected $paginator;
 
@@ -53,7 +53,7 @@ class BlogController extends BaseController
         ViewHandlerInterface $viewHandler = null,
         BlogRepository $blogRepository,
         PostRepository $postRepository,
-        $paginator = null,
+        Paginator $paginator = null,
         $postsPerPage = 0
     ) {
         parent::__construct($templating, $securityContext, $viewHandler);
@@ -64,7 +64,7 @@ class BlogController extends BaseController
     }
 
     /**
-     * List blogs
+     * List blogs.
      */
     public function listAction(Request $request)
     {
@@ -77,7 +77,7 @@ class BlogController extends BaseController
     }
 
     /**
-     * Blog detail - list posts in a blog, optionally paginated
+     * Blog detail - list posts in a blog, optionally paginated.
      */
     public function detailAction(Request $request, Blog $contentDocument, $contentTemplate = null)
     {
@@ -87,16 +87,15 @@ class BlogController extends BaseController
             'blogId' => $blog->getId(),
         ));
 
-        $pager = false;
         if ($this->postsPerPage) {
-            $pager = $posts = $this->paginator->paginate(
+            $posts = $this->paginator->paginate(
                 $posts,
                 $request->query->get('page', 1),
                 $this->postsPerPage
             );
         }
 
-        $templateFilename = $pager ? 'detailPaginated' : 'detail';
+        $templateFilename = $this->postsPerPage ? 'detailPaginated' : 'detail';
         $contentTemplate = $this->getTemplateForResponse(
             $request,
             $contentTemplate ?: sprintf('CmfBlogBundle:Blog:%s.{_format}.twig', $templateFilename)

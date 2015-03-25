@@ -3,4 +3,3 @@ Tests/Resources/app/logs
 bin/
 composer.lock
 vendor/
-.idea

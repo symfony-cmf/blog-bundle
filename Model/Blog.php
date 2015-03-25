@@ -9,41 +9,40 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\BlogBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Blog Model
+ * Blog Model.
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
 class Blog
 {
     /**
-     * Blog name
+     * Blog name.
      *
      * @var string
      */
     protected $name;
 
     /**
-     * Description of the blog
+     * Description of the blog.
      *
      * @var string
      */
     protected $description;
 
     /**
-     * Posts
+     * Posts.
      *
      * @var ArrayCollection
      */
     protected $posts;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -51,7 +50,7 @@ class Blog
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -61,9 +60,10 @@ class Blog
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
+     *
      * @return Blog
      */
     public function setName($name)
@@ -74,7 +74,7 @@ class Blog
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -84,9 +84,10 @@ class Blog
     }
 
     /**
-     * Set description
+     * Set description.
      *
      * @param string $description
+     *
      * @return Blog
      */
     public function setDescription($description)
@@ -97,9 +98,10 @@ class Blog
     }
 
     /**
-     * Add post
+     * Add post.
      *
      * @param Post $post
+     *
      * @return Blog
      */
     public function addPost(Post $post)
@@ -112,9 +114,10 @@ class Blog
     }
 
     /**
-     * Remove post
+     * Remove post.
      *
      * @param Post $post
+     *
      * @return Blog
      */
     public function removePost(Post $post)
@@ -127,7 +130,7 @@ class Blog
     }
 
     /**
-     * Get posts
+     * Get posts.
      *
      * @return ArrayCollection
      */
@@ -137,9 +140,10 @@ class Blog
     }
 
     /**
-     * Set posts
+     * Set posts.
      *
      * @param $posts
+     *
      * @return $this
      */
     public function setPosts($posts)

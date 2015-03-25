@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\BlogBundle\Tests\Functional;
 
 class BlogControllerTest extends BaseTestCase
@@ -22,7 +21,7 @@ class BlogControllerTest extends BaseTestCase
     }
 
     /**
-     * Pagination disabled
+     * Pagination disabled.
      */
     public function testDetailAction()
     {

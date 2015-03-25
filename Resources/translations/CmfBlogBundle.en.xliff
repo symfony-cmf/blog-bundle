@@ -87,6 +87,11 @@
                 <target>Blog</target>
             </trans-unit>
 
+            <trans-unit id="form.label_description">
+                <source>form.label_description</source>
+                <target>Description</target>
+            </trans-unit>
+
             <trans-unit id="form.label_body_preview">
                 <source>form.label_body_preview</source>
                 <target>Body Preview</target>

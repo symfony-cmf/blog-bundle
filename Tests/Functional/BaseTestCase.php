@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\BlogBundle\Tests\Functional;
 
 use Symfony\Bundle\FrameworkBundle\Client;
@@ -51,6 +50,7 @@ class BaseTestCase extends CmfBaseTestCase
 
     /**
      * @param string $serviceId
+     *
      * @return object
      */
     protected function get($serviceId)
@@ -60,6 +60,7 @@ class BaseTestCase extends CmfBaseTestCase
 
     /**
      * @param string $parameter
+     *
      * @return mixed
      */
     protected function getParameter($parameter)
@@ -70,6 +71,7 @@ class BaseTestCase extends CmfBaseTestCase
     /**
      * @param string $method
      * @param string $url
+     *
      * @return \Symfony\Component\DomCrawler\Crawler
      */
     protected function request($method, $url)
@@ -80,7 +82,8 @@ class BaseTestCase extends CmfBaseTestCase
     /**
      * @param string $method
      * @param string $route
-     * @param array $parameters
+     * @param array  $parameters
+     *
      * @return \Symfony\Component\DomCrawler\Crawler
      */
     protected function requestRoute($method, $route, array $parameters = array())
@@ -92,10 +95,11 @@ class BaseTestCase extends CmfBaseTestCase
     }
 
     /**
-     * Returns the unique ID Sonata Admins use to prefix form fields
+     * Returns the unique ID Sonata Admins use to prefix form fields.
      *
      * @param \Symfony\Component\DomCrawler\Crawler $crawler
-     * @param string $filter
+     * @param string                                $filter
+     *
      * @return string
      */
     protected function getAdminFormNamePrefix(\Symfony\Component\DomCrawler\Crawler $crawler, $filter = 'input[type=text]')
@@ -107,7 +111,8 @@ class BaseTestCase extends CmfBaseTestCase
 
     /**
      * @param string $command
-     * @param array $options
+     * @param array  $options
+     *
      * @return int
      */
     protected function runConsole($command, array $options = array())

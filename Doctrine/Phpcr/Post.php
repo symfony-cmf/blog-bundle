@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr;
 
 use Symfony\Cmf\Bundle\BlogBundle\Util\PostUtils;
@@ -35,14 +34,14 @@ class Post extends PostModel implements RouteReferrersReadInterface
     protected $slug;
 
     /**
-     * List of referring routes
+     * List of referring routes.
      *
      * @var \Symfony\Component\Routing\Route[]
      */
     protected $routes;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return string
      */
@@ -52,7 +51,7 @@ class Post extends PostModel implements RouteReferrersReadInterface
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
      * @return string
      */
@@ -74,7 +73,7 @@ class Post extends PostModel implements RouteReferrersReadInterface
     }
 
     /**
-     * Get parent document
+     * Get parent document.
      *
      * @return BlogModel
      */
@@ -84,9 +83,10 @@ class Post extends PostModel implements RouteReferrersReadInterface
     }
 
     /**
-     * Set parent document
+     * Set parent document.
      *
      * @param BlogModel $blog
+     *
      * @return Post
      */
     public function setParentDocument(BlogModel $blog)
@@ -97,7 +97,7 @@ class Post extends PostModel implements RouteReferrersReadInterface
     }
 
     /**
-     * Get routes
+     * Get routes.
      *
      * @return \Symfony\Component\Routing\Route[]
      */

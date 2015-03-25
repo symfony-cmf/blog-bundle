@@ -9,18 +9,17 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\BlogBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-
 use Symfony\Cmf\Bundle\RoutingBundle\Routing\DynamicRouter;
 
 /**
- * This is the class that loads and manages your bundle configuration
+ * This is the class that loads and manages your bundle configuration.
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
@@ -38,25 +37,29 @@ class CmfBlogExtension extends Extension
         $loader->load('services.xml');
 
         if (isset($config['persistence']['phpcr'])) {
-            $this->loadPhpcrPersistence($config, $loader, $container);
+            $this->loadPhpcrPersistence($config['persistence']['phpcr'], $loader, $container);
         }
 
-        if (isset($config['sonata_admin']) && $config['sonata_admin']['enabled']) {
-            $this->loadSonataAdmin($config, $loader, $container);
+        if ($config['sonata_admin']['enabled']) {
+            $this->loadSonataAdmin($config['sonata_admin'], $loader, $container);
         }
 
-        if (isset($config['integrate_menu']) && $config['integrate_menu']['enabled']) {
-            $this->loadMenuIntegration($config, $loader, $container);
+        if ($config['menu']['enabled']) {
+            $this->loadMenu($config['menu'], $loader, $container);
         }
 
-        $this->loadPaginationIntegration($config, $container);
+        if (!$this->handlePagination($config['pagination'], $loader, $container)) {
+            // this parameter is used in the cmf_blog.blog_controller service definition, so
+            // it must be defined until it's a viable option to use the expression language instead
+            $container->setParameter($this->getAlias().'.pagination.posts_per_page', 0);
+        }
     }
 
-    protected function loadPhpcrPersistence($config, XmlFileLoader $loader, ContainerBuilder $container)
+    private function loadPhpcrPersistence($config, XmlFileLoader $loader, ContainerBuilder $container)
     {
-        $container->setParameter($this->getAlias().'.blog_basepath', $config['persistence']['phpcr']['blog_basepath']);
+        $container->setParameter($this->getAlias().'.blog_basepath', $config['blog_basepath']);
 
-        foreach ($config['persistence']['phpcr']['class'] as $type => $classFqn) {
+        foreach ($config['class'] as $type => $classFqn) {
             $container->setParameter(
                 $param = sprintf('cmf_blog.phpcr.%s.class', $type),
                 $classFqn
@@ -67,47 +70,64 @@ class CmfBlogExtension extends Extension
         $loader->load('doctrine-phpcr.xml');
     }
 
-    protected function loadSonataAdmin(array $config, XmlFileLoader $loader, ContainerBuilder $container)
+    private function loadSonataAdmin(array $config, XmlFileLoader $loader, ContainerBuilder $container)
     {
         $bundles = $container->getParameter('kernel.bundles');
         if (!isset($bundles['SonataDoctrinePHPCRAdminBundle'])) {
-            return;
+            if ('auto' === $config['enabled']) {
+                return;
+            }
+
+            throw new InvalidConfigurationException('Explicitly enabled sonata admin integration but SonataDoctrinePHPCRAdminBundle is not loaded');
         }
 
         $loader->load('admin.xml');
     }
 
-    protected function loadMenuIntegration(array $config, XmlFileLoader $loader, ContainerBuilder $container)
+    private function loadMenu(array $config, XmlFileLoader $loader, ContainerBuilder $container)
     {
         $bundles = $container->getParameter('kernel.bundles');
         if (!isset($bundles['CmfMenuBundle'])) {
-            return;
+            if ('auto' === $config['enabled']) {
+                return;
+            }
+
+            throw new InvalidConfigurationException('Explicitly enabled menu integration but CmfMenuBundle is not loaded');
         }
 
-        if (empty($config['integrate_menu']['content_key'])) {
+        if (empty($config['content_key'])) {
             if (!class_exists('Symfony\\Cmf\\Bundle\\RoutingBundle\\Routing\\DynamicRouter')) {
-                throw new \RuntimeException('You need to set the content_key when not using the CmfRoutingBundle DynamicRouter');
+                if ('auto' === $config['enabled']) {
+                    return;
+                }
+
+                throw new InvalidConfigurationException('You need to set the content_key when not using the CmfRoutingBundle DynamicRouter');
             }
             $contentKey = DynamicRouter::CONTENT_KEY;
         } else {
-            $contentKey = $config['integrate_menu']['content_key'];
+            $contentKey = $config['content_key'];
         }
 
-        $container->setParameter('cmf_blog.content_key', $contentKey);
+        $container->setParameter($this->getAlias().'.content_key', $contentKey);
 
         $loader->load('menu.xml');
     }
 
-    protected function loadPaginationIntegration(array $config, ContainerBuilder $container)
+    private function handlePagination(array $config, XmlFileLoader $loader, ContainerBuilder $container)
     {
-        if (isset($config['pagination']) && $config['pagination']['enabled']) {
-            $container->setParameter($this->getAlias().'.pagination.enabled', true);
-            $container->setParameter($this->getAlias().'.pagination.posts_per_page', $config['pagination']['posts_per_page']);
-        } else {
-            // this parameter is used in the cmf_blog.blog_controller service definition, so
-            // it must be defined until it's a viable option to use the expression language instead
-            $container->setParameter($this->getAlias().'.pagination.posts_per_page', 0);
+        if (!$config['enabled']) {
+            return false;
         }
+        if (!isset($bundles['KnpPaginatorBundle'])) {
+            if ('auto' === $config['enabled']) {
+                return false;
+            }
+
+            throw new InvalidConfigurationException('Explicitly enabled pagination but KnpPaginatorBundle is not loaded');
+        }
+        $container->setParameter($this->getAlias().'.pagination.posts_per_page', $config['pagination']['posts_per_page']);
+
+        return true;
     }
 
     /**

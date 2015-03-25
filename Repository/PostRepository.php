@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\BlogBundle\Repository;
 
 use Doctrine\ODM\PHPCR\DocumentRepository;
@@ -25,10 +24,10 @@ class PostRepository extends DocumentRepository
     protected $resolver;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param \Doctrine\ODM\PHPCR\DocumentManager $dm
-     * @param ClassMetadata $class
+     * @param ClassMetadata                       $class
      */
     public function __construct($dm, ClassMetadata $class)
     {
@@ -42,10 +41,11 @@ class PostRepository extends DocumentRepository
      *   - isPublishable: boolean (optional, default true) // TODO: https://github.com/symfony-cmf/CoreBundle/issues/126
      *   - title: string (optional)
      *   - limit: integer (optional)
-     *   - orderBy: array of arrays('field' => $field, 'order' => 'ASC or DESC') (optional)
+     *   - orderBy: array of arrays('field' => $field, 'order' => 'ASC or DESC') (optional).
      *
      * @param array $options
-     * @return Post[] When limit is not provided or is greater than 1
+     *
+     * @return Post[]    When limit is not provided or is greater than 1
      * @return Post|null When limit is set to 1
      */
     public function search(array $options)
@@ -62,9 +62,10 @@ class PostRepository extends DocumentRepository
     }
 
     /**
-     * Create query builder from search options
+     * Create query builder from search options.
      *
      * @param array $options
+     *
      * @return \Doctrine\ODM\PHPCR\Query\Builder\QueryBuilder
      */
     protected function createQueryBuilderFromOptions(array $options)
@@ -81,7 +82,6 @@ class PostRepository extends DocumentRepository
 
         // order by
         if (isset($options['orderBy']['field']) && isset($options['orderBy']['order'])) {
-
             $field = $options['orderBy']['field'];
             $sortOrder = strtolower($options['orderBy']['order']);
 
@@ -97,9 +97,10 @@ class PostRepository extends DocumentRepository
     }
 
     /**
-     * Set default search options
+     * Set default search options.
      *
      * @param OptionsResolver $resolver
+     *
      * @return OptionsResolver
      */
     protected function setDefaultOptions(OptionsResolver $resolver)
