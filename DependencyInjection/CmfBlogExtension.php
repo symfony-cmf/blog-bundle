@@ -118,6 +118,8 @@ class CmfBlogExtension extends Extension
         if (!$config['enabled']) {
             return false;
         }
+        
+        $bundles = $container->getParameter('kernel.bundles');
         if (!isset($bundles['KnpPaginatorBundle'])) {
             if ('auto' === $config['enabled']) {
                 return false;
@@ -125,7 +127,7 @@ class CmfBlogExtension extends Extension
 
             throw new InvalidConfigurationException('Explicitly enabled pagination but KnpPaginatorBundle is not loaded');
         }
-        $container->setParameter($this->getAlias().'.pagination.posts_per_page', $config['pagination']['posts_per_page']);
+        $container->setParameter($this->getAlias().'.pagination.posts_per_page', $config['posts_per_page']);
 
         return true;
     }
