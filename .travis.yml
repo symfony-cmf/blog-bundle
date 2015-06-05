@@ -7,11 +7,11 @@ php:
   - hhvm
 
 env:
-  - SYMFONY_VERSION=2.6.*
+  - SYMFONY_VERSION=2.7.* SYMFONY_DEPRECATIONS_HELPER=weak
 
 matrix:
   include:
-    - php: 5.3.3
+    - php: 5.3
       env: SYMFONY_VERSION=2.3.* COMPOSER_FLAGS="--prefer-lowest"
     - php: 5.5
       env: SYMFONY_VERSION=2.3.*
@@ -19,6 +19,8 @@ matrix:
       env: SYMFONY_VERSION=2.6.*
     - php: 5.5
       env: SYMFONY_VERSION=2.7.* SYMFONY_DEPRECATIONS_HELPER=weak
+    - php: 5.5
+      env: SYMFONY_VERSION=2.8.* SYMFONY_DEPRECATIONS_HELPER=weak
 
 before_install:
   - composer self-update || true
