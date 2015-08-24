@@ -33,7 +33,7 @@ class PostAdminTest extends BaseTestCase
         $crawler = $this->client->submit($form);
 
         $this->assertCount(1, $crawler->filter("html:contains('has been successfully created')"),
-            'Expected a success flash message, but none was found.'
+            'Expected a success flash message, but none was found.'."\n".$crawler->html()
         );
     }
 }

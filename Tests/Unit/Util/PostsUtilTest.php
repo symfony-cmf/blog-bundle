@@ -32,6 +32,6 @@ class PostsUtilTest extends \PhpUnit_Framework_Testcase
     public function testSlugify($val, $expected)
     {
         $res = PostUtils::slugify($val);
-        $this->assertEquals($res, $expected);
+        $this->assertEquals($expected, $res);
     }
 }
