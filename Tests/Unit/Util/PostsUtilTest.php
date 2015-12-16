@@ -21,7 +21,7 @@ class PostsUtilTest extends \PhpUnit_Framework_Testcase
             array('this is a slug', 'this-is-a-slug'),
             array('This Is A SLUG', 'this-is-a-slug'),
             array('je suis une dévelopeur web', 'je-suis-une-developeur-web'),
-            array('foo!"  812391 !"£ %!"$£*%!"$£', 'foo-812391'),
+            array('foo!"  812391 !"£ %!"$£*%!"$£', 'foo-812391-lb-lblb'),
             array('ĉràzŷ& cĥärs', 'crazy-chars'),
         );
     }
