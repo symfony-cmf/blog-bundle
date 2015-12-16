@@ -3,12 +3,11 @@
 /*
  * This file is part of the Symfony CMF package.
  *
- * (c) 2011-2014 Symfony CMF
+ * (c) 2011-2015 Symfony CMF
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 
 namespace Symfony\Cmf\Bundle\BlogBundle\Admin;
 
@@ -17,11 +16,9 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
-use Symfony\Cmf\Bundle\BlogBundle\Form\PostType;
-use Symfony\Cmf\Bundle\BlogBundle\Routing\BlogRouteManager;
 
 /**
- * Blog Admin
+ * Blog Admin.
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
@@ -34,9 +31,9 @@ class BlogAdmin extends Admin
     {
         $mapper->add('name', 'text');
         $mapper->add('parent', 'doctrine_phpcr_odm_tree', array(
-            'root_node' => $this->blogRoot, 
-            'choice_list' => array(), 
-            'select_root_node' => true)
+            'root_node' => $this->blogRoot,
+            'choice_list' => array(),
+            'select_root_node' => true, )
         );
     }
 

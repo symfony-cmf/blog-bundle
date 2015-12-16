@@ -3,21 +3,16 @@
 /*
  * This file is part of the Symfony CMF package.
  *
- * (c) 2011-2014 Symfony CMF
+ * (c) 2011-2015 Symfony CMF
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\BlogBundle\Document;
 
-use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
-
 use Symfony\Cmf\Component\Routing\RouteReferrersReadInterface;
-
 use Symfony\Cmf\Bundle\BlogBundle\Util\PostUtils;
-
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
 
@@ -29,66 +24,75 @@ use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
 class Post implements RouteReferrersReadInterface, PublishTimePeriodInterface, PublishableInterface
 {
     /**
-     * ID / Path to to this object
+     * ID / Path to to this object.
+     *
      * @var string
      */
     protected $id;
 
     /**
-     * Node name (same as slug)
+     * Node name (same as slug).
+     *
      * @var string
      */
     protected $name;
 
     /**
-     * READ ONLY: Post slug (cannot query directly on name field)
+     * READ ONLY: Post slug (cannot query directly on name field).
      */
     protected $slug;
 
     /**
      * Blog - this is the parent document.
+     *
      * @var Blog
      */
     protected $blog;
 
     /**
-     * Post title (name is generated from this)
+     * Post title (name is generated from this).
+     *
      * @var string
      */
     protected $title;
 
     /**
-     * Post body text
+     * Post body text.
+     *
      * @var string
      */
     protected $body;
 
     /**
-     * Date of publication
+     * Date of publication.
+     *
      * @var \DateTime
      */
     protected $date;
 
     /**
-     * List of referring routes
+     * List of referring routes.
      */
     protected $routes;
 
     /**
-     * Date to start publishing from
+     * Date to start publishing from.
+     *
      * @var \DateTime
      */
     protected $publishStartDate;
 
     /**
-     * Date to stop publishing from
+     * Date to stop publishing from.
+     *
      * @var \DateTime
      */
     protected $publishEndDate;
 
     /**
-     * If the document should be publishable
-     * @var Boolean
+     * If the document should be publishable.
+     *
+     * @var bool
      */
     protected $isPublishable = true;
 

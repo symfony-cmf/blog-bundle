@@ -3,51 +3,48 @@
 /*
  * This file is part of the Symfony CMF package.
  *
- * (c) 2011-2014 Symfony CMF
+ * (c) 2011-2015 Symfony CMF
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\BlogBundle\Document;
 
-use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 use Symfony\Cmf\Component\Routing\RouteReferrersReadInterface;
 use Symfony\Component\Routing\Route;
 
 /**
- * Blog Document
+ * Blog Document.
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
 class Blog implements RouteReferrersReadInterface
 {
     /**
-     * Identifier
+     * Identifier.
      */
     protected $id;
 
     /**
-     * Node Name / Blog Title
+     * Node Name / Blog Title.
      */
     protected $name;
 
     /**
-     * Parent Document
+     * Parent Document.
      */
     protected $parent;
 
     /**
-     * Posts (mapped as children)
+     * Posts (mapped as children).
      */
     protected $posts;
 
     /**
-     * Routes (mapped from Route::content)
+     * Routes (mapped from Route::content).
      */
     protected $routes;
-
 
     public function getId()
     {
@@ -115,9 +112,10 @@ class Blog implements RouteReferrersReadInterface
         $subRoutes = array();
 
         foreach ($this->routes as $route) {
-            foreach ($route->getRouteChildren() as $routeChild)
+            foreach ($route->getRouteChildren() as $routeChild) {
                 if ($routeChild instanceof $routeClass) {
                     $subRoutes[] = $routeChild;
+                }
             }
         }
 
