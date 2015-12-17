@@ -1,6 +1,7 @@
 # Symfony CMF Blog Bundle
 
 [![Build Status](https://travis-ci.org/symfony-cmf/BlogBundle.png?branch=master)](https://travis-ci.org/symfony-cmf/BlogBundle)
+[![StyleCI](https://styleci.io/repos/7897343/shield)](https://styleci.io/repos/7897343)
 [![Latest Stable Version](https://poser.pugx.org/symfony-cmf/blog-bundle/v/stable.png)](https://packagist.org/packages/symfony-cmf/blog-bundle)
 [![Total Downloads](https://poser.pugx.org/symfony-cmf/blog-bundle/downloads.png)](https://packagist.org/packages/symfony-cmf/blog-bundle)
 

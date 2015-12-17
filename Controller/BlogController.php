@@ -3,12 +3,11 @@
 /*
  * This file is part of the Symfony CMF package.
  *
- * (c) 2011-2014 Symfony CMF
+ * (c) 2011-2015 Symfony CMF
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 
 namespace Symfony\Cmf\Bundle\BlogBundle\Controller;
 
@@ -23,7 +22,7 @@ use FOS\RestBundle\View\ViewHandlerInterface;
 use FOS\RestBundle\View\View;
 
 /**
- * Blog Controller
+ * Blog Controller.
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
@@ -56,7 +55,6 @@ class BlogController
      */
     private $publishWorkflowPermission = PublishWorkflowChecker::VIEW_ATTRIBUTE;
 
-
     public function __construct(
         EngineInterface $templating,
         ViewHandlerInterface $viewHandler = null,
@@ -85,6 +83,7 @@ class BlogController
         if ($this->viewHandler) {
             $view = new View($params);
             $view->setTemplate($contentTemplate);
+
             return $this->viewHandler->handle($view);
         }
 
@@ -102,11 +101,10 @@ class BlogController
 
         if (true !== $this->securityContext->isGranted($this->publishWorkflowPermission, $post)) {
             throw new NotFoundHttpException(sprintf(
-                'Post "%s" is not published'
-            , $post->getTitle()));
+                'Post "%s" is not published', $post->getTitle()));
         }
 
-        $contentTemplate = $contentTemplate ? : 'CmfBlogBundle:Blog:view_post.html.twig';
+        $contentTemplate = $contentTemplate ?: 'CmfBlogBundle:Blog:view_post.html.twig';
 
         return $this->renderResponse($contentTemplate, array(
             'post' => $post,
@@ -138,7 +136,7 @@ class BlogController
         return $this->renderResponse($contentTemplate, array(
             'blog' => $blog,
             'posts' => $posts,
-            'tag' => $tag
+            'tag' => $tag,
         ));
     }
 }

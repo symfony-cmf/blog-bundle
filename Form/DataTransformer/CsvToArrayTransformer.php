@@ -3,19 +3,18 @@
 /*
  * This file is part of the Symfony CMF package.
  *
- * (c) 2011-2014 Symfony CMF
+ * (c) 2011-2015 Symfony CMF
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 
 namespace Symfony\Cmf\Bundle\BlogBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
- * CSV (comma separated value) to array transformer
+ * CSV (comma separated value) to array transformer.
  *
  * Transforms a list of values delimited by "," into
  * an array of values and vice-versa.
@@ -49,7 +48,7 @@ class CsvToArrayTransformer implements DataTransformerInterface
     /**
      * Transforms a CSV string into an array.
      *
-     * @param  string $value
+     * @param string $value
      *
      * @return array
      */
@@ -67,5 +66,3 @@ class CsvToArrayTransformer implements DataTransformerInterface
         }
     }
 }
-
-

@@ -3,12 +3,11 @@
 /*
  * This file is part of the Symfony CMF package.
  *
- * (c) 2011-2014 Symfony CMF
+ * (c) 2011-2015 Symfony CMF
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 
 namespace Symfony\Cmf\Bundle\BlogBundle\Block;
 
@@ -17,16 +16,15 @@ use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\BlockBundle\Block\BaseBlockService;
-use Doctrine\ODM\PHPCR\DocumentManager;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Cmf\Bundle\BlogBundle\Repository\TagRepository;
 
 /**
- * Tag Cloud block service
+ * Tag Cloud block service.
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
-class TagCloudBlockService extends BaseBlockService
+class TagCloudBlock extends BaseBlockService
 {
     protected $repo;
 
@@ -39,7 +37,7 @@ class TagCloudBlockService extends BaseBlockService
     public function getDefaultSettings()
     {
         return array(
-            'path' => 'cmf_blog_post_index'
+            'path' => 'cmf_blog_post_index',
         );
     }
 
@@ -54,9 +52,10 @@ class TagCloudBlockService extends BaseBlockService
     public function execute(BlockInterface $block, Response $response = null)
     {
         $wTags = $this->repo->getWeightedTags();
+
         return $this->renderResponse('CmfBlogBundle:Block:tagCloud.html.twig', array(
             'block' => $block,
-            'wTags' => $wTags
+            'wTags' => $wTags,
         ));
     }
 }
