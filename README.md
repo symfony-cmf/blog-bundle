@@ -1,14 +1,10 @@
 # Symfony CMF Blog Bundle
 
-[![Build Status](https://travis-ci.org/symfony-cmf/BlogBundle.png?branch=master)](https://travis-ci.org/symfony-cmf/BlogBundle)
-[![Latest Stable Version](https://poser.pugx.org/symfony-cmf/blog-bundle/v/stable.png)](https://packagist.org/packages/symfony-cmf/blog-bundle)
-[![Total Downloads](https://poser.pugx.org/symfony-cmf/blog-bundle/downloads.png)](https://packagist.org/packages/symfony-cmf/blog-bundle)
+ > **WARNING: Unmaintained** The Blog Bundle was built to demonstrate CMF features. To focus our efforts
+ > in the CMF project, we decided to abandon this bundle. It is no longer maintained.
 
 This bundle is part of the [Symfony Content Management Framework (CMF)](http://cmf.symfony.com/)
 and licensed under the [MIT License](LICENSE).
-
- > **WARNING** The Blog Bundle is a "work in progress" and will only be
- > complete when all the neessary pieces of the CMF are available.
 
 This bundle aims to provide everything you need to create a full blog or
 blog-like system. It also includes in-built support for the Sonata Admin
