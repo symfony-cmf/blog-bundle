@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\BlogBundle\Tests\Unit\Util;
 
 use Symfony\Cmf\Bundle\BlogBundle\Util\PostUtils;
@@ -33,6 +32,6 @@ class PostsUtilTest extends \PhpUnit_Framework_Testcase
     public function testSlugify($val, $expected)
     {
         $res = PostUtils::slugify($val);
-        $this->assertEquals($res, $expected);
+        $this->assertEquals($expected, $res);
     }
 }

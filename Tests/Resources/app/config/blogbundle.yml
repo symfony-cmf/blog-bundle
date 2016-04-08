@@ -1,2 +1,41 @@
+parameters:
+    phpcr_basepath: /cms
+
+doctrine:
+    dbal:
+        driver: pdo_sqlite
+        path: %kernel.root_dir%/cache/test_db.sqlite
+        memory: true
+        types:
+            json: Sonata\Doctrine\Types\JsonType
+
+doctrine_phpcr:
+    odm:
+        auto_generate_proxy_classes: true
+
 cmf_blog:
-    blog_basepath: /cms/content
+    sonata_admin: ~
+    persistence:
+        phpcr:
+            blog_basepath: /cms/blogs
+
+cmf_routing:
+    chain:
+        routers_by_id:
+            router.default: 100
+            cmf_routing.dynamic_router: 20
+    dynamic:
+        persistence:
+            phpcr:
+                admin_basepath:       %phpcr_basepath%
+                route_basepaths:      [%phpcr_basepath%]
+                content_basepath:     %phpcr_basepath%
+        controllers_by_class:
+            Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Blog: cmf_blog.blog_controller:detailAction
+        templates_by_class:
+            Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Post: CmfBlogBundle:Post:detail.html.twig
+
+cmf_routing_auto:
+    persistence:
+        phpcr:
+            route_basepath: /cms/routes

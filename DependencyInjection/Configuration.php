@@ -9,20 +9,19 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\BlogBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 
 /**
-* This class contains the configuration information for the bundle
-*
-* This information is solely responsible for how the different configuration
-* sections are normalized, and merged.
-*
-* @author David Buchmann
-*/
+ * This class contains the configuration information for the bundle.
+ *
+ * This information is solely responsible for how the different configuration
+ * sections are normalized, and merged.
+ *
+ * @author David Buchmann
+ */
 class Configuration implements ConfigurationInterface
 {
     /**
@@ -35,12 +34,19 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $treeBuilder->root('cmf_blog')
             ->children()
-                ->enumNode('use_sonata_admin')
-                    ->values(array(true, false, 'auto'))
-                    ->defaultValue('auto')
+
+                // admin
+                ->arrayNode('sonata_admin')
+                    ->children()
+                        ->enumNode('enabled')
+                            ->values(array(true, false, 'auto'))
+                            ->defaultValue('auto')
+                        ->end()
+                    ->end()
                 ->end()
 
-                ->arrayNode('integrate_menu')
+                // menu
+                ->arrayNode('menu')
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->enumNode('enabled')
@@ -50,30 +56,49 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('content_key')->defaultNull()->end()
                     ->end()
                 ->end()
-                ->scalarNode('blog_basepath')
-                    ->isRequired()
-                ->end()
-                ->scalarNode('routing_post_controller')
-                    ->defaultValue('cmf_blog.blog_controller:viewPostAction')
-                ->end()
-                ->scalarNode('routing_post_prefix')
-                    ->defaultValue('posts')
-                ->end()
-                ->scalarNode('routing_tag_controller')
-                    ->defaultValue('cmf_blog.blog_controller:listAction')
-                ->end()
-                ->scalarNode('routing_tag_prefix')
-                    ->defaultValue('tag')
-                ->end()
-                ->arrayNode('class')
+
+                // pagination
+                ->arrayNode('pagination')
+                    ->addDefaultsIfNotSet()
+                    ->canBeEnabled()
                     ->children()
-                        # defaults defined in CmfBlogExtension
-                        ->scalarNode('blog_admin')->end()
-                        ->scalarNode('post_admin')->end()
-                        ->scalarNode('blog')->end()
-                        ->scalarNode('post')->end()
+                        ->scalarNode('posts_per_page')->defaultValue(5)->end()
                     ->end()
                 ->end()
+
+                // persistence
+                ->arrayNode('persistence')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('phpcr')
+                            ->addDefaultsIfNotSet()
+                            ->canBeEnabled()
+                            ->children()
+                                ->scalarNode('blog_basepath')
+                                    ->defaultValue('/cms/blogs')->cannotBeEmpty()
+                                ->end()
+                                ->arrayNode('class')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('blog_admin')
+                                            ->defaultValue('Symfony\Cmf\Bundle\BlogBundle\Admin\BlogAdmin')
+                                        ->end()
+                                        ->scalarNode('post_admin')
+                                            ->defaultValue('Symfony\Cmf\Bundle\BlogBundle\Admin\PostAdmin')
+                                        ->end()
+                                        ->scalarNode('blog')
+                                            ->defaultValue('Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Blog')
+                                        ->end()
+                                        ->scalarNode('post')
+                                            ->defaultValue('Symfony\Cmf\Bundle\BlogBundle\Doctrine\Phpcr\Post')
+                                        ->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+
             ->end()
         ->end()
         ;

@@ -1,0 +1,2 @@
+blog_bundle:
+    resource: '@CmfBlogBundle/Resources/config/routing/blog_controller.xml'

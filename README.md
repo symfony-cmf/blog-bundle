@@ -27,7 +27,7 @@ Pending features:
 
 ## Requirements
 
-* Symfony 2.2.x
+* Symfony 2.3+
 * [CoreBundle](https://github.com/symfony-cmf/CoreBundle)
 * [RoutingAutoBundle](https://github.com/symfony-cmf/RoutingAutoBundle)
 

@@ -10,12 +10,13 @@
 
         <service id="symfony_cmf_blog.menu_voter.parent" class="%cmf_blog.menu_voter.parent_class%">
             <argument>%cmf_blog.content_key%</argument>
-            <argument>%cmf_blog.post_class%</argument>
+            <argument>%cmf_blog.phpcr.post.class%</argument>
             <tag name="cmf_menu.voter"/>
-            <tag name="cmf_request_aware"/>
+            <call method="setRequest">
+                <argument type="service" id="request" on-invalid="null" strict="false" />
+            </call>
         </service>
 
     </services>
 
 </container>
-

@@ -9,11 +9,10 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\BlogBundle\Util;
 
 /**
- * Miscilaneous reuseable code
+ * Miscilaneous reuseable code.
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
